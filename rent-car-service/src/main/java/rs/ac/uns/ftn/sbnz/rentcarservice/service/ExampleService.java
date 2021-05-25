@@ -22,7 +22,7 @@ public class ExampleService {
     }
     
     public Auto getAuto(Auto a) {
-        KieSession kieSession = kieContainer.newKieSession("ExampleSession");
+        KieSession kieSession = kieContainer.newKieSession();
         kieSession.insert(a);
         kieSession.fireAllRules();
         kieSession.dispose();

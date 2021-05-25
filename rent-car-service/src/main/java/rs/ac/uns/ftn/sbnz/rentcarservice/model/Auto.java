@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Auto {
 	private int id;
-	private String name;
+	private String naziv;
 	private String model;
 	private int godiste;
 	private Karoserija karoserija;

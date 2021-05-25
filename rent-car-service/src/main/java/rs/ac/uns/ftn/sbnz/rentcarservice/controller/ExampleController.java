@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,9 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.service.ExampleService;
 
 @RestController
 public class ExampleController {
-
+	
+	private static Logger log = LoggerFactory.getLogger(ExampleController.class);
+	
 	private final ExampleService exampleService;
 	
 	@Autowired
@@ -23,11 +27,11 @@ public class ExampleController {
 	@RequestMapping(value = "/proba", method = RequestMethod.GET)
 	public ResponseEntity<Void> example(){
 		Auto auto = new Auto();
-		auto.setName("auto");
+		auto.setNaziv("auto");
 		
 		Auto a2 = exampleService.getAuto(auto);
 		
-		System.out.println(a2.getName());
+		System.out.println(a2.getNaziv());
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	};
