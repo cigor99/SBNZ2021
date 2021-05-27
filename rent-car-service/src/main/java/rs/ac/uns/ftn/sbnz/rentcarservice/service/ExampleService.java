@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Karoserija;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.TipGoriva;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.ZahteviZaAuto;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
 @Service
 public class ExampleService {
@@ -59,6 +56,24 @@ public class ExampleService {
 		kieSession.fireAllRules();
 		kieSession.dispose();
 
+	}
+
+	public void testKorisnik() {
+
+		Korisnik korisnik = new Korisnik();
+		HashSet<Rezervacija> rezervacije = new HashSet<>();
+		for(int i=0;i<10;i++){
+			Rezervacija rezervacija = new Rezervacija(i);
+			rezervacije.add(rezervacija);
+		}
+		korisnik.setRezervacije(rezervacije);
+
+		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.insert(korisnik);
+		kieSession.getAgenda().getAgendaGroup("status").setFocus();
+		kieSession.fireAllRules();
+		kieSession.dispose();
+		System.out.println(korisnik.getStatus());
 	}
 
 	public Auto getAuto(Auto a) {

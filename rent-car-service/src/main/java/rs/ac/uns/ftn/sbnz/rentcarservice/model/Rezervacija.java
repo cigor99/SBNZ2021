@@ -35,5 +35,9 @@ public class Rezervacija {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   	@JoinColumn(name = "korisnik_id")
 	private Korisnik korisnik;
+
+	public Rezervacija(){}
+
+	public Rezervacija(int id){this.id = id;}
 	
 }

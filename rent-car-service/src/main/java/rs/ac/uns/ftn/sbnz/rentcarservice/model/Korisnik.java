@@ -35,4 +35,8 @@ public class Korisnik {
 	@JoinColumn(name = "korisnik_id")
 	private Set<Rezervacija> rezervacije;
 
+	public int getRezervacijaSize(){
+		return this.rezervacije.size();
+	}
+
 }
