@@ -1,0 +1,16 @@
+package rules.filter;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
+
+rule "Oznacena ekoloska voznja"
+    salience 100
+    agenda-group "filter"
+    no-loop
+    when
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnost: KorisnickiUnosDto(ekoloskaVoznja==true);
+    then
+        modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.HIBRID);}
+        modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.ELEKTRICNI);}
+        System.out.println(zahteviZaAuto.getTipGoriva());
+end;
