@@ -12,4 +12,11 @@ public class KorisnickiUnosDto {
 	private int brojPutnika;
 	private boolean ekoloskaVoznja;
 	private String budzet;
+
+	public int sizeOfDodatnaOprema(){
+		return dodatnaOprema.size();
+	}
+	public int sizeOfDodaciZaUdobnost(){
+		return dodaciZaUdobnost.size();
+	}
 }

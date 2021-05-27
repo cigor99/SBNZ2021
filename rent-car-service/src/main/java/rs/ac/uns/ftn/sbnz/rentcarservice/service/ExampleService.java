@@ -1,6 +1,8 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -34,10 +36,17 @@ public class ExampleService {
 		unos.setSvrha("DUZA_PUTOVANJA");
 		unos.setBrojPutnika(4);
 		unos.setBudzet("NISKI");
+		Set<String> dodatnaOprema = new HashSet<String>();
+		dodatnaOprema.add("grejaci sedista");
+		unos.setDodatnaOprema(dodatnaOprema);
+		Set<String> dodaciZaUdobnost = new HashSet<String>();
+		dodaciZaUdobnost.add("drzaci za case");
+		unos.setDodaciZaUdobnost(dodaciZaUdobnost);
 
 		Auto auto = new Auto("tesla", "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
 				500, 0, 600, 3.5, 250, 8000);
-
+		
+		
 		ArrayList<Auto> automobili = new ArrayList<Auto>();
 		automobili.add(auto);
 		ZahteviZaAuto zza = new ZahteviZaAuto();

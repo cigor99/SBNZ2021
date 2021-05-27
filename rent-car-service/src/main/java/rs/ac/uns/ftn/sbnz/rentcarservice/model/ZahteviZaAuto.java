@@ -13,13 +13,14 @@ public class ZahteviZaAuto {
 	private Set<DodaciZaUdobnost> dodaciZaUdobnost;
 	private int minBrojSedista;
 	private Budzet budzet;
+	private Set<String> dodatneOpreme;
+	private Set<String> dodaciZaUdobnost;
 	
 	public ZahteviZaAuto() {
 		this.moguceKaroserije = new HashSet<Karoserija>();
 		this.tipGoriva = new HashSet<TipGoriva>();
-		this.dodatneOpreme = new HashSet<DodatnaOprema>();
-		this.dodaciZaUdobnost = new HashSet<DodaciZaUdobnost>();
+		this.dodatneOpreme = new HashSet<String>();
+		this.dodaciZaUdobnost = new HashSet<String>();
 	}
-	
-	
+
 }

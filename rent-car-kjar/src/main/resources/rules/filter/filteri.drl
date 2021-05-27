@@ -14,6 +14,30 @@ rule "Oznacena ekoloska voznja"
         modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.ELEKTRICNI);}
 end;
 
+rule "Oznacena dodatna oprema"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto($dodatnaOprema: dodatnaOprema, sizeOfDodatnaOprema() > 0);
+    then
+        modify(zahteviZaAuto){getDodatneOpreme().addAll($dodatnaOprema);}
+        System.out.println("dodatna oprema");
+end;
+
+rule "Oznacena oprema za udobnost"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto($dodaciZaUdobnost: dodaciZaUdobnost, sizeOfDodaciZaUdobnost() > 0);
+    then
+        modify(zahteviZaAuto){getDodaciZaUdobnost().addAll($dodaciZaUdobnost);}
+        System.out.println($dodaciZaUdobnost);
+end;
+
 rule "Unos putnika"
     salience 100
     agenda-group "filter"

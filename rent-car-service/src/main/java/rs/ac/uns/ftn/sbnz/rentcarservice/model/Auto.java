@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 import java.util.Set;
 
 import javax.persistence.*;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import lombok.Data;
 
 @Entity
@@ -60,20 +61,18 @@ public class Auto {
 	@Column()
 	private double prosecnaOcena;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "auto_id")
-	private Set<DodatnaOprema> dodatnaOprema;
+	@ElementCollection
+	private Set<String> dodatnaOprema;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "auto_id")
-	private Set<DodaciZaUdobnost> dodaciZaUdobnost;
+	@ElementCollection
+	private Set<String> dodaciZaUdobnost;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "auto")
 	private Set<Ocena> ocene;
 
-	public Auto(String naziv, String model, int godiste, Karoserija karoserija, TipGoriva tipGoriva, double duzina,
-			double sirina, double visina, int brojSedista, int zapreminaGepeka, int zapreminaRezervoara, int distanca,
-			double ubrzanje, int maksimalnaBrzina, double cena) {
+	public Auto(String naziv, String model, int godiste, Karoserija karoserija, TipGoriva tipGoriva,
+				double duzina, double sirina, double visina, int brojSedista, int zapreminaGepeka,
+				int zapreminaRezervoara, int distanca, double ubrzanje, int maksimalnaBrzina, double cena){
 
 		this.naziv = naziv;
 		this.model = model;
