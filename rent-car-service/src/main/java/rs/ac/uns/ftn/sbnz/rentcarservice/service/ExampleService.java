@@ -76,6 +76,21 @@ public class ExampleService {
 		System.out.println(korisnik.getStatus());
 	}
 
+	public void testPopusti() {
+
+		Rezervacija rezervacija = new Rezervacija();
+		rezervacija.setBrojDana(181);
+		rezervacija.setIznos(100);
+
+		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.insert(rezervacija);
+		kieSession.getAgenda().getAgendaGroup("popusti").setFocus();
+		kieSession.fireAllRules();
+		kieSession.dispose();
+		System.out.println(rezervacija.getIznos());
+	}
+
+
 	public Auto getAuto(Auto a) {
 		KieSession kieSession = kieContainer.newKieSession();
 		kieSession.insert(a);

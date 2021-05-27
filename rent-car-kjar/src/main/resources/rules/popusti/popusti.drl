@@ -1,0 +1,42 @@
+package rules.popusti;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+
+
+rule "Iznajmljen na vise od mesec dana"
+    salience 100
+    agenda-group "popusti"
+    lock-on-active true
+    when
+        rezervacija: Rezervacija($iznos: getIznos(), brojDana >= 30, brojDana<90);
+    then
+        modify(rezervacija) {setIznos($iznos*0.95);}
+        System.out.println("Popust od 5%");
+
+end;
+
+
+rule "Iznajmljen na vise od 3 meseca"
+    salience 100
+    agenda-group "popusti"
+    lock-on-active true
+    when
+        rezervacija: Rezervacija($iznos: getIznos(), brojDana >= 90, brojDana < 180);
+    then
+        modify(rezervacija) {setIznos($iznos*0.9);}
+        System.out.println("Popust od 10%");
+
+
+end;
+
+
+rule "Iznajmljen na vise od 6 meseci"
+    salience 100
+    agenda-group "popusti"
+    lock-on-active true
+    when
+        rezervacija: Rezervacija($iznos: getIznos(), brojDana >= 180);
+    then
+        modify(rezervacija) {setIznos($iznos*0.85);}
+        System.out.println("Popust od 15%");
+
+end;
