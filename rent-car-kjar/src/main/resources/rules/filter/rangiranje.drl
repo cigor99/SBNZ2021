@@ -1,0 +1,22 @@
+package rules.filter;
+import java.util.List;
+import java.util.ArrayList;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+import rs.ac.uns.ftn.sbnz.rentcarservice.service.DodavanjeBodovaService;
+
+global ArrayList<Auto> predlozeniAuti;
+
+
+rule "Rangiranje predlozenih auta"
+    agenda-group "rangiranje"
+    salience( $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto))
+    when
+        $auto: Auto();
+        $zahteviZaAuto: ZahteviZaAuto();
+        $dodavanjeBodovaService: DodavanjeBodovaService();
+        
+    then
+        predlozeniAuti.add($auto);
+        drools.getKnowledgeRuntime().setGlobal("predlozeniAuti", predlozeniAuti);
+        System.out.println($auto + " ima bodova: " + $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto));
+end;

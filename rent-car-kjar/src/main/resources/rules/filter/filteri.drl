@@ -12,6 +12,7 @@ rule "Oznacena ekoloska voznja"
     then
         modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.HIBRID);}
         modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.ELEKTRICNI);}
+        System.out.println("Ekoloska voznja");
 end;
 
 rule "Oznacena dodatna oprema"
@@ -47,6 +48,8 @@ rule "Unos putnika"
         korisnickiUnos: KorisnickiUnosDto();
     then
         modify(zahteviZaAuto) {setMinBrojSedista(korisnickiUnos.getBrojPutnika())}
+        System.out.println("Broj putnika");
+
 end;
 
 
@@ -59,6 +62,8 @@ rule "Unos budzeta"
         korisnickiUnos: KorisnickiUnosDto($budzet: budzet);
     then
         modify(zahteviZaAuto) {setBudzet(Budzet.StringToBudzet($budzet));};
+        System.out.println("Budzet");
+
 end;
 
 
@@ -74,6 +79,8 @@ rule "Svrha Gradska voznja"
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KUPE);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KABRIOLET);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.MINIVAN);};
+        System.out.println("Gradska voznja");
+
 end;
 
 
@@ -85,10 +92,13 @@ rule "Svrha duza putovanja"
         zahteviZaAuto: ZahteviZaAuto();
         korisnickiUnos: KorisnickiUnosDto(svrha == "DUZA_PUTOVANJA")
     then
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.LIMUNZINA);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.HECBEK);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.MINIVAN);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KARAVAN);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.SUV);};
+        System.out.println("Duza putovanja");
+
 end;
 
 rule "Svrha zabava"
@@ -102,6 +112,8 @@ rule "Svrha zabava"
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.LIMUNZINA);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KUPE);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KABRIOLET);};
+        System.out.println("Zabava");
+
 end;
 
 
@@ -116,6 +128,8 @@ rule "Svrha biznis"
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.LIMUNZINA);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KUPE);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.SUV);};
+        System.out.println("Biznis");
+
 end;
 
 
@@ -129,4 +143,6 @@ rule "Svrha offroad"
     then
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.SUV);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.PIKAP);};
+        System.out.println("Offroad");
+
 end;

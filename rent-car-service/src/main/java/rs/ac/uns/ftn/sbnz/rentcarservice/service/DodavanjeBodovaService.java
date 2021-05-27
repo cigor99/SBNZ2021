@@ -2,10 +2,12 @@ package rs.ac.uns.ftn.sbnz.rentcarservice.service;
 
 import org.apache.tomcat.util.threads.ResizableExecutor;
 
+import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Budzet;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.ZahteviZaAuto;
 
+@Service
 public class DodavanjeBodovaService {
     
     public int racunajBodove(Auto auto, ZahteviZaAuto zahteviZaAuto){
@@ -16,6 +18,12 @@ public class DodavanjeBodovaService {
         suma += this.racunajDodatnuOpremu(auto, zahteviZaAuto);
 
         suma += this.racunajDodatkeZaUdobnost(auto, zahteviZaAuto);
+
+        suma += this.racunajBrojSedista(auto, zahteviZaAuto);
+
+        suma += this.racunajEkoloskuVoznju(auto, zahteviZaAuto);
+
+        suma += this.racunajKaroseriju(auto, zahteviZaAuto);
 
         return suma;
     }
@@ -63,4 +71,23 @@ public class DodavanjeBodovaService {
 
         return rez;
     }
+
+    public int racunajEkoloskuVoznju(Auto auto, ZahteviZaAuto zahteviZaAuto){
+        if(zahteviZaAuto.getTipGoriva().contains(auto.getTipGoriva()))
+            return 3;
+        return -3;
+    }
+
+    public int racunajKaroseriju(Auto auto, ZahteviZaAuto zahteviZaAuto){
+        if(zahteviZaAuto.getMoguceKaroserije().contains(auto.getKaroserija()))
+            return 3;
+        return -1;
+    }
+
+    public int racunajBrojSedista(Auto auto, ZahteviZaAuto zahteviZaAuto){
+        if(auto.getBrojSedista()>=zahteviZaAuto.getMinBrojSedista())
+            return 3;
+        return -3;
+    }
+
 }
