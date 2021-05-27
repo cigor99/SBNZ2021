@@ -40,3 +40,41 @@ rule "Iznajmljen na vise od 6 meseci"
         System.out.println("Popust od 15%");
 
 end;
+
+rule "Popust na bronzani status"
+    salience 100
+    agenda-group "popusti"
+    lock-on-active true
+    when
+        korisnik: Korisnik(status==StatusKorisnika.BRONZANI);
+        rezervacija: Rezervacija($iznos: getIznos());
+    then
+        modify(rezervacija){setIznos($iznos*0.95);}
+        System.out.println("Popust 5%");
+end;
+
+rule "Popust na srebrni status"
+    salience 100
+    agenda-group "popusti"
+    lock-on-active true
+    when
+        korisnik: Korisnik(status==StatusKorisnika.SREBRNI);
+        rezervacija: Rezervacija($iznos: getIznos());
+    then
+        modify(rezervacija){setIznos($iznos*0.90);}
+        System.out.println("Popust 10%");
+
+end;
+
+rule "Popust na zlatni status"
+    salience 100
+    agenda-group "popusti"
+    lock-on-active true
+    when
+        korisnik: Korisnik(status==StatusKorisnika.ZLATNI);
+        rezervacija: Rezervacija($iznos: getIznos());
+    then
+        modify(rezervacija){setIznos($iznos*0.85);}
+        System.out.println("Popust 15%");
+
+end;

@@ -78,11 +78,20 @@ public class ExampleService {
 
 	public void testPopusti() {
 
+		Korisnik korisnik = new Korisnik();
+		HashSet<Rezervacija> rezervacije = new HashSet<>();
+		for(int i=0;i<10;i++){
+			Rezervacija rezervacija = new Rezervacija(i);
+			rezervacije.add(rezervacija);
+		}
+		korisnik.setRezervacije(rezervacije);
+		korisnik.setStatus(StatusKorisnika.SREBRNI);
 		Rezervacija rezervacija = new Rezervacija();
 		rezervacija.setBrojDana(181);
 		rezervacija.setIznos(100);
 
 		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.insert(korisnik);
 		kieSession.insert(rezervacija);
 		kieSession.getAgenda().getAgendaGroup("popusti").setFocus();
 		kieSession.fireAllRules();

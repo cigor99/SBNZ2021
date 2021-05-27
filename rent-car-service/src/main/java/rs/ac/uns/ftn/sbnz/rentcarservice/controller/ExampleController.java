@@ -27,7 +27,7 @@ public class ExampleController {
 	@RequestMapping(value = "/proba", method = RequestMethod.GET)
 	public ResponseEntity<Void> example(){
 //		this.exampleService.test();
-//		this.exampleService.testKorisnik();
+		// this.exampleService.testKorisnik();
 		this.exampleService.testPopusti();
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	};
