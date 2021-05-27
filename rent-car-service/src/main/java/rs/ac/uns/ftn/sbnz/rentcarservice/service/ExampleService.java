@@ -31,8 +31,9 @@ public class ExampleService {
 
 		KorisnickiUnosDto unos = new KorisnickiUnosDto();
 		unos.setEkoloskaVoznja(true);
-		unos.setSvrha("Duza putovanja");
+		unos.setSvrha("DUZA_PUTOVANJA");
 		unos.setBrojPutnika(4);
+		unos.setBudzet("NISKI");
 
 		Auto auto = new Auto("tesla", "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
 				500, 0, 600, 3.5, 250, 8000);

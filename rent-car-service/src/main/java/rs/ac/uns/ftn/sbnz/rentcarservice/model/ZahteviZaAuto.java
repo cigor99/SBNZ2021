@@ -11,6 +11,8 @@ public class ZahteviZaAuto {
 	private Set<TipGoriva> tipGoriva;
 	private Set<DodatnaOprema> dodatneOpreme;
 	private Set<DodaciZaUdobnost> dodaciZaUdobnost;
+	private int minBrojSedista;
+	private Budzet budzet;
 	
 	public ZahteviZaAuto() {
 		this.moguceKaroserije = new HashSet<Karoserija>();
@@ -18,8 +20,6 @@ public class ZahteviZaAuto {
 		this.dodatneOpreme = new HashSet<DodatnaOprema>();
 		this.dodaciZaUdobnost = new HashSet<DodaciZaUdobnost>();
 	}
-	
-	
 	
 	
 }

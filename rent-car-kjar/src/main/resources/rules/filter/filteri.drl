@@ -5,12 +5,104 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
 rule "Oznacena ekoloska voznja"
     salience 100
     agenda-group "filter"
-    no-loop
+    lock-on-active true
     when
         zahteviZaAuto: ZahteviZaAuto();
-        korisnickiUnost: KorisnickiUnosDto(ekoloskaVoznja==true);
+        korisnickiUnos: KorisnickiUnosDto(ekoloskaVoznja==true);
     then
         modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.HIBRID);}
         modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.ELEKTRICNI);}
-        System.out.println(zahteviZaAuto.getTipGoriva());
+end;
+
+rule "Unos putnika"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto();
+    then
+        modify(zahteviZaAuto) {setMinBrojSedista(korisnickiUnos.getBrojPutnika())}
+end;
+
+
+rule "Unos budzeta"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto($budzet: budzet);
+    then
+        modify(zahteviZaAuto) {setBudzet(Budzet.StringToBudzet($budzet));};
+end;
+
+
+rule "Svrha Gradska voznja"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when 
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto(svrha == "GRADSKA_VOZNJA")
+    then
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.HECBEK);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KUPE);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KABRIOLET);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.MINIVAN);};
+end;
+
+
+rule "Svrha duza putovanja"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when 
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto(svrha == "DUZA_PUTOVANJA")
+    then
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.HECBEK);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.MINIVAN);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KARAVAN);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.SUV);};
+end;
+
+rule "Svrha zabava"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when 
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto(svrha == "ZABAVA")
+    then
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.LIMUNZINA);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KUPE);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KABRIOLET);};
+end;
+
+
+rule "Svrha biznis"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when 
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto(svrha == "BIZNIS")
+    then
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.LIMUNZINA);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.KUPE);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.SUV);};
+end;
+
+
+rule "Svrha offroad"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when 
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto(svrha == "OFFROAD")
+    then
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.SUV);};
+        modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.PIKAP);};
 end;
