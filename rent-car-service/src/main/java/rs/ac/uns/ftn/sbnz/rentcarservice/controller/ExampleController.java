@@ -26,13 +26,7 @@ public class ExampleController {
 	
 	@RequestMapping(value = "/proba", method = RequestMethod.GET)
 	public ResponseEntity<Void> example(){
-		Auto auto = new Auto();
-		auto.setNaziv("auto");
-		
-		Auto a2 = exampleService.getAuto(auto);
-		
-		System.out.println(a2.getNaziv());
-		
+		this.exampleService.test();
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	};
 }
