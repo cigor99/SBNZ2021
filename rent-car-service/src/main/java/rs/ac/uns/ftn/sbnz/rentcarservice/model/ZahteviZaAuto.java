@@ -9,8 +9,6 @@ import lombok.Data;
 public class ZahteviZaAuto {
 	private Set<Karoserija> moguceKaroserije;
 	private Set<TipGoriva> tipGoriva;
-	private Set<DodatnaOprema> dodatneOpreme;
-	private Set<DodaciZaUdobnost> dodaciZaUdobnost;
 	private int minBrojSedista;
 	private Budzet budzet;
 	private Set<String> dodatneOpreme;
