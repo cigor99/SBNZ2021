@@ -5,7 +5,7 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
 rule "Oznacena ekoloska voznja"
     salience 100
     agenda-group "filter"
-    no-loop
+    lock-on-active true
     when
         zahteviZaAuto: ZahteviZaAuto();
         korisnickiUnost: KorisnickiUnosDto(ekoloskaVoznja==true);
@@ -13,4 +13,28 @@ rule "Oznacena ekoloska voznja"
         modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.HIBRID);}
         modify(zahteviZaAuto) {getTipGoriva().add(TipGoriva.ELEKTRICNI);}
         System.out.println(zahteviZaAuto.getTipGoriva());
+end;
+
+rule "Oznacena dodatna oprema"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto($dodatnaOprema: dodatnaOprema, sizeOfDodatnaOprema() > 0);
+    then
+        modify(zahteviZaAuto){getDodatneOpreme().addAll($dodatnaOprema);}
+        System.out.println("dodatna oprema");
+end;
+
+rule "Oznacena oprema za udobnost"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        zahteviZaAuto: ZahteviZaAuto();
+        korisnickiUnos: KorisnickiUnosDto($dodaciZaUdobnost: dodaciZaUdobnost, sizeOfDodaciZaUdobnost() > 0);
+    then
+        modify(zahteviZaAuto){getDodaciZaUdobnost().addAll($dodaciZaUdobnost);}
+        System.out.println($dodaciZaUdobnost);
 end;

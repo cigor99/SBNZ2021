@@ -8,12 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Karoserija;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.TipGoriva;
-
-import rs.ac.uns.ftn.sbnz.rentcarservice.service.ExampleService;
 
 @SpringBootApplication
 public class RentCarServiceApplication {
