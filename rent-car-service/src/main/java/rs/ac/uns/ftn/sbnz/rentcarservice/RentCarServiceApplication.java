@@ -1,12 +1,20 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice;
 
 
+import java.util.ArrayList;
+
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import antlr.collections.List;
+import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.Karoserija;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.TipGoriva;
 
 
 @SpringBootApplication
