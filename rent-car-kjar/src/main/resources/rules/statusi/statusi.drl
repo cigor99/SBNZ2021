@@ -1,0 +1,37 @@
+package rules.statusi;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+
+
+rule "Status bronzani"
+    salience 100
+    agenda-group "status"
+    lock-on-active true
+    when
+        korisnik: Korisnik(getRezervacijaSize() >= 3);
+    then
+        modify(korisnik) {setStatus(StatusKorisnika.BRONZANI);}
+        System.out.println(korisnik);
+end;
+
+rule "Status srebrni"
+    salience 99
+    agenda-group "status"
+    lock-on-active true
+    when
+        korisnik: Korisnik(getRezervacijaSize() >= 5);
+    then
+        modify(korisnik) {setStatus(StatusKorisnika.SREBRNI);}
+        System.out.println(korisnik);
+end;
+
+rule "Status zlatni"
+    salience 98
+    agenda-group "status"
+    lock-on-active true
+    when
+        korisnik: Korisnik(getRezervacijaSize() >= 7);
+    then
+        modify(korisnik) {setStatus(StatusKorisnika.ZLATNI);}
+        System.out.println(korisnik);
+end;
+
