@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.sbnz.rentcarservice.dto;
 import java.util.Set;
 
 import lombok.Data;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.DodatnaOprema;
 
 @Data
 public class KorisnickiUnosDto {

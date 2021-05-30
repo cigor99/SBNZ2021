@@ -24,6 +24,7 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.service.DodavanjeBodovaService;
 rule "Dodaj bodove za nizak budzet(3)"
     agenda-group "rangiranje"
     salience 100
+    lock-on-active true
     when
         $auto: Auto($cena: cena <= 20, $bodovi: bodovi);
         $zahteviZaAuto: ZahteviZaAuto($budzet: budzet == Budzet.NISKI);
@@ -35,6 +36,7 @@ end;
 rule "Dodaj bodove za nizak budzet(1)"
     agenda-group "rangiranje"
     salience 100
+    lock-on-active true
     when
         $auto: Auto($bodovi:bodovi, $cena: cena >= 20, cena < 60);
         $zahteviZaAuto: ZahteviZaAuto($budzet: budzet == Budzet.NISKI);
@@ -45,6 +47,7 @@ end;
 rule "Dodaj bodove za srednji budzet(3)"
     agenda-group "rangiranje"
     salience 100
+    lock-on-active true
     when 
         $auto: Auto($bodovi:bodovi,cena < 60, cena > 20);
         $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.SREDNJI);
@@ -55,6 +58,7 @@ end
 rule "Dodaj bodove srednji budzet(1)"
     agenda-group "rangiranje"
     salience 100
+    lock-on-active true
     when
         $auto: Auto($bodovi:bodovi,cena < 20);
         $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.SREDNJI);
@@ -65,6 +69,7 @@ end
 rule "Dodaj bodove visoki budzet(3)"
     agenda-group "rangiranje"
     salience 100
+    lock-on-active true
     when
         $auto: Auto($bodovi:bodovi, cena > 60);
         $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.VISOK);
@@ -75,6 +80,7 @@ end
 rule "Dodaj bodove visoki budzet(1)"
     agenda-group "rangiranje"
     salience 100
+    lock-on-active true
     when
         $auto: Auto($bodovi:bodovi, cena < 60, cena > 20);
         $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.VISOK);
@@ -86,13 +92,15 @@ end
 rule "Bodovi za opremu"
     agenda-group "rangiranje"
     salience 100
+    lock-on-active true
     when
-        $auto: Auto($dodatnaOprema: dodatnaOprema);
-        $zahteviZaAuto($dodatneOpreme: dodatneOpreme);
-        $total: Number() from 
-                accumulate( $s:String() from $dodatnaOprema, $s memberOf $dodatneOpreme,
-                            count($s) )
+        $auto: Auto($dodatnaOprema: dodatnaOprema, $bodovi:bodovi);
+        $zahteviZaAuto: ZahteviZaAuto($dodatneOpreme: dodatneOpreme);
+        $total: Number() from
+            accumulate(DodatnaOprema($naziv: naziv memberOf $dodatneOpreme) from $dodatnaOprema, count($naziv))
     then
-        modify($auto){setBodovi(getBodovi() + $total);}
-        System.out.println($total);
+        modify($auto){setBodovi($bodovi + $total.intValue() * 3);}
+        System.out.println("Total: " + $total);
+        // System.out.println("Bodovi: " + $auto.getBodovi());
+        
 end

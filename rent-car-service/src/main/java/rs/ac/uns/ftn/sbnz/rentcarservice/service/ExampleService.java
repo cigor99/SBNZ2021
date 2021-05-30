@@ -33,7 +33,7 @@ public class ExampleService {
 		unos.setSvrha("DUZA_PUTOVANJA");
 		unos.setBrojPutnika(4);
 		unos.setBudzet("NISKI");
-		Set<String> dodatnaOprema = new HashSet<String>();
+		Set<String> dodatnaOprema = new HashSet<>();
 		dodatnaOprema.add("grejaci sedista");
 		unos.setDodatnaOprema(dodatnaOprema);
 		Set<String> dodaciZaUdobnost = new HashSet<String>();

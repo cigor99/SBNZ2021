@@ -61,8 +61,8 @@ public class Auto {
 	@Column()
 	private double prosecnaOcena;
 
-	@ElementCollection
-	private Set<String> dodatnaOprema;
+	@OneToMany(mappedBy = "naziv", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<DodatnaOprema> dodatnaOprema;
 
 	@ElementCollection
 	private Set<String> dodaciZaUdobnost;

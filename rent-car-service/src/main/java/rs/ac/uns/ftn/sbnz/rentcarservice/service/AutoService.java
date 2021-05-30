@@ -5,10 +5,7 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Karoserija;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.TipGoriva;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.ZahteviZaAuto;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -66,12 +63,13 @@ public class AutoService {
         Auto auto1 = new Auto("skoda", "oktavia", 2018, Karoserija.KARAVAN, TipGoriva.DIZEL, 6.5, 2.1, 1.3, 5,
                 500, 600, 0, 3.5, 220, 15);
 
-        HashSet<String> dodatnaOprema = new HashSet<>();
-        dodatnaOprema.add("grejaci sedista");
+        HashSet<DodatnaOprema> dodatnaOprema = new HashSet<>();
+        dodatnaOprema.add(new DodatnaOprema("grejaci sedista"));
+        dodatnaOprema.add(new DodatnaOprema("automatski menjac"));
         HashSet<String> udobnost = new HashSet<>();
 
-        HashSet<String> dodatnaOprema2 = new HashSet<>();
-        dodatnaOprema2.add("grejaci sedista");
+        HashSet<DodatnaOprema> dodatnaOprema2 = new HashSet<>();
+        dodatnaOprema2.add(new DodatnaOprema("grejaci sedista"));
         HashSet<String> udobnost2 = new HashSet<>();
 
         auto.setDodatnaOprema(dodatnaOprema);

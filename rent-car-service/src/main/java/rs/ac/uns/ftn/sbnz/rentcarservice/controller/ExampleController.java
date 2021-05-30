@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.DodatnaOprema;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.AutoService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.ExampleService;
 
@@ -42,9 +42,10 @@ public class ExampleController {
 		unos.setSvrha("DUZA_PUTOVANJA");
 		unos.setBrojPutnika(4);
 		unos.setBudzet("NISKI");
-		Set<String> dodatnaOprema = new HashSet<String>();
+		Set<String> dodatnaOprema = new HashSet<>();
 		dodatnaOprema.add("grejaci sedista");
 		unos.setDodatnaOprema(dodatnaOprema);
+
 		Set<String> dodaciZaUdobnost = new HashSet<String>();
 		dodaciZaUdobnost.add("drzaci za case");
 		unos.setDodaciZaUdobnost(dodaciZaUdobnost);
