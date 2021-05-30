@@ -70,6 +70,8 @@ public class Auto {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "auto")
 	private Set<Ocena> ocene;
 
+	private int bodovi = 0;
+
 	public Auto(String naziv, String model, int godiste, Karoserija karoserija, TipGoriva tipGoriva,
 				double duzina, double sirina, double visina, int brojSedista, int zapreminaGepeka,
 				int zapreminaRezervoara, int distanca, double ubrzanje, int maksimalnaBrzina, double cena){

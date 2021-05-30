@@ -34,4 +34,3 @@ rule "Status zlatni"
         modify(korisnik) {setStatus(StatusKorisnika.ZLATNI);}
         System.out.println(korisnik);
 end;
-

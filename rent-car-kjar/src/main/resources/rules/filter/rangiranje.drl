@@ -4,19 +4,95 @@ import java.util.ArrayList;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.DodavanjeBodovaService;
 
-global ArrayList<Auto> predlozeniAuti;
+// global ArrayList<Auto> predlozeniAuti;
 
 
-rule "Rangiranje predlozenih auta"
-    agenda-group "rangiranje"
-    salience( $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto))
-    when
-        $auto: Auto();
-        $zahteviZaAuto: ZahteviZaAuto();
-        $dodavanjeBodovaService: DodavanjeBodovaService();
+// rule "Rangiranje predlozenih auta"
+//     agenda-group "rangiranje"
+//     salience( $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto))
+//     when
+//         $auto: Auto();
+//         $zahteviZaAuto: ZahteviZaAuto();
+//         $dodavanjeBodovaService: DodavanjeBodovaService();
         
+//     then
+//         predlozeniAuti.add($auto);
+//         drools.getKnowledgeRuntime().setGlobal("predlozeniAuti", predlozeniAuti);
+//         System.out.println($auto + " ima bodova: " + $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto));
+// end;
+
+rule "Dodaj bodove za nizak budzet(3)"
+    agenda-group "rangiranje"
+    salience 100
+    when
+        $auto: Auto($cena: cena <= 20, $bodovi: bodovi);
+        $zahteviZaAuto: ZahteviZaAuto($budzet: budzet == Budzet.NISKI);
     then
-        predlozeniAuti.add($auto);
-        drools.getKnowledgeRuntime().setGlobal("predlozeniAuti", predlozeniAuti);
-        System.out.println($auto + " ima bodova: " + $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto));
+        modify($auto){setBodovi($bodovi + 3);} 
+        System.out.println("Dodaj bodove niski budzet 3");
 end;
+
+rule "Dodaj bodove za nizak budzet(1)"
+    agenda-group "rangiranje"
+    salience 100
+    when
+        $auto: Auto($bodovi:bodovi, $cena: cena >= 20, cena < 60);
+        $zahteviZaAuto: ZahteviZaAuto($budzet: budzet == Budzet.NISKI);
+    then
+        modify($auto){setBodovi($bodovi + 1);} 
+end;
+
+rule "Dodaj bodove za srednji budzet(3)"
+    agenda-group "rangiranje"
+    salience 100
+    when 
+        $auto: Auto($bodovi:bodovi,cena < 60, cena > 20);
+        $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.SREDNJI);
+    then
+        modify($auto){setBodovi($bodovi + 3);}
+end
+
+rule "Dodaj bodove srednji budzet(1)"
+    agenda-group "rangiranje"
+    salience 100
+    when
+        $auto: Auto($bodovi:bodovi,cena < 20);
+        $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.SREDNJI);
+    then
+        modify($auto){setBodovi($bodovi + 1);}
+end
+
+rule "Dodaj bodove visoki budzet(3)"
+    agenda-group "rangiranje"
+    salience 100
+    when
+        $auto: Auto($bodovi:bodovi, cena > 60);
+        $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.VISOK);
+    then
+        modify($auto){setBodovi($bodovi + 3);}
+end
+
+rule "Dodaj bodove visoki budzet(1)"
+    agenda-group "rangiranje"
+    salience 100
+    when
+        $auto: Auto($bodovi:bodovi, cena < 60, cena > 20);
+        $zahteviZaAuto: ZahteviZaAuto(budzet == Budzet.VISOK);
+    then
+        modify($auto){setBodovi($bodovi + 1);}
+        System.out.println("Dodaj bodove visoki budzet");
+end
+
+rule "Bodovi za opremu"
+    agenda-group "rangiranje"
+    salience 100
+    when
+        $auto: Auto($dodatnaOprema: dodatnaOprema);
+        $zahteviZaAuto($dodatneOpreme: dodatneOpreme);
+        $total: Number() from 
+                accumulate( $s:String() from $dodatnaOprema, $s memberOf $dodatneOpreme,
+                            count($s) )
+    then
+        modify($auto){setBodovi(getBodovi() + $total);}
+        System.out.println($total);
+end
