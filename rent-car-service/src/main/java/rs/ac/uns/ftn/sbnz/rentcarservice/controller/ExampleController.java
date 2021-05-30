@@ -39,13 +39,14 @@ public class ExampleController {
 
 		KorisnickiUnosDto unos = new KorisnickiUnosDto();
 		unos.setEkoloskaVoznja(true);
-		unos.setSvrha("DUZA_PUTOVANJA");
-		unos.setBrojPutnika(4);
+		unos.setSvrha("ZABAVA");
+		unos.setBrojPutnika(2);
 		unos.setBudzet("NISKI");
 		Set<String> dodatnaOprema = new HashSet<>();
 		dodatnaOprema.add("grejaci sedista");
 		dodatnaOprema.add("automatski menjac");
 		unos.setDodatnaOprema(dodatnaOprema);
+
 
 		Set<String> dodaciZaUdobnost = new HashSet<String>();
 		dodaciZaUdobnost.add("drzaci za case");

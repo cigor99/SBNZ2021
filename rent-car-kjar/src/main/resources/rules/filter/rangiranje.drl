@@ -2,7 +2,6 @@ package rules.filter;
 import java.util.List;
 import java.util.ArrayList;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
-import rs.ac.uns.ftn.sbnz.rentcarservice.service.DodavanjeBodovaService;
 
 global ArrayList<Auto> predlozeniAuti;
 
@@ -16,7 +15,7 @@ rule "Rangiranje predlozenih auta"
     then
         predlozeniAuti.add($auto);
         drools.getKnowledgeRuntime().setGlobal("predlozeniAuti", predlozeniAuti);
-        System.out.println($auto + " ima bodova: " +$bodovi);
+        System.out.println($auto.getNaziv() + " ima bodova: " +$bodovi);
 end;
 
 rule "Dodaj bodove za nizak budzet(3)"

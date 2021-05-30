@@ -13,6 +13,12 @@ public class ZahteviZaAuto {
 	private Budzet budzet;
 	private Set<String> dodatneOpreme;
 	private Set<String> dodaciZaUdobnost;
+
+	private boolean maliAutomobil;
+	private boolean duzePutovanjeSaPorodicom;
+	private boolean sportskiAutomobil;
+	private boolean oldtajmer;
+	private boolean duzeEkoPutovanje;
 	
 	public ZahteviZaAuto() {
 		this.moguceKaroserije = new HashSet<Karoserija>();

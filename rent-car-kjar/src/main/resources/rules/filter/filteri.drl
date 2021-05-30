@@ -144,5 +144,4 @@ rule "Svrha offroad"
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.SUV);};
         modify(zahteviZaAuto) {getMoguceKaroserije().add(Karoserija.PIKAP);};
         System.out.println("Offroad");
-
 end;

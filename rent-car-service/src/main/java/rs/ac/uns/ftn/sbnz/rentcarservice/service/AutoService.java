@@ -20,12 +20,10 @@ public class AutoService {
 //    @Autowired
 //    private AutoRepository autoRepository;
 
-    private final DodavanjeBodovaService dodavanjeBodovaService;
 
     @Autowired
-    public AutoService(KieContainer kieContainer, DodavanjeBodovaService dodavanjeBodovaService) {
+    public AutoService(KieContainer kieContainer) {
         this.kieContainer = kieContainer;
-        this.dodavanjeBodovaService = dodavanjeBodovaService;
     }
 
     public List<Auto> naprednaPretraga(KorisnickiUnosDto korisnickiUnosDto){
@@ -62,6 +60,12 @@ public class AutoService {
         Auto auto1 = new Auto("skoda", "oktavia", 2018, Karoserija.KARAVAN, TipGoriva.DIZEL, 6.5, 2.1, 1.3, 5,
                 500, 600, 0, 3.5, 220, 15);
 
+        Auto auto2 = new Auto("smart", "two", 2018, Karoserija.KUPE, TipGoriva.ELEKTRICNI, 3, 2.1, 1.3, 2,
+                40, 300, 0, 3.5, 220, 15);
+
+        Auto auto3 = new Auto("ferarri", "488 pista", 2018, Karoserija.KUPE, TipGoriva.BENZIN, 3, 2.1, 1.3, 2,
+            40, 300, 0, 2.8, 340, 15);
+
         HashSet<DodatnaOprema> dodatnaOprema = new HashSet<>();
         dodatnaOprema.add(new DodatnaOprema("grejaci sedista"));
         dodatnaOprema.add(new DodatnaOprema("automatski menjac"));
@@ -79,10 +83,17 @@ public class AutoService {
         auto1.setDodaciZaUdobnost(udobnost2);
         auto1.setDodatnaOprema(dodatnaOprema2);
 
+        auto2.setDodatnaOprema(dodatnaOprema);
+        auto2.setDodaciZaUdobnost(udobnost);
+
+        dodatnaOprema.add(new DodatnaOprema("sportska sedista"));
+        auto3.setDodatnaOprema(dodatnaOprema);
 
         ArrayList<Auto> automobili = new ArrayList<Auto>();
         automobili.add(auto);
         automobili.add(auto1);
+        automobili.add(auto2);
+        automobili.add(auto3);
         return automobili;
     }
 

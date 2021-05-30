@@ -1,0 +1,137 @@
+package rules.filter;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
+
+
+rule "Generisanje cinjenice mali automobil"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        $korisnickiUnos: KorisnickiUnosDto(svrha == "GRADSKA_VOZNJA", brojPutnika < 4);
+        $zahteviZaAuto: ZahteviZaAuto();
+    then
+        modify($zahteviZaAuto){setMaliAutomobil(true);}
+end
+
+rule "Dodavanje bodova za cinjenicu mali automobil"
+    salience 99
+    agenda-group "rangiranje"
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto(maliAutomobil == true);
+        $auto: Auto($bodovi: bodovi, brojSedista == 2,
+                    duzina < 3.5);
+    then
+        modify($auto){setBodovi($bodovi + 100);}
+        System.out.println("MALI AUTOOOOO");
+end
+
+rule "Generisanje cinjenice duze putovanje sa porodicom"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        $korisnickiUnos: KorisnickiUnosDto(svrha == "DUZE_PUTOVANJE", brojPutnika >= 4);
+        $zahteviZaAuto: ZahteviZaAuto();
+    then
+        modify($zahteviZaAuto){setDuzePutovanjeSaPorodicom(true);}
+        System.out.println("GENERISEMO DUZE SA PORODICOM");
+end
+
+rule "Dodavanje bodova za cinjenicu duze putovanje"
+    salience 99
+    agenda-group "rangiranje"
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto(duzePutovanjeSaPorodicom == true);
+        $auto: Auto(zapreminaGepeka > 450, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi+100);}
+        System.out.println("DUZE PUTOVANJE SA PORODICOM");
+end
+
+rule "Dodavanje bodova za cinjenicu duze putovanje(karoserija)"
+    salience 99
+    agenda-group "rangiranje"
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto(duzePutovanjeSaPorodicom == true);
+        $auto: Auto(karoserija == Karoserija.LIMUNZINA || karoserija == Karoserija.SUV,
+                $bodovi: bodovi);
+    then
+        modify($auto){setBodovi($bodovi+100);}
+        System.out.println("DUZE PUTOVANJE SA PORODICOM");
+end
+
+rule "Generisanje cinjenice sportski auto i oldtajmer"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        $korisnickiUnos: KorisnickiUnosDto(svrha == "ZABAVA", brojPutnika < 4);
+        $zahteviZaAuto: ZahteviZaAuto();
+    then
+        modify($zahteviZaAuto){setSportskiAutomobil(true);}
+        modify($zahteviZaAuto){setOldtajmer(true);}
+end
+
+rule "Dodavanje bodova za cinjenicu sportski auto"
+    salience 99
+    agenda-group "rangiranje"
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto(sportskiAutomobil == true);
+        $auto: Auto(ubrzanje < 3 || maksimalnaBrzina > 250, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi+100);}
+        System.out.println("IDE GAS");
+end
+
+rule "Dodavanje bodova za cinjenicu oldtajmer"
+    salience 99
+    agenda-group "rangiranje"
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto(oldtajmer == true);
+        $auto: Auto(godiste < 1970, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi+100);}
+        System.out.println("OLDTAJMER");
+end
+
+rule "Dodavanje bodova za cinjenicu sportski auto(sedista)"
+    salience 99
+    agenda-group "rangiranje"
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto(sportskiAutomobil == true);
+        $dodatna: DodatnaOprema(naziv == "sportska sedista");
+        $auto: Auto($dodatna memberOf dodatnaOprema, $bodovi:bodovi);
+    then                 
+        modify($auto){setBodovi($bodovi+100);}
+        System.out.println("SPORTSKA SEDISTA");
+end
+
+rule "Generisanje cinjenice duze eko putovanje"
+    salience 100
+    agenda-group "filter"
+    lock-on-active true
+    when
+        $korisnickiUnos: KorisnickiUnosDto(svrha == "DUZE_PUTOVANJE", ekoloskaVoznja == true);
+        $zahteviZaAuto: ZahteviZaAuto();
+    then
+        modify($zahteviZaAuto){setDuzeEkoPutovanje(true);}
+end
+
+rule "Dodavanje bodova za cinjenicu duze eko"
+    salience 99
+    agenda-group "rangiranje"
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto(duzeEkoPutovanje == true);
+        $auto: Auto(distanca > 500, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi+100);}
+        System.out.println("DUZE EKO");
+end
