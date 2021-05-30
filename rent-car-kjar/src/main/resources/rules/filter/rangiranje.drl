@@ -4,22 +4,20 @@ import java.util.ArrayList;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.DodavanjeBodovaService;
 
-// global ArrayList<Auto> predlozeniAuti;
+global ArrayList<Auto> predlozeniAuti;
 
 
-// rule "Rangiranje predlozenih auta"
-//     agenda-group "rangiranje"
-//     salience( $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto))
-//     when
-//         $auto: Auto();
-//         $zahteviZaAuto: ZahteviZaAuto();
-//         $dodavanjeBodovaService: DodavanjeBodovaService();
-        
-//     then
-//         predlozeniAuti.add($auto);
-//         drools.getKnowledgeRuntime().setGlobal("predlozeniAuti", predlozeniAuti);
-//         System.out.println($auto + " ima bodova: " + $dodavanjeBodovaService.racunajBodove($auto, $zahteviZaAuto));
-// end;
+rule "Rangiranje predlozenih auta"
+    agenda-group "rangiranje"
+    salience( 98 - $bodovi)
+    when
+        $auto: Auto($bodovi:bodovi);
+        $zahteviZaAuto: ZahteviZaAuto();
+    then
+        predlozeniAuti.add($auto);
+        drools.getKnowledgeRuntime().setGlobal("predlozeniAuti", predlozeniAuti);
+        System.out.println($auto + " ima bodova: " +$bodovi);
+end;
 
 rule "Dodaj bodove za nizak budzet(3)"
     agenda-group "rangiranje"
@@ -99,8 +97,94 @@ rule "Bodovi za opremu"
         $total: Number() from
             accumulate(DodatnaOprema($naziv: naziv memberOf $dodatneOpreme) from $dodatnaOprema, count($naziv))
     then
-        modify($auto){setBodovi($bodovi + $total.intValue() * 3);}
+        modify($auto){setBodovi($bodovi + $total.intValue() * 2);}
         System.out.println("Total: " + $total);
         // System.out.println("Bodovi: " + $auto.getBodovi());
-        
+end
+
+rule "Bodovi za udobnost"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        $auto: Auto($dodaciZaUdobnost: dodaciZaUdobnost, $bodovi:bodovi);
+        $zahteviZaAuto: ZahteviZaAuto($dodaciZahtev:dodaciZaUdobnost);
+        $total: Number() from
+            accumulate(DodatakZaUdobnost($naziv: naziv memberOf $dodaciZahtev)
+                        from $dodaciZaUdobnost, count($naziv))
+    then
+        modify($auto){setBodovi($bodovi + $total.intValue() * 2);}
+        System.out.println("Total za udobnost: " + $total);
+end
+
+rule "Bodovi za eko voznju"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto($goriva: tipGoriva);
+        $auto: Auto($tipGoriva: tipGoriva memberOf $goriva, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi + 3)}
+        System.out.println("eko voznja");
+end
+
+rule "Bodovi za eko voznju(oduzmi)"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto($goriva: tipGoriva);
+        $auto: Auto($tipGoriva: tipGoriva not memberOf $goriva, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi - 3)}
+        System.out.println("nije eko voznja");
+end
+
+rule "Bodovi za karoseriju"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto($moguceKaroserije:moguceKaroserije);
+        $auto: Auto($karoserija:karoserija memberOf $moguceKaroserije, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi + 3);}
+        System.out.println("odgovara karoserija");
+end
+
+rule "Bodovi za karoseriju(oduzmi)"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto($moguceKaroserije:moguceKaroserije);
+        $auto: Auto($karoserija:karoserija not memberOf $moguceKaroserije, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi - 3);}
+        System.out.println("ne odgovara karoserija");
+end
+
+rule "Bodovi za broj sedista"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto($minBrojSedista:minBrojSedista);
+        $auto: Auto($brojSedista:brojSedista >= $minBrojSedista, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi + 3);}
+        System.out.println("ok broj sedista");
+end
+
+rule "Bodovi za broj sedista(oduzmi)"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        $zahteviZaAuto: ZahteviZaAuto($minBrojSedista:minBrojSedista);
+        $auto: Auto($brojSedista:brojSedista < $minBrojSedista, $bodovi:bodovi);
+    then
+        modify($auto){setBodovi($bodovi - 3);}
+        System.out.println("nije ok broj sedista");
 end

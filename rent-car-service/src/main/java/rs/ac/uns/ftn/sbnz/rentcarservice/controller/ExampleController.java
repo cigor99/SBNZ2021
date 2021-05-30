@@ -44,6 +44,7 @@ public class ExampleController {
 		unos.setBudzet("NISKI");
 		Set<String> dodatnaOprema = new HashSet<>();
 		dodatnaOprema.add("grejaci sedista");
+		dodatnaOprema.add("automatski menjac");
 		unos.setDodatnaOprema(dodatnaOprema);
 
 		Set<String> dodaciZaUdobnost = new HashSet<String>();

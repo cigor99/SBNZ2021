@@ -61,11 +61,13 @@ public class Auto {
 	@Column()
 	private double prosecnaOcena;
 
-	@OneToMany(mappedBy = "naziv", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "auto_id")
 	private Set<DodatnaOprema> dodatnaOprema;
 
-	@ElementCollection
-	private Set<String> dodaciZaUdobnost;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "auto_id")
+	private Set<DodatakZaUdobnost> dodaciZaUdobnost;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "auto")
 	private Set<Ocena> ocene;

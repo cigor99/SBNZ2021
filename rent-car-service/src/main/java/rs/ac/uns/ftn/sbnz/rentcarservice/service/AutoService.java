@@ -45,12 +45,11 @@ public class AutoService {
             kieSession.insert(a);
         }
 
-        // kieSession.insert(dodavanjeBodovaService);
         kieSession.insert(zza);
-        // kieSession.setGlobal("predlozeniAuti", predlozeniAuti);
+        kieSession.setGlobal("predlozeniAuti", predlozeniAuti);
         kieSession.getAgenda().getAgendaGroup("rangiranje").setFocus();
         kieSession.fireAllRules();
-        // predlozeniAuti = (ArrayList<Auto>) kieSession.getGlobal("predlozeniAuti");
+        predlozeniAuti = (ArrayList<Auto>) kieSession.getGlobal("predlozeniAuti");
         kieSession.dispose();
         System.out.println(predlozeniAuti);
         return predlozeniAuti;
@@ -66,11 +65,13 @@ public class AutoService {
         HashSet<DodatnaOprema> dodatnaOprema = new HashSet<>();
         dodatnaOprema.add(new DodatnaOprema("grejaci sedista"));
         dodatnaOprema.add(new DodatnaOprema("automatski menjac"));
-        HashSet<String> udobnost = new HashSet<>();
+        HashSet<DodatakZaUdobnost> udobnost = new HashSet<>();
+        udobnost.add(new DodatakZaUdobnost("drzaci za case"));
 
         HashSet<DodatnaOprema> dodatnaOprema2 = new HashSet<>();
         dodatnaOprema2.add(new DodatnaOprema("grejaci sedista"));
-        HashSet<String> udobnost2 = new HashSet<>();
+        HashSet<DodatakZaUdobnost> udobnost2 = new HashSet<>();
+        udobnost2.add(new DodatakZaUdobnost("drzaci za case"));
 
         auto.setDodatnaOprema(dodatnaOprema);
         auto.setDodaciZaUdobnost(udobnost);

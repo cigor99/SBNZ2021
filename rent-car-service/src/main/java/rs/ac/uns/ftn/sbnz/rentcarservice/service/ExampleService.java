@@ -28,33 +28,33 @@ public class ExampleService {
 
 	public void test() {
 
-		KorisnickiUnosDto unos = new KorisnickiUnosDto();
-		unos.setEkoloskaVoznja(true);
-		unos.setSvrha("DUZA_PUTOVANJA");
-		unos.setBrojPutnika(4);
-		unos.setBudzet("NISKI");
-		Set<String> dodatnaOprema = new HashSet<>();
-		dodatnaOprema.add("grejaci sedista");
-		unos.setDodatnaOprema(dodatnaOprema);
-		Set<String> dodaciZaUdobnost = new HashSet<String>();
-		dodaciZaUdobnost.add("drzaci za case");
-		unos.setDodaciZaUdobnost(dodaciZaUdobnost);
+		// KorisnickiUnosDto unos = new KorisnickiUnosDto();
+		// unos.setEkoloskaVoznja(true);
+		// unos.setSvrha("DUZA_PUTOVANJA");
+		// unos.setBrojPutnika(4);
+		// unos.setBudzet("NISKI");
+		// Set<String> dodatnaOprema = new HashSet<>();
+		// dodatnaOprema.add("grejaci sedista");
+		// unos.setDodatnaOprema(dodatnaOprema);
+		// Set<String> dodaciZaUdobnost = new HashSet<String>();
+		// dodaciZaUdobnost.add("drzaci za case");
+		// unos.setDodaciZaUdobnost(dodaciZaUdobnost);
 
-		Auto auto = new Auto("tesla", "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
-				500, 0, 600, 3.5, 250, 8000);
+		// Auto auto = new Auto("tesla", "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
+		// 		500, 0, 600, 3.5, 250, 8000);
 		
 		
-		ArrayList<Auto> automobili = new ArrayList<Auto>();
-		automobili.add(auto);
-		ZahteviZaAuto zza = new ZahteviZaAuto();
+		// ArrayList<Auto> automobili = new ArrayList<Auto>();
+		// automobili.add(auto);
+		// ZahteviZaAuto zza = new ZahteviZaAuto();
 
-		KieSession kieSession = kieContainer.newKieSession();
-		kieSession.insert(automobili);
-		kieSession.insert(unos);
-		kieSession.insert(zza);
-		kieSession.getAgenda().getAgendaGroup("filter").setFocus();
-		kieSession.fireAllRules();
-		kieSession.dispose();
+		// KieSession kieSession = kieContainer.newKieSession();
+		// kieSession.insert(automobili);
+		// kieSession.insert(unos);
+		// kieSession.insert(zza);
+		// kieSession.getAgenda().getAgendaGroup("filter").setFocus();
+		// kieSession.fireAllRules();
+		// kieSession.dispose();
 
 	}
 
