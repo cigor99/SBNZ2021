@@ -82,7 +82,7 @@ rule "Dodavanje bodova za cinjenicu sportski auto"
     lock-on-active true
     when
         $zahteviZaAuto: ZahteviZaAuto(sportskiAutomobil == true);
-        $auto: Auto(ubrzanje < 3 || maksimalnaBrzina > 250, $bodovi:bodovi);
+        $auto: Auto(ubrzanje < 3 && maksimalnaBrzina > 250, $bodovi:bodovi);
     then
         modify($auto){setBodovi($bodovi+100);}
         System.out.println("IDE GAS");
@@ -105,12 +105,16 @@ rule "Dodavanje bodova za cinjenicu sportski auto(sedista)"
     agenda-group "rangiranje"
     lock-on-active true
     when
-        $zahteviZaAuto: ZahteviZaAuto(sportskiAutomobil == true);
-        $dodatna: DodatnaOprema(naziv == "sportska sedista");
-        $auto: Auto($dodatna memberOf dodatnaOprema, $bodovi:bodovi);
+        $zahteviZaAuto: ZahteviZaAuto(sportskiAutomobil == true)
+        $auto: Auto($dodatnaOprema: dodatnaOprema, $bodovi:bodovi)
+        $broj: Number(intValue == 1) from accumulate(
+            DodatnaOprema($dd: this, naziv == "sportska sedista") from $dodatnaOprema,
+            count($dd)
+        )
     then                 
         modify($auto){setBodovi($bodovi+100);}
         System.out.println("SPORTSKA SEDISTA");
+        // System.out.println($broj);
 end
 
 rule "Generisanje cinjenice duze eko putovanje"

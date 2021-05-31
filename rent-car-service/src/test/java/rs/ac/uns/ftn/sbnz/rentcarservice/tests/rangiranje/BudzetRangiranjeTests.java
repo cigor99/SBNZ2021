@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.sbnz.rentcarservice.rangiranje;
+package rs.ac.uns.ftn.sbnz.rentcarservice.tests.rangiranje;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -10,9 +10,9 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 public class BudzetRangiranjeTests {
     private KieSession kieSession;
@@ -230,4 +230,125 @@ public class BudzetRangiranjeTests {
         assertEquals(-3, auto.getBodovi());
     }
 
+    @Test
+    public void Dodaj_birane_marke(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        Korisnik korisnik = new Korisnik(1, "Ime", "Prezime", "email@email.com", "1234", StatusKorisnika.OBICNI, new HashSet<>(), new HashSet<>());
+        for(int i=0; i<20; i++){
+            Auto auto = new Auto();
+            auto.setMarka(new Marka("tesla"));
+            Rezervacija rezervacija = new Rezervacija(i, auto);
+            rezervacija.setPocetakRezervacije(LocalDate.now());
+            korisnik.getRezervacije().add(rezervacija);
+        }
+        auto = new Auto();
+        auto.setMarka(new Marka("tesla"));
+        kieSession.insert(zza);
+        kieSession.insert(korisnik);
+        kieSession.insert(auto);
+        kieSession.setGlobal("ulogovaniEmail", "email@email.com");
+
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(1000, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_mali_automobil(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        zza.setMaliAutomobil(true);
+        auto.setBrojSedista(2);
+        auto.setDuzina(3);
+        kieSession.insert(zza);
+        kieSession.insert(auto);
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(100, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_duze_putovanje_sp_gepek(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        zza.setDuzePutovanjeSaPorodicom(true);
+        auto.setZapreminaGepeka(500);
+        kieSession.insert(zza);
+        kieSession.insert(auto);
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(100, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_duze_putovanje_sp_karoserija(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        zza.setDuzePutovanjeSaPorodicom(true);
+        auto.setKaroserija(Karoserija.LIMUNZINA);
+        kieSession.insert(zza);
+        kieSession.insert(auto);
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(100, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_sportski_automobil(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        zza.setSportskiAutomobil(true);
+        auto.setUbrzanje(2);
+        auto.setMaksimalnaBrzina(300);
+        kieSession.insert(zza);
+        kieSession.insert(auto);
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(100, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_oldtajmer(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        zza.setOldtajmer(true);
+        auto.setGodiste(1966);
+        kieSession.insert(zza);
+        kieSession.insert(auto);
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(100, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_duze_eko(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        zza.setDuzeEkoPutovanje(true);
+        auto.setDistanca(550);
+        kieSession.insert(zza);
+        kieSession.insert(auto);
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(100, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_sportska_sedista(){
+        ZahteviZaAuto zza = new ZahteviZaAuto(zahteviZaAuto);
+        Auto auto = new Auto();
+        auto.setMarka(new Marka("TEST"));
+        auto.getDodatnaOprema().add(new DodatnaOprema("sportska sedista"));
+        auto.getDodatnaOprema().add(new DodatnaOprema("automatski menjac"));
+        zza.setSportskiAutomobil(true);
+        auto.setMaksimalnaBrzina(10);
+        auto.setUbrzanje(10);
+        kieSession.insert(zza);
+        kieSession.insert(auto);
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(2, rules);
+        assertEquals(100, auto.getBodovi());
+    }
 }
