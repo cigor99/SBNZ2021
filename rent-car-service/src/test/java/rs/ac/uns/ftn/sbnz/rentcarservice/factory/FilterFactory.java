@@ -17,12 +17,8 @@ public class FilterFactory {
     public KorisnickiUnosDto napraviEkoloskiKorisnickiUnos(){
         KorisnickiUnosDto unos = new KorisnickiUnosDto();
 		unos.setEkoloskaVoznja(true);
-		// unos.setSvrha("ZABAVA");
-		// unos.setBrojPutnika(2);
 		unos.setBudzet("VISOK");
 		Set<String> dodatnaOprema = new HashSet<>();
-		// dodatnaOprema.add("grejaci sedista");
-		// dodatnaOprema.add("automatski menjac");
 		unos.setDodatnaOprema(dodatnaOprema);
 
 		Set<String> dodaciZaUdobnost = new HashSet<String>();
