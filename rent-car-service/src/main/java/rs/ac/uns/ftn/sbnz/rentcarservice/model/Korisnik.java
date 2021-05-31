@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -35,8 +36,8 @@ public class Korisnik {
 	@JoinColumn(name = "korisnik_id")
 	private Set<Rezervacija> rezervacije;
 
-	public int getRezervacijaSize(){
-		return this.rezervacije.size();
+	public Korisnik(){
+		this.rezervacije = new HashSet<Rezervacija>();
 	}
 
 }

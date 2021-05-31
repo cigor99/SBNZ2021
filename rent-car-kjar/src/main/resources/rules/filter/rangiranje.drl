@@ -92,7 +92,7 @@ rule "Bodovi za opremu"
     lock-on-active true
     when
         $auto: Auto($dodatnaOprema: dodatnaOprema, $bodovi:bodovi);
-        $zahteviZaAuto: ZahteviZaAuto($dodatneOpreme: dodatneOpreme);
+        $zahteviZaAuto: ZahteviZaAuto($dodatneOpreme: dodatneOpreme, $dodatneOpreme.size() > 0);
         $total: Number() from
             accumulate(DodatnaOprema($naziv: naziv memberOf $dodatneOpreme) from $dodatnaOprema, count($naziv))
     then
@@ -107,7 +107,7 @@ rule "Bodovi za udobnost"
     lock-on-active true
     when
         $auto: Auto($dodaciZaUdobnost: dodaciZaUdobnost, $bodovi:bodovi);
-        $zahteviZaAuto: ZahteviZaAuto($dodaciZahtev:dodaciZaUdobnost);
+        $zahteviZaAuto: ZahteviZaAuto($dodaciZahtev:dodaciZaUdobnost, $dodaciZahtev.size() > 0);
         $total: Number() from
             accumulate(DodatakZaUdobnost($naziv: naziv memberOf $dodaciZahtev)
                         from $dodaciZaUdobnost, count($naziv))
@@ -121,7 +121,7 @@ rule "Bodovi za eko voznju"
     salience 100
     lock-on-active true
     when
-        $zahteviZaAuto: ZahteviZaAuto($goriva: tipGoriva);
+        $zahteviZaAuto: ZahteviZaAuto($goriva: tipGoriva, $goriva.size() > 0);
         $auto: Auto($tipGoriva: tipGoriva memberOf $goriva, $bodovi:bodovi);
     then
         modify($auto){setBodovi($bodovi + 3)}
@@ -133,7 +133,7 @@ rule "Bodovi za eko voznju(oduzmi)"
     salience 100
     lock-on-active true
     when
-        $zahteviZaAuto: ZahteviZaAuto($goriva: tipGoriva);
+        $zahteviZaAuto: ZahteviZaAuto($goriva: tipGoriva, $goriva.size() > 0);
         $auto: Auto($tipGoriva: tipGoriva not memberOf $goriva, $bodovi:bodovi);
     then
         modify($auto){setBodovi($bodovi - 3)}
@@ -145,7 +145,7 @@ rule "Bodovi za karoseriju"
     salience 100
     lock-on-active true
     when
-        $zahteviZaAuto: ZahteviZaAuto($moguceKaroserije:moguceKaroserije);
+        $zahteviZaAuto: ZahteviZaAuto($moguceKaroserije:moguceKaroserije, $moguceKaroserije.size() > 0);
         $auto: Auto($karoserija:karoserija memberOf $moguceKaroserije, $bodovi:bodovi);
     then
         modify($auto){setBodovi($bodovi + 3);}
@@ -157,7 +157,7 @@ rule "Bodovi za karoseriju(oduzmi)"
     salience 100
     lock-on-active true
     when
-        $zahteviZaAuto: ZahteviZaAuto($moguceKaroserije:moguceKaroserije);
+        $zahteviZaAuto: ZahteviZaAuto($moguceKaroserije:moguceKaroserije, $moguceKaroserije.size() > 0);
         $auto: Auto($karoserija:karoserija not memberOf $moguceKaroserije, $bodovi:bodovi);
     then
         modify($auto){setBodovi($bodovi - 3);}
@@ -169,7 +169,7 @@ rule "Bodovi za broj sedista"
     salience 100
     lock-on-active true
     when
-        $zahteviZaAuto: ZahteviZaAuto($minBrojSedista:minBrojSedista);
+        $zahteviZaAuto: ZahteviZaAuto($minBrojSedista:minBrojSedista, $minBrojSedista > 0);
         $auto: Auto($brojSedista:brojSedista >= $minBrojSedista, $bodovi:bodovi);
     then
         modify($auto){setBodovi($bodovi + 3);}
@@ -181,7 +181,7 @@ rule "Bodovi za broj sedista(oduzmi)"
     salience 100
     lock-on-active true
     when
-        $zahteviZaAuto: ZahteviZaAuto($minBrojSedista:minBrojSedista);
+        $zahteviZaAuto: ZahteviZaAuto($minBrojSedista:minBrojSedista, $minBrojSedista > 0);
         $auto: Auto($brojSedista:brojSedista < $minBrojSedista, $bodovi:bodovi);
     then
         modify($auto){setBodovi($bodovi - 3);}
