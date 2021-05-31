@@ -30,7 +30,7 @@ public class BudzetRangiranjeTests {
         kieSession.getAgenda().getAgendaGroup("rangiranje").setFocus();
         zahteviZaAuto = new ZahteviZaAuto(new HashSet<Karoserija>(), new HashSet<TipGoriva>(), 0, null, new HashSet<String>(), new HashSet<String>(), false, false, false, false, false );
         auto = new Auto();
-        auto.setNaziv("TEST AUTO");
+        auto.setMarka(new Marka("TEST AUTO"));
     }
 
     @Test

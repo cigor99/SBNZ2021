@@ -5,10 +5,12 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Data
+@AllArgsConstructor
 public class Korisnik {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +37,10 @@ public class Korisnik {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "korisnik_id")
 	private Set<Rezervacija> rezervacije;
+
+	public int getRezervacijaSize(){
+		return this.rezervacije.size();
+	}
 
 	public Korisnik(){
 		this.rezervacije = new HashSet<Rezervacija>();

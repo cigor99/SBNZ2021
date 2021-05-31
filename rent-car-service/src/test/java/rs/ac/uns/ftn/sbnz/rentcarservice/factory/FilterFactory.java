@@ -92,16 +92,16 @@ public class FilterFactory {
     
 
     public List<Auto> getAllAutomobili(){
-        Auto auto = new Auto("tesla", "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
+        Auto auto = new Auto(new Marka("tesla"), "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
                 500, 0, 600, 3.5, 250, 45);
 
-        Auto auto1 = new Auto("skoda", "oktavia", 2018, Karoserija.KARAVAN, TipGoriva.DIZEL, 6.5, 2.1, 1.3, 5,
+        Auto auto1 = new Auto(new Marka("skoda"), "oktavia", 2018, Karoserija.KARAVAN, TipGoriva.DIZEL, 6.5, 2.1, 1.3, 5,
                 500, 600, 0, 3.5, 220, 15);
 
-        Auto auto2 = new Auto("smart", "two", 2018, Karoserija.KUPE, TipGoriva.ELEKTRICNI, 3, 2.1, 1.3, 2,
+        Auto auto2 = new Auto(new Marka("smart"), "two", 2018, Karoserija.KUPE, TipGoriva.ELEKTRICNI, 3, 2.1, 1.3, 2,
                 40, 300, 0, 3.5, 220, 15);
 
-        Auto auto3 = new Auto("ferarri", "488 pista", 2018, Karoserija.KUPE, TipGoriva.BENZIN, 3, 2.1, 1.3, 2,
+        Auto auto3 = new Auto(new Marka("ferarri"), "488 pista", 2018, Karoserija.KUPE, TipGoriva.BENZIN, 3, 2.1, 1.3, 2,
             40, 300, 0, 2.8, 340, 15);
 
         HashSet<DodatnaOprema> dodatnaOprema = new HashSet<>();

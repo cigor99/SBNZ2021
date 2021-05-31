@@ -14,8 +14,9 @@ public class Auto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable = false, unique = true)
-	private String naziv;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "auto_id")
+	private Marka marka;
 
 	@Column(nullable = false)
 	private String model;
@@ -75,11 +76,11 @@ public class Auto {
 
 	private int bodovi = 0;
 
-	public Auto(String naziv, String model, int godiste, Karoserija karoserija, TipGoriva tipGoriva,
+	public Auto(Marka marka, String model, int godiste, Karoserija karoserija, TipGoriva tipGoriva,
 				double duzina, double sirina, double visina, int brojSedista, int zapreminaGepeka,
 				int zapreminaRezervoara, int distanca, double ubrzanje, int maksimalnaBrzina, double cena){
 
-		this.naziv = naziv;
+		this.marka = marka;
 		this.model = model;
 		this.godiste = godiste;
 		this.karoserija = karoserija;
@@ -98,7 +99,7 @@ public class Auto {
 
 	public Auto(Auto auto){
 
-		this.naziv = auto.getNaziv();
+		this.marka = auto.getMarka();
 		this.model = auto.getModel();
 		this.godiste = auto.getGodiste();
 		this.karoserija = auto.getKaroserija();

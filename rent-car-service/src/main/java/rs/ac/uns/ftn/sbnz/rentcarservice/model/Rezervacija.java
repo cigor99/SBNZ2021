@@ -1,10 +1,13 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Data
@@ -14,10 +17,10 @@ public class Rezervacija {
 	private int id;
 
 	@Column(nullable = false)
-	private Date pocetakRezervacije;
+	private LocalDate pocetakRezervacije;
 
 	@Column(nullable = false)
-	private Date krajRezervacije;
+	private LocalDate krajRezervacije;
 
     @Enumerated(EnumType.STRING)
 	private StatusRezervacije status;
@@ -39,5 +42,7 @@ public class Rezervacija {
 	public Rezervacija(){}
 
 	public Rezervacija(int id){this.id = id;}
+
+	public Rezervacija(int id, Auto auto){this.id = id; this.auto = auto;}
 	
 }

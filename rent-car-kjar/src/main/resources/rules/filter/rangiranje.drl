@@ -1,10 +1,11 @@
 package rules.filter;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
 global ArrayList<Auto> predlozeniAuti;
-
+global String ulogovaniEmail;
 
 rule "Rangiranje predlozenih auta"
     agenda-group "rangiranje"
@@ -15,7 +16,7 @@ rule "Rangiranje predlozenih auta"
     then
         predlozeniAuti.add($auto);
         drools.getKnowledgeRuntime().setGlobal("predlozeniAuti", predlozeniAuti);
-        System.out.println($auto.getNaziv() + " ima bodova: " +$bodovi);
+        System.out.println($auto.getMarka().getNaziv() + " ima bodova: " +$bodovi);
 end;
 
 rule "Dodaj bodove za nizak budzet(3)"
@@ -187,3 +188,34 @@ rule "Bodovi za broj sedista(oduzmi)"
         modify($auto){setBodovi($bodovi - 3);}
         System.out.println("nije ok broj sedista");
 end
+
+
+// Kompleksna pravila
+// rule "Dodavanje bodova na osnovu marke"
+//     agenda-group "rangiranje"
+//     salience 100
+//     lock-on-active true
+//     when
+//         Korisnik(email == ulogovaniEmail, $iznajmljivanja: rezervacije)
+//         $brojProslogodisnjihIznajmljivanja: Number(intValue >= 10) from accumulate(
+//             Rezervacija($r: this, $datum: pocetakRezervacije, $datum.isAfter(LocalDate.now().minusMonths(12))) from $iznajmljivanja,
+//             count($r)
+//         )
+
+//         accumulate(
+//             Auto($m:marka)
+//             Marka($m: this, $nazivMarke:naziv) and
+//             $iznajmljivanjePoMarki: Number(intValue > $brojProslogodisnjihIznajmljivanja / 5) from accumulate(
+//                 Rezervacija($r: this, auto.getMarka().getNaziv() == $nazivMarke, $datum: pocetakRezervacije, $datum.isAfter(LocalDate.now().minusMonths(12))) from $iznajmljivanja,
+//                 count($r)
+//             ),
+//             $punoBiraneMarke: collectList($m)
+//         )
+//         // $auto: Auto($bodovi:bodovi, marka memberOf $punoBiraneMarke)
+//     then
+//         // modify($auto){setBodovi($bodovi + 1000);}
+
+//         System.out.println("Dodati bodovi za marku");
+//         System.out.println("PUNO BIRANE MARKE: ");
+//         System.out.println($iznajmljivanja);
+// end

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +28,7 @@ public class AutoService {
     }
 
     public List<Auto> naprednaPretraga(KorisnickiUnosDto korisnickiUnosDto){
+
         ZahteviZaAuto zza = new ZahteviZaAuto();
         List<Auto> atutomobili = getAllAutomobili();
         KieSession kieSession = kieContainer.newKieSession();
@@ -43,8 +45,19 @@ public class AutoService {
             kieSession.insert(a);
         }
 
+        Korisnik korisnik = new Korisnik(1, "Ime", "Prezime", "email@email.com", "1234", StatusKorisnika.OBICNI, new HashSet<>(), new HashSet<>());
+        for(int i=0; i<20; i++){
+            Auto auto = new Auto();
+            auto.setMarka(new Marka("tesla"));
+            Rezervacija rezervacija = new Rezervacija(i, auto);
+            rezervacija.setPocetakRezervacije(LocalDate.now());
+            korisnik.getRezervacije().add(rezervacija);
+        }
+
         kieSession.insert(zza);
+        kieSession.insert(korisnik);
         kieSession.setGlobal("predlozeniAuti", predlozeniAuti);
+        kieSession.setGlobal("ulogovaniEmail", "email@email.com");
         kieSession.getAgenda().getAgendaGroup("rangiranje").setFocus();
         kieSession.fireAllRules();
         predlozeniAuti = (ArrayList<Auto>) kieSession.getGlobal("predlozeniAuti");
@@ -54,16 +67,16 @@ public class AutoService {
     }
 
     private List<Auto> getAllAutomobili(){
-        Auto auto = new Auto("tesla", "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
+        Auto auto = new Auto(new Marka("tesla"), "model s", 2019, Karoserija.LIMUNZINA, TipGoriva.ELEKTRICNI, 4.5, 2.1, 1.3, 5,
                 500, 0, 600, 3.5, 250, 45);
 
-        Auto auto1 = new Auto("skoda", "oktavia", 2018, Karoserija.KARAVAN, TipGoriva.DIZEL, 6.5, 2.1, 1.3, 5,
+        Auto auto1 = new Auto(new Marka("skoda"), "oktavia", 2018, Karoserija.KARAVAN, TipGoriva.DIZEL, 6.5, 2.1, 1.3, 5,
                 500, 600, 0, 3.5, 220, 15);
 
-        Auto auto2 = new Auto("smart", "two", 2018, Karoserija.KUPE, TipGoriva.ELEKTRICNI, 3, 2.1, 1.3, 2,
+        Auto auto2 = new Auto(new Marka("smart"), "two", 2018, Karoserija.KUPE, TipGoriva.ELEKTRICNI, 3, 2.1, 1.3, 2,
                 40, 300, 0, 3.5, 220, 15);
 
-        Auto auto3 = new Auto("ferarri", "488 pista", 2018, Karoserija.KUPE, TipGoriva.BENZIN, 3, 2.1, 1.3, 2,
+        Auto auto3 = new Auto(new Marka("ferarri"), "488 pista", 2018, Karoserija.KUPE, TipGoriva.BENZIN, 3, 2.1, 1.3, 2,
             40, 300, 0, 2.8, 340, 15);
 
         HashSet<DodatnaOprema> dodatnaOprema = new HashSet<>();
