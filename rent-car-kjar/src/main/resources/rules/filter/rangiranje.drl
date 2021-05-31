@@ -189,33 +189,30 @@ rule "Bodovi za broj sedista(oduzmi)"
         System.out.println("nije ok broj sedista");
 end
 
+rule "broj iznajmljivanja"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        Korisnik(email == ulogovaniEmail, $iznajmljivanja: rezervacije)
+        $brojProslogodisnjihIznajmljivanja: Number(intValue > 10) from accumulate(
+            Rezervacija($r: this, $datum: pocetakRezervacije, $datum.isAfter(LocalDate.now().minusMonths(12))) from $iznajmljivanja,
+            count($r)
+        )
+        accumulate(
+            $a: Auto($m:marka) and
+            // Marka($m: this) and
+            $iznajmljivanjePoMarki: Number(intValue * 5 > $brojProslogodisnjihIznajmljivanja.intValue) from accumulate(
+                Rezervacija($r: this, auto.getMarka().getNaziv() == $m.getNaziv(), $datum: pocetakRezervacije, $datum.isAfter(LocalDate.now().minusMonths(12))) from $iznajmljivanja,
+                count($r)
+            ),
+            $punoBiraneMarke: collectList($m)
+        )
+        $auto:Auto($bodovi:bodovi, $marka: marka, $marka memberOf $punoBiraneMarke)
+    then
+        modify($auto){setBodovi($bodovi + 1000);}
+        System.out.println("Puno biran emarke");
+        System.out.println($punoBiraneMarke);
+        System.out.println("========================================");
 
-// Kompleksna pravila
-// rule "Dodavanje bodova na osnovu marke"
-//     agenda-group "rangiranje"
-//     salience 100
-//     lock-on-active true
-//     when
-//         Korisnik(email == ulogovaniEmail, $iznajmljivanja: rezervacije)
-//         $brojProslogodisnjihIznajmljivanja: Number(intValue >= 10) from accumulate(
-//             Rezervacija($r: this, $datum: pocetakRezervacije, $datum.isAfter(LocalDate.now().minusMonths(12))) from $iznajmljivanja,
-//             count($r)
-//         )
-
-//         accumulate(
-//             Auto($m:marka)
-//             Marka($m: this, $nazivMarke:naziv) and
-//             $iznajmljivanjePoMarki: Number(intValue > $brojProslogodisnjihIznajmljivanja / 5) from accumulate(
-//                 Rezervacija($r: this, auto.getMarka().getNaziv() == $nazivMarke, $datum: pocetakRezervacije, $datum.isAfter(LocalDate.now().minusMonths(12))) from $iznajmljivanja,
-//                 count($r)
-//             ),
-//             $punoBiraneMarke: collectList($m)
-//         )
-//         // $auto: Auto($bodovi:bodovi, marka memberOf $punoBiraneMarke)
-//     then
-//         // modify($auto){setBodovi($bodovi + 1000);}
-
-//         System.out.println("Dodati bodovi za marku");
-//         System.out.println("PUNO BIRANE MARKE: ");
-//         System.out.println($iznajmljivanja);
-// end
+end
