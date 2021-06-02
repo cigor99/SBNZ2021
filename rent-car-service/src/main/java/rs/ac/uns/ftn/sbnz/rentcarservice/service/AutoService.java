@@ -16,18 +16,7 @@ import java.util.Set;
 @Service
 public class AutoService {
 
-    private final KieContainer kieContainer;
-
-//    @Autowired
-//    private AutoRepository autoRepository;
-
     @Autowired private KnowledgeService knowledgeService;
-
-
-    @Autowired
-    public AutoService(KieContainer kieContainer) {
-        this.kieContainer = kieContainer;
-    }
 
     public List<Auto> naprednaPretraga(KorisnickiUnosDto korisnickiUnosDto){
 

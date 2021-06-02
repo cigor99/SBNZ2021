@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,23 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.util.KnowledgeSessionHelper;
 
 public class FilterTests {
-    
-    protected final String ksessionName = "filterKsession";
     private KieSession kieSession;
-    private FilterFactory filterFactory;
     private ZahteviZaAuto zza;
+    private KorisnickiUnosDto korisnickiUnosDto;
 
     @Autowired
-    public FilterTests(){
-        this.filterFactory = new FilterFactory();
-    }
+    private FilterFactory filterFactory;
+
+    public  FilterTests(){this.filterFactory = new FilterFactory();}
 
     @Before
     public void setUp(){
-        KieContainer kc = KnowledgeSessionHelper.createRuleBase();
-        kieSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kc, ksessionName);
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kieContainer = ks
+                .newKieContainer(ks.newReleaseId("rs.ac.uns.ftn.sbnz", "rent-car-kjar", "1.0.0-SNAPSHOT"));
+
         zza = new ZahteviZaAuto();
+        kieSession = kieContainer.newKieSession("rulesSession");
         kieSession.getAgenda().getAgendaGroup("filter").setFocus();
     }
 

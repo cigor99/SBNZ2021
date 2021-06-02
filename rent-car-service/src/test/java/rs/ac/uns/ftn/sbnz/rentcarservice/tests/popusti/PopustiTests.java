@@ -1,6 +1,8 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.tests.popusti;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.util.KnowledgeSessionHelper;
 
 public class PopustiTests {
-    protected final String ksessionName = "filterKsession";
+    private KieSession kieSession;
 
     private FilterFactory filterFactory;
 
@@ -22,10 +24,16 @@ public class PopustiTests {
         this.filterFactory = new FilterFactory();
     }
 
+    @Before
+    public void setup(){
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kieContainer = ks
+                .newKieContainer(ks.newReleaseId("rs.ac.uns.ftn.sbnz", "rent-car-kjar", "1.0.0-SNAPSHOT"));
+        kieSession = kieContainer.newKieSession("rulesSession");
+    }
+
     @Test
     public void testIznajmljivanjeViseOdMesecDana(){
-        KieContainer kc = KnowledgeSessionHelper.createRuleBase();
-        KieSession kieSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kc, ksessionName);
 
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setIznos(100);
@@ -41,8 +49,6 @@ public class PopustiTests {
 
     @Test
     public void testIznajmljivanjeViseOdTriMeseca(){
-        KieContainer kc = KnowledgeSessionHelper.createRuleBase();
-        KieSession kieSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kc, ksessionName);
 
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setIznos(100);
@@ -58,8 +64,6 @@ public class PopustiTests {
 
     @Test 
     public void testIznajmljivanjeViseOdSestMeseci(){
-        KieContainer kc = KnowledgeSessionHelper.createRuleBase();
-        KieSession kieSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kc, ksessionName);
 
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setIznos(100);
@@ -75,8 +79,6 @@ public class PopustiTests {
 
     @Test
     public void testPopustBronzani(){
-        KieContainer kc = KnowledgeSessionHelper.createRuleBase();
-        KieSession kieSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kc, ksessionName);
 
         Korisnik korisnik = new Korisnik();
         korisnik.setStatus(StatusKorisnika.BRONZANI);
@@ -95,8 +97,6 @@ public class PopustiTests {
 
     @Test
     public void testPopustSrebrni(){
-        KieContainer kc = KnowledgeSessionHelper.createRuleBase();
-        KieSession kieSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kc, ksessionName);
 
         Korisnik korisnik = new Korisnik();
         korisnik.setStatus(StatusKorisnika.SREBRNI);
@@ -115,8 +115,6 @@ public class PopustiTests {
 
     @Test
     public void testPopustiZlatni(){
-        KieContainer kc = KnowledgeSessionHelper.createRuleBase();
-        KieSession kieSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kc, ksessionName);
 
         Korisnik korisnik = new Korisnik();
         korisnik.setStatus(StatusKorisnika.ZLATNI);

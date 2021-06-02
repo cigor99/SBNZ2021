@@ -56,7 +56,6 @@ public class CEPTests {
         session.insert(new LoginEvent("email@email.com"));
         session.insert(new LoginEvent("email@email.com"));
 
-        session.fireAllRules();
         int firedRules = session.fireAllRules();
         session.dispose();
 
