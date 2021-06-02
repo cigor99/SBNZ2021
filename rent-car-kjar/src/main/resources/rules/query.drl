@@ -1,0 +1,10 @@
+package rules;
+import java.util.List;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+
+// global List<Auto> pronadjeni;
+
+query "pretrazi auto po imenu" (String containsString)
+    auto: Auto(marka.getNaziv().toLowerCase().contains(containsString.toLowerCase()))
+    // auto: Auto()
+end;

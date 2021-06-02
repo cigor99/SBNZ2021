@@ -67,4 +67,9 @@ public class ExampleController {
 		System.out.println("USAO");
 		this.exampleService.testLoginEvents();
 	}
+
+	@RequestMapping(value = "/query", method = RequestMethod.GET)
+	public void queryTest(){
+		this.exampleService.testQuery();
+	}
 }
