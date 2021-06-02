@@ -12,7 +12,6 @@ import java.util.HashSet;
 
 import rs.ac.uns.ftn.sbnz.rentcarservice.factory.FilterFactory;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
-import rs.ac.uns.ftn.sbnz.rentcarservice.util.KnowledgeSessionHelper;
 
 public class PopustiTests {
     private KieSession kieSession;

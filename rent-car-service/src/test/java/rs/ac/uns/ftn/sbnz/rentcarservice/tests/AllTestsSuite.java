@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import rs.ac.uns.ftn.sbnz.rentcarservice.tests.cep.CEPTests;
 import rs.ac.uns.ftn.sbnz.rentcarservice.tests.filter.FilterTests;
 import rs.ac.uns.ftn.sbnz.rentcarservice.tests.popusti.PopustiTests;
+import rs.ac.uns.ftn.sbnz.rentcarservice.tests.query.QueryTests;
 import rs.ac.uns.ftn.sbnz.rentcarservice.tests.rangiranje.BudzetRangiranjeTests;
 import rs.ac.uns.ftn.sbnz.rentcarservice.tests.statusi.StatusiTests;
 
@@ -14,7 +15,8 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.tests.statusi.StatusiTests;
         BudzetRangiranjeTests.class,
         PopustiTests.class,
         StatusiTests.class,
-        CEPTests.class
+        CEPTests.class,
+        QueryTests.class
 })
 public class AllTestsSuite {
 }
