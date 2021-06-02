@@ -59,7 +59,7 @@ public class AutoService {
         Auto auto = new Auto();
         auto.setMarka(new Marka("bmw"));
         Auto auto2 = new Auto();
-        auto.setMarka(new Marka("tesla"));
+        auto2.setMarka(new Marka("tesla"));
         Set<Ocena> ocene = new HashSet<Ocena>();
 
         for(int i = 0; i< 12; i++){
@@ -70,7 +70,7 @@ public class AutoService {
             o.setId(i);
             ocene.add(o);
         }
-        for(int i = 0; i< 8; i++){
+        for(int i = 0; i< 11; i++){
             Ocena o = new Ocena();
             o.setAuto(auto2);
             o.setVrednost(4);
