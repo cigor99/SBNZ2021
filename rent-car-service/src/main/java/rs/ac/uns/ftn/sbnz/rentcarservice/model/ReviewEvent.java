@@ -5,6 +5,7 @@ import org.kie.api.definition.type.Role;
 import org.kie.api.definition.type.Timestamp;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 import lombok.Data;
@@ -16,13 +17,15 @@ import lombok.Data;
 public class ReviewEvent implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    private Marka marka;
-    private UUID id;
+    private String marka;
     private Date executionTime;
+    private UUID id;
 
-    public ReviewEvent(Marka marka){
+    public ReviewEvent(String marka){
+        super();
         this.executionTime = new Date();
         this.marka = marka;
         this.id = UUID.randomUUID();
     }
+
 }

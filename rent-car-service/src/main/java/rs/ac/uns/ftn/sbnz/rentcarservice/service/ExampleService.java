@@ -19,27 +19,20 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 public class ExampleService {
 	private static Logger log = LoggerFactory.getLogger(ExampleService.class);
 
+	@Autowired
 	private KnowledgeService knowledgeService;
 
-	@Autowired
-	public ExampleService(KnowledgeService knowledgeService) {
-		log.info("Initialising a new example session.");
-		this.knowledgeService = knowledgeService;
-	}
-
 	public void tetsEvents() {
-		// KieSession eventSession = knowledgeService.getEventsSession();
-		KieServices ks = KieServices.Factory.get();
-    	KieContainer kc = ks.newKieClasspathContainer();
-        KieSession eventSession = kc.newKieSession("eventsSession");
 
-		eventSession.insert(new ReviewEvent(new Marka("mercedes")));
-		eventSession.insert(new ReviewEvent(new Marka("mercedes")));
-		eventSession.insert(new ReviewEvent(new Marka("mercedes")));
-		eventSession.insert(new ReviewEvent(new Marka("mercedes")));
-		eventSession.insert(new ReviewEvent(new Marka("mercedes")));
+		knowledgeService.getEventsSession().insert(new ReviewEvent("mercedes"));
+		knowledgeService.getEventsSession().insert(new ReviewEvent("mercedes"));
+		knowledgeService.getEventsSession().insert(new ReviewEvent("mercedes"));
+		knowledgeService.getEventsSession().insert(new ReviewEvent("mercedes"));
+		knowledgeService.getEventsSession().insert(new ReviewEvent("mercedes"));
+		knowledgeService.getEventsSession().insert(new ReviewEvent("mercedes"));
 
-		eventSession.fireAllRules();
+		knowledgeService.getEventsSession().fireAllRules();
+		knowledgeService.releaseEventsSession();
 
 	}
 

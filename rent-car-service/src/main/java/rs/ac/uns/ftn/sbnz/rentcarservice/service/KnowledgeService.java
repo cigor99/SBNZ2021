@@ -21,13 +21,10 @@ public class KnowledgeService {
     }
 
     public KieSession getRulesSession() {
-    	
-    	rulesSession = kieContainer.newKieSession("rulesSession");
+        if (this.rulesSession == null) {
+    	    rulesSession = kieContainer.newKieSession("rulesSession");
+        }
         return rulesSession;
-    }
-
-    public void setRulesSession(KieSession kieSession) {
-        this.rulesSession = kieSession;
     }
     
     public void releaseRulesSession(){
@@ -36,14 +33,17 @@ public class KnowledgeService {
     }
     
     public KieSession getEventsSession() {
-        if(eventsSession == null){
-    		eventsSession = kieContainer.newKieSession("eventsSession");
+        if(this.eventsSession == null){
+    		this.eventsSession = kieContainer.newKieSession("eventsSession");
         }
-        return eventsSession;
+        return this.eventsSession;
     }
 
-    public void setEventsSession(KieSession kieSession) {
-        this.eventsSession = kieSession;
+    public void releaseEventsSession(){
+        this.eventsSession.dispose();
+        this.eventsSession = null;
     }
-    
+
+
+
 }

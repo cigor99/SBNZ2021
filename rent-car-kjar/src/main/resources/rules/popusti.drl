@@ -1,4 +1,4 @@
-package rules.popusti;
+package rules;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
 

@@ -21,6 +21,8 @@ public class AutoService {
 //    @Autowired
 //    private AutoRepository autoRepository;
 
+    @Autowired private KnowledgeService knowledgeService;
+
 
     @Autowired
     public AutoService(KieContainer kieContainer) {
@@ -31,18 +33,19 @@ public class AutoService {
 
         ZahteviZaAuto zza = new ZahteviZaAuto();
         List<Auto> atutomobili = getAllAutomobili();
-        KieSession kieSession = kieContainer.newKieSession();
-        kieSession.insert(atutomobili);
-        kieSession.insert(korisnickiUnosDto);
-        kieSession.insert(zza);
-        kieSession.getAgenda().getAgendaGroup("filter").setFocus();
-        kieSession.fireAllRules();
-        kieSession.dispose();
 
+        knowledgeService.getRulesSession().insert(atutomobili);
+        knowledgeService.getRulesSession().insert(korisnickiUnosDto);
+        knowledgeService.getRulesSession().insert(zza);
+        knowledgeService.getRulesSession().getAgenda().getAgendaGroup("filter").setFocus();
+        knowledgeService.getRulesSession().fireAllRules();
+        knowledgeService.getRulesSession().dispose();
+        knowledgeService.releaseRulesSession();
+//
         ArrayList<Auto> predlozeniAuti = new ArrayList<>();
-        kieSession = kieContainer.newKieSession();
+
         for(Auto a: atutomobili){
-            kieSession.insert(a);
+            knowledgeService.getRulesSession().insert(a);
         }
 
         Korisnik korisnik = new Korisnik(1, "Ime", "Prezime", "email@email.com", "1234", StatusKorisnika.OBICNI, new HashSet<>(), new HashSet<>());
@@ -54,14 +57,15 @@ public class AutoService {
             korisnik.getRezervacije().add(rezervacija);
         }
 
-        kieSession.insert(zza);
-        kieSession.insert(korisnik);
-        kieSession.setGlobal("predlozeniAuti", predlozeniAuti);
-        kieSession.setGlobal("ulogovaniEmail", "email@email.com");
-        kieSession.getAgenda().getAgendaGroup("rangiranje").setFocus();
-        kieSession.fireAllRules();
-        predlozeniAuti = (ArrayList<Auto>) kieSession.getGlobal("predlozeniAuti");
-        kieSession.dispose();
+        knowledgeService.getRulesSession().insert(zza);
+        knowledgeService.getRulesSession().insert(korisnik);
+        knowledgeService.getRulesSession().setGlobal("predlozeniAuti", predlozeniAuti);
+        knowledgeService.getRulesSession().setGlobal("ulogovaniEmail", "email@email.com");
+        knowledgeService.getRulesSession().getAgenda().getAgendaGroup("rangiranje").setFocus();
+        knowledgeService.getRulesSession().fireAllRules();
+        predlozeniAuti = (ArrayList<Auto>) knowledgeService.getRulesSession().getGlobal("predlozeniAuti");
+
+        knowledgeService.releaseRulesSession();
         System.out.println(predlozeniAuti);
         return predlozeniAuti;
     }

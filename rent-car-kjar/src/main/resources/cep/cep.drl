@@ -11,7 +11,7 @@ end;
 rule "Popular model"
     when
         $re1: ReviewEvent($marka: marka)
-        Number(intValue >= 1) from accumulate(
+        $num: Number(intValue >= 4) from accumulate(
             $re2: ReviewEvent(
             	this != $re1,
                 marka == $marka
@@ -20,7 +20,7 @@ rule "Popular model"
         )
         not (PopularModelEvent(marka == $marka, reason == "Popular model"))
     then
-        insert(new PopularModelEvent($marka.getNaziv(), "Popular model"));
+        insert(new PopularModelEvent($marka, "Popular model"));
         System.out.println("Popular model: " + $marka);
 end
 

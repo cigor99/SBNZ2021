@@ -1,4 +1,4 @@
-package rules.filter;
+package rules;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;

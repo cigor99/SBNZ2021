@@ -1,4 +1,4 @@
-package rules.filter;
+package rules;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
 
