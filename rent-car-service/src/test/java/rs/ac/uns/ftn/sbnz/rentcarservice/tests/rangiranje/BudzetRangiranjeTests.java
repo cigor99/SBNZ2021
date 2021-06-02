@@ -25,7 +25,7 @@ public class BudzetRangiranjeTests {
         KieContainer kieContainer = ks
                 .newKieContainer(ks.newReleaseId("rs.ac.uns.ftn.sbnz", "rent-car-kjar", "1.0.0-SNAPSHOT"));
         ArrayList<Auto> predlozeniAuti = new ArrayList<>();
-        kieSession = kieContainer.newKieSession();
+        kieSession = kieContainer.newKieSession("rulesSession");
         kieSession.setGlobal("predlozeniAuti", predlozeniAuti);
         kieSession.getAgenda().getAgendaGroup("rangiranje").setFocus();
         zahteviZaAuto = new ZahteviZaAuto(new HashSet<Karoserija>(), new HashSet<TipGoriva>(), 0, null, new HashSet<String>(), new HashSet<String>(), false, false, false, false, false );

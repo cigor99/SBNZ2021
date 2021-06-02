@@ -18,7 +18,7 @@ public class StatusiTests {
         KieServices ks = KieServices.Factory.get();
         KieContainer kieContainer = ks
                 .newKieContainer(ks.newReleaseId("rs.ac.uns.ftn.sbnz", "rent-car-kjar", "1.0.0-SNAPSHOT"));
-        kieSession = kieContainer.newKieSession();
+        kieSession = kieContainer.newKieSession("rulesSession");
         kieSession.getAgenda().getAgendaGroup("status").setFocus();
         korisnik = new Korisnik();
 
