@@ -1,0 +1,26 @@
+package cep;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+
+declare PopularModelEvent
+    @role(event)
+    @expires(10m)
+    marka: String
+    reason: String
+end;
+
+rule "Popular model"
+    when
+        $re1: ReviewEvent($marka: marka)
+        Number(intValue >= 1) from accumulate(
+            $re2: ReviewEvent(
+            	this != $re1,
+                marka == $marka
+            ) over window:time( 720h ),
+            count($re2)
+        )
+        not (PopularModelEvent(marka == $marka, reason == "Popular model"))
+    then
+        insert(new PopularModelEvent($marka.getNaziv(), "Popular model"));
+        System.out.println("Popular model: " + $marka);
+end
+

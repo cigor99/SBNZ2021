@@ -55,4 +55,9 @@ public class ExampleController {
 		autoService.naprednaPretraga(unos);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	};
+
+	@RequestMapping(value = "/events", method = RequestMethod.GET)
+	public void fireEvents(){
+		this.exampleService.tetsEvents();
+	}
 }
