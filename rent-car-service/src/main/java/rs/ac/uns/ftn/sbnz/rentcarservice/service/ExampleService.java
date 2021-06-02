@@ -37,4 +37,15 @@ public class ExampleService {
 	}
 
 
+	public void testLoginEvents() {
+		knowledgeService.getEventsSession().insert(new LoginEvent("email@email.com"));
+		knowledgeService.getEventsSession().insert(new LoginEvent("email@email.com"));
+		knowledgeService.getEventsSession().insert(new LoginEvent("email@email.com"));
+		knowledgeService.getEventsSession().insert(new LoginEvent("email@email.com"));
+		knowledgeService.getEventsSession().insert(new LoginEvent("email@email.com"));
+		knowledgeService.getEventsSession().insert(new LoginEvent("email@email.com"));
+
+		knowledgeService.getEventsSession().fireAllRules();
+		knowledgeService.releaseEventsSession();
+	}
 }

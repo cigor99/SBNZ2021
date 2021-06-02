@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.DodatnaOprema;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.LoginEvent;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.AutoService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.ExampleService;
 
@@ -59,5 +60,11 @@ public class ExampleController {
 	@RequestMapping(value = "/events", method = RequestMethod.GET)
 	public void fireEvents(){
 		this.exampleService.tetsEvents();
+	}
+
+	@RequestMapping(value = "/event-login", method = RequestMethod.GET)
+	public void fireLoginEvents(){
+		System.out.println("USAO");
+		this.exampleService.testLoginEvents();
 	}
 }

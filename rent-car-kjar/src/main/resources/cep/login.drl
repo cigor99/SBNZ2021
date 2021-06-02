@@ -1,0 +1,25 @@
+package cep;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+
+declare SuspiciousUserEvent
+    @role(event)
+    @expires(10m)
+    email: String
+    reason: String
+end;
+
+rule "More than 5 login attempts in 1 minute from one user"
+    when
+        $u1: LoginEvent($email: email)
+        Number(intValue >= 4) from accumulate(
+            $u2: LoginEvent(
+                this != $u1, 
+                email == $email
+            ) over window:time( 1m ),
+            count($u2)
+        )
+        not (SuspiciousUserEvent(email == $email, reason == "Many login attempts"))
+    then
+        insert(new SuspiciousUserEvent($email, "Many login attempts"));
+        System.out.println("Suspicious login attempt for user: " + $email);
+end
