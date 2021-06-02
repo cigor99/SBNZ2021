@@ -49,16 +49,41 @@ public class AutoService {
         }
 
         Korisnik korisnik = new Korisnik(1, "Ime", "Prezime", "email@email.com", "1234", StatusKorisnika.OBICNI, new HashSet<>(), new HashSet<>());
-        for(int i=0; i<20; i++){
-            Auto auto = new Auto();
-            auto.setMarka(new Marka("tesla"));
-            Rezervacija rezervacija = new Rezervacija(i, auto);
-            rezervacija.setPocetakRezervacije(LocalDate.now());
-            korisnik.getRezervacije().add(rezervacija);
+        // for(int i=0; i<20; i++){
+        //     Auto auto = new Auto();
+        //     auto.setMarka(new Marka("tesla"));
+        //     Rezervacija rezervacija = new Rezervacija(i, auto);
+        //     rezervacija.setPocetakRezervacije(LocalDate.now());
+        //     korisnik.getRezervacije().add(rezervacija);
+        // }
+        Auto auto = new Auto();
+        auto.setMarka(new Marka("bmw"));
+        Auto auto2 = new Auto();
+        auto2.setMarka(new Marka("tesla"));
+        Set<Ocena> ocene = new HashSet<Ocena>();
+
+        for(int i = 0; i< 12; i++){
+            Ocena o = new Ocena();
+            o.setAuto(auto);
+            o.setVrednost(5);
+            o.setDatum(LocalDate.now());
+            o.setId(i);
+            ocene.add(o);
         }
+        for(int i = 0; i< 11; i++){
+            Ocena o = new Ocena();
+            o.setAuto(auto2);
+            o.setVrednost(4);
+            o.setDatum(LocalDate.now());
+            o.setId(i+10);
+            ocene.add(o);
+        }
+
+        korisnik.setOcene(ocene);
 
         knowledgeService.getRulesSession().insert(zza);
         knowledgeService.getRulesSession().insert(korisnik);
+        knowledgeService.getRulesSession().insert(auto);
         knowledgeService.getRulesSession().setGlobal("predlozeniAuti", predlozeniAuti);
         knowledgeService.getRulesSession().setGlobal("ulogovaniEmail", "email@email.com");
         knowledgeService.getRulesSession().getAgenda().getAgendaGroup("rangiranje").setFocus();

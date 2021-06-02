@@ -214,5 +214,23 @@ rule "broj iznajmljivanja"
         System.out.println("Puno biran emarke");
         System.out.println($punoBiraneMarke);
         System.out.println("========================================");
+end
 
+rule "Ocenjivanje vise od 10 put"
+    agenda-group "rangiranje"
+    salience 100
+    lock-on-active true
+    when
+        Korisnik(email == ulogovaniEmail, $ocene: ocene)
+        $auto: Auto($marka:marka, $bodovi:bodovi) and
+        $brojProslogodisnjihOcenjivanja: Number(intValue > 10) from accumulate(
+            Ocena($o:this,auto.getMarka()==$marka, $datum: datum, $datum.isAfter(LocalDate.now().minusMonths(12)),
+                        vrednost >= 4) from $ocene,
+            count($o)
+        )
+        
+    then 
+        modify($auto){setBodovi($bodovi + 400);}
+        System.out.println("Ocenjivanje vise od 10 puta");
+        System.out.println("========================================");
 end

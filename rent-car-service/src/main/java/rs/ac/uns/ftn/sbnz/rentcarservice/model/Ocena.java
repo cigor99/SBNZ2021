@@ -1,12 +1,17 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
 import javax.persistence.GeneratedValue;
+
+import java.time.LocalDate;
+
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
+@EqualsAndHashCode
 public class Ocena {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +19,9 @@ public class Ocena {
 
 	@Column(nullable = false)
 	private int vrednost;
+
+	@Column(nullable = false)
+	private LocalDate datum;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "auto_id")
