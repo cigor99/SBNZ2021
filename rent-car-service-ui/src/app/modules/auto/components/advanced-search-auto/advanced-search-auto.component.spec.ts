@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CarSearchPageComponent } from './car-search-page.component';
+import { AdvancedSearchAutoComponent } from './advanced-search-auto.component';
 
-describe('CarSearchPageComponent', () => {
-  let component: CarSearchPageComponent;
-  let fixture: ComponentFixture<CarSearchPageComponent>;
+describe('AdvancedSearchAutoComponent', () => {
+  let component: AdvancedSearchAutoComponent;
+  let fixture: ComponentFixture<AdvancedSearchAutoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CarSearchPageComponent ]
+      declarations: [ AdvancedSearchAutoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarSearchPageComponent);
+    fixture = TestBed.createComponent(AdvancedSearchAutoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
