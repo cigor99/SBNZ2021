@@ -15,7 +15,7 @@ rule "Popular model"
             $re2: ReviewEvent(
             	this != $re1,
                 marka == $marka
-            ) over window:time( 720h ),
+            ) over window:time( 24h ),
             count($re2)
         )
         not (PopularModelEvent(marka == $marka, reason == "Popular model"))
