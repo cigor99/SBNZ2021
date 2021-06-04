@@ -9,6 +9,7 @@ import lombok.*;
 
 @Entity
 @Data
+@AllArgsConstructor
 public class Auto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

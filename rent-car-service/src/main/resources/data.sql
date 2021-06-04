@@ -1,1 +1,0 @@
-INSERT INTO auto_dodatna_oprema (auto_id, dodatna_oprema) VALUES (1002, 'automatski menjac');
