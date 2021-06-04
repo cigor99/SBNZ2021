@@ -1,13 +1,10 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Data

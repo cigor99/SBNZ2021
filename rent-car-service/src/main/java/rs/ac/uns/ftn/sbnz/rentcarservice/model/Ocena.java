@@ -7,11 +7,11 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@EqualsAndHashCode
+@NoArgsConstructor
 public class Ocena {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

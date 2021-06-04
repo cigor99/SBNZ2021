@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
-import lombok.Data;
+
+import lombok.*;
 
 @Entity
 @Data
@@ -96,31 +96,21 @@ public class Auto {
 		this.maksimalnaBrzina = maksimalnaBrzina;
 		this.cena = cena;
 	}
-
-	public Auto(Auto auto){
-
-		this.marka = auto.getMarka();
-		this.model = auto.getModel();
-		this.godiste = auto.getGodiste();
-		this.karoserija = auto.getKaroserija();
-		this.tipGoriva = auto.getTipGoriva();
-		this.duzina = auto.getDuzina();
-		this.sirina = auto.getSirina();
-		this.visina = auto.getVisina();
-		this.brojSedista = auto.getBrojSedista();
-		this.zapreminaGepeka = auto.getZapreminaGepeka();
-		this.zapreminaRezervoara = auto.getZapreminaRezervoara();
-		this.distanca = auto.getDistanca();
-		this.ubrzanje = auto.getUbrzanje();
-		this.maksimalnaBrzina = auto.getMaksimalnaBrzina();
-		this.cena = auto.getCena();
-		this.dodaciZaUdobnost = auto.getDodaciZaUdobnost();
-		this.dodatnaOprema = auto.getDodatnaOprema();
-	}
 	
 	public Auto() {
 		this.dodatnaOprema = new HashSet<>();
 		this.dodaciZaUdobnost = new HashSet<>();
 	}
 
+	@Override
+	public String toString() {
+		return "Auto{" +
+				"marka=" + marka +
+				", model='" + model + '\'' +
+				", godiste=" + godiste +
+				", karoserija=" + karoserija +
+				", tipGoriva=" + tipGoriva +
+				", bodovi=" + bodovi +
+				'}';
+	}
 }

@@ -15,12 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.factory.FilterFactory;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
-import rs.ac.uns.ftn.sbnz.rentcarservice.util.KnowledgeSessionHelper;
 
 public class FilterTests {
     private KieSession kieSession;
     private ZahteviZaAuto zza;
-    private KorisnickiUnosDto korisnickiUnosDto;
 
     @Autowired
     private FilterFactory filterFactory;
