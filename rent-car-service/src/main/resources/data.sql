@@ -1,2 +1,1 @@
-INSERT INTO Administrator (id, ime, prezime, email, lozinka) VALUES
-    (1002, 'Admin', 'Admin', 'adddmin@gmail.com','admin');
+INSERT INTO auto_dodatna_oprema (auto_id, dodatna_oprema) VALUES (1002, 'automatski menjac');

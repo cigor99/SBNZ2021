@@ -1,19 +1,18 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
-import org.kie.api.definition.type.Expires;
+import lombok.NoArgsConstructor;
 import org.kie.api.definition.type.Role;
 import org.kie.api.definition.type.Timestamp;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import java.util.UUID;
 
 import lombok.Data;
 
 @Role(Role.Type.EVENT)
 @Timestamp("executionTime")
-// @Expires("2h30m")
 @Data
+@NoArgsConstructor
 public class ReviewEvent implements Serializable{
 
     private static final long serialVersionUID = 1L;

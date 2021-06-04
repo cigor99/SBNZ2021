@@ -1,32 +1,20 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.security.core.GrantedAuthority;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@AllArgsConstructor
-public class Korisnik {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
-	@Column(nullable = false)
-	private String ime;
-
-	@Column(nullable = false)
-	private String prezime;
-
-	@Column(nullable = false, unique = true)
-	private String email;
-
-	@Column(nullable = false)
-	private String lozinka;
+@DiscriminatorValue("KORISNIK")
+public class Korisnik extends Osoba{
 
     @Enumerated(EnumType.STRING)
 	private StatusKorisnika status;
@@ -43,7 +31,15 @@ public class Korisnik {
 	}
 
 	public Korisnik(){
+		super();
 		this.rezervacije = new HashSet<Rezervacija>();
+	}
+
+	public Korisnik(int id, String ime, String prezime, String email, String lozinka, StatusKorisnika status, Set<Ocena> ocene, Set<Rezervacija> rezervacije) {
+		super(id, ime, prezime, email, lozinka);
+		this.status = status;
+		this.ocene = ocene;
+		this.rezervacije = rezervacije;
 	}
 
 }
