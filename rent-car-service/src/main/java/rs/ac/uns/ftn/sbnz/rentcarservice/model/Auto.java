@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import lombok.*;
 
 @Entity
 @Data
+@AllArgsConstructor
 public class Auto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -112,5 +114,18 @@ public class Auto {
 				", tipGoriva=" + tipGoriva +
 				", bodovi=" + bodovi +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Auto auto = (Auto) o;
+		return id == auto.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }

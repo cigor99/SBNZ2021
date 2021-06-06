@@ -13,8 +13,11 @@ import org.springframework.security.core.GrantedAuthority;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@DiscriminatorValue("KORISNIK")
+@DiscriminatorValue("Korisnik")
 public class Korisnik extends Osoba{
+
+	@Transient
+	private static final long serialVersionUID = 1L;
 
     @Enumerated(EnumType.STRING)
 	private StatusKorisnika status;
@@ -41,5 +44,7 @@ public class Korisnik extends Osoba{
 		this.ocene = ocene;
 		this.rezervacije = rezervacije;
 	}
+
+
 
 }

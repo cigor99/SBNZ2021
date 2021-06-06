@@ -1,13 +1,17 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.service;
 
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.KorisnickiUnosDto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+import rs.ac.uns.ftn.sbnz.rentcarservice.repository.AutoRepository;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AutoService {
@@ -15,7 +19,10 @@ public class AutoService {
     @Autowired
     private KnowledgeService knowledgeService;
 
-    public List<Auto> naprednaPretraga(KorisnickiUnosDto korisnickiUnosDto){
+    @Autowired
+    private AutoRepository autoRepository;
+
+    public List<Auto> naprednaPretraga(KorisnickiUnosDto korisnickiUnosDto, Korisnik korisnik){
 
         ZahteviZaAuto zza = new ZahteviZaAuto();
         List<Auto> atutomobili = new ArrayList<>();
@@ -34,8 +41,6 @@ public class AutoService {
             knowledgeService.getRulesSession().insert(a);
         }
 
-        Korisnik korisnik = new Korisnik(1, "Ime", "Prezime", "email@email.com", "1234", StatusKorisnika.OBICNI, new HashSet<>(), new HashSet<>());
-
         Auto auto = new Auto();
 
         knowledgeService.getRulesSession().insert(zza);
@@ -52,4 +57,28 @@ public class AutoService {
         return predlozeniAuti;
     }
 
+
+    public List<Auto> pretragaPoImenu(String containsString) {
+        List<Auto> automobili = autoRepository.findAll();
+        List<Auto> pronadjeniAutomobili = new ArrayList<>();
+
+        for(Auto a: automobili){
+            knowledgeService.getRulesSession().insert(a);
+        }
+
+        QueryResults results =  knowledgeService.getRulesSession().getQueryResults("pretrazi auto po imenu", containsString);
+
+        for ( QueryResultsRow row : results ) {
+            Auto auto = ( Auto ) row.get( "auto" );
+            pronadjeniAutomobili.add(auto);
+        }
+        knowledgeService.releaseRulesSession();
+
+        return pronadjeniAutomobili;
+    }
+
+
+    public Auto dodajNoviAuto(Auto auto) {
+        return autoRepository.save(auto);
+    }
 }

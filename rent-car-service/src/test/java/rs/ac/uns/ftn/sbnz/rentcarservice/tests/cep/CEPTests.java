@@ -62,4 +62,27 @@ public class CEPTests {
         assertEquals(1, firedRules);
 
     }
+
+    @Test
+    public void Invalid_rezervacija_event(){
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks
+                .newKieContainer(ks.newReleaseId("rs.ac.uns.ftn.sbnz", "rent-car-kjar", "1.0.0-SNAPSHOT"));
+
+        KieSession session = kContainer.newKieSession("eventsSession");
+
+        session.insert(new RezervacijaEvent("email@email.com"));
+        session.insert(new RezervacijaEvent("email@email.com"));
+        session.insert(new RezervacijaEvent("email@email.com"));
+        session.insert(new RezervacijaEvent("email@email.com"));
+        session.insert(new RezervacijaEvent("email@email.com"));
+        session.insert(new RezervacijaEvent("email@email.com"));
+        session.insert(new RezervacijaEvent("email@email.com"));
+
+        int firedRules = session.fireAllRules();
+        session.dispose();
+
+        assertEquals(1, firedRules);
+
+    }
 }

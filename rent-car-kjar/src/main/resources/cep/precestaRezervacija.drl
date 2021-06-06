@@ -1,0 +1,25 @@
+package cep;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+
+declare SuspiciousUserEvent
+    @role(event)
+    @expires(1m)
+    email: String
+    reason: String
+end;
+
+rule "Vise od 5 pokusaja za rezervaciju u 1 minutu od jednog korisnika"
+    when
+        $u1: RezervacijaEvent($email: email)
+        Number(intValue >= 4) from accumulate(
+            $u2: RezervacijaEvent(
+                this != $u1, 
+                email == $email
+            ) over window:time( 1m ),
+            count($u2)
+        )
+        not (SuspiciousUserEvent(email == $email, reason == "Previse pokusaja rezervacije"))
+    then
+        insert(new SuspiciousUserEvent($email, "Previse pokusaja rezervacije"));
+        System.out.println("Neobicno korisnicko ponasanje (rezervacija) za korisnika: " + $email);
+end

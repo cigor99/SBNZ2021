@@ -69,6 +69,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .formLogin().permitAll().and()
                 .logout()
                 .logoutUrl("/logout-user")
                 .logoutSuccessUrl("/successful-logout.html")

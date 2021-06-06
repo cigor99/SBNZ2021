@@ -11,8 +11,7 @@ import org.kie.api.runtime.KieSession;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
 public class BudzetRangiranjeTests {
     private KieSession kieSession;
@@ -351,4 +350,72 @@ public class BudzetRangiranjeTests {
         assertEquals(2, rules);
         assertEquals(100, auto.getBodovi());
     }
+
+    @Test
+    public void Dodaj_puno_birane_marke(){
+        Set<Rezervacija> rezervacije = new HashSet<>();
+        Korisnik korisnik = new Korisnik();
+        korisnik.setEmail("email@email.com");
+
+        for(int i=0; i<10; i++){
+            Rezervacija rezervacija = new Rezervacija(i, this.auto);
+            rezervacija.setPocetakRezervacije(LocalDate.now());
+            rezervacija.setAuto(this.auto);
+            rezervacija.setKorisnik(korisnik);
+            rezervacije.add(rezervacija);
+        }
+        korisnik.setRezervacije(rezervacije);
+
+
+        for(int i=11; i<20; i++){
+            Rezervacija rezervacija = new Rezervacija(i, this.auto);
+            rezervacija.setPocetakRezervacije(LocalDate.now());
+            rezervacija.setAuto(this.auto);
+            rezervacije.add(rezervacija);
+        }
+
+        for(Rezervacija r: rezervacije)
+            kieSession.insert(r);
+
+        kieSession.insert(this.auto);
+        kieSession.insert(korisnik);
+        kieSession.setGlobal("ulogovaniEmail", korisnik.getEmail());
+
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(1, rules);
+        assertEquals(1000, auto.getBodovi());
+    }
+
+    @Test
+    public void Dodaj_ocenjivanje_vise_od_10_puta(){
+        Korisnik korisnik = new Korisnik();
+        korisnik.setEmail("email@email.com");
+        Set<Ocena> ocene = new HashSet<>();
+        for(int i=0; i<15; i++){
+            Ocena ocena = new Ocena();
+            ocena.setId(i);
+            ocena.setAuto(this.auto);
+            ocena.setDatum(LocalDate.now());
+            ocena.setVrednost(5);
+            ocena.setKorisnik(korisnik);
+            ocene.add(ocena);
+
+        }
+        korisnik.setOcene(ocene);
+
+
+        for(Ocena o: ocene)
+            kieSession.insert(o);
+
+        kieSession.insert(this.auto);
+        kieSession.insert(korisnik);
+        kieSession.setGlobal("ulogovaniEmail", korisnik.getEmail());
+
+        int rules = kieSession.fireAllRules();
+
+        assertEquals(1, rules);
+        assertEquals(400, auto.getBodovi());
+    }
+
 }
