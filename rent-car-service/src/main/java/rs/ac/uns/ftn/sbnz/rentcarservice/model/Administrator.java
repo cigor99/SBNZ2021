@@ -11,8 +11,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@DiscriminatorValue("ADMINISTRATOR")
+@DiscriminatorValue("Administrator")
 public class Administrator extends Osoba{
+
+	@Transient
+	private static final long serialVersionUID = 1L;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "administrator_id")

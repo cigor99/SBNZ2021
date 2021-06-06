@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -41,5 +42,17 @@ public class Rezervacija {
 	public Rezervacija(int id){this.id = id;}
 
 	public Rezervacija(int id, Auto auto){this.id = id; this.auto = auto;}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Rezervacija that = (Rezervacija) o;
+		return id == that.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }

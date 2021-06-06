@@ -35,8 +35,8 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
             Authentication authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(
-                        userLoginDTO.getUsername(),
-                        userLoginDTO.getPassword()
+                        userLoginDTO.getEmail(),
+                        userLoginDTO.getLozinka()
                     ));
 
             return authentication;
@@ -56,5 +56,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         response.addHeader(tokenUtils.getExpHeader(), String.valueOf(tokenUtils.getExpiresIn()));
         response.addHeader("Access-Control-Allow-Headers",  "Origin, X-Requested-With, Content-Type, Accept, Authorization, Expires-In");
         response.addHeader("Access-Control-Expose-Headers", "Authorization, Expires-In");
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        System.out.println("NEUSPESNO");
+        super.unsuccessfulAuthentication(request, response, failed);
     }
 }
