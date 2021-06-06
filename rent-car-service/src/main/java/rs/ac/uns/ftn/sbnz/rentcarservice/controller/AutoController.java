@@ -42,7 +42,7 @@ public class AutoController {
         return new ResponseEntity<>(autoDtoList, HttpStatus.OK);
     }
 
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/napredna-pretraga", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AutoDto>> naprednaPretraga(@RequestBody KorisnickiUnosDto korisnickiUnosDto){
         List<AutoDto> autoDtoList;
         try{

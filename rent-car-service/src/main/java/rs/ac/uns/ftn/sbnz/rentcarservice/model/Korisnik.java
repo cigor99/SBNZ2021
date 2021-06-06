@@ -45,4 +45,6 @@ public class Korisnik extends Osoba{
 		this.rezervacije = rezervacije;
 	}
 
+
+
 }
