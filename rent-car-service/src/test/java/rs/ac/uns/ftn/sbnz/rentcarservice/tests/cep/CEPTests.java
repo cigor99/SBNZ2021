@@ -8,10 +8,6 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.KnowledgeService;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import static org.junit.Assert.assertEquals;
 
 public class CEPTests {

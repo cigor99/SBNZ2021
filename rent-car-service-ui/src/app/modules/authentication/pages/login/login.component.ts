@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: AuthenticationService
+    private service: AuthenticationService,
   ) {
     this.form = this.formBuilder.group({
       email: [
