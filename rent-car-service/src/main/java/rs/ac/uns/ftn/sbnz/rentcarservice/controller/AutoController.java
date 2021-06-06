@@ -28,9 +28,6 @@ public class AutoController {
     @Autowired
     private AutoService autoService;
 
-    @Autowired
-    private TokenUtils tokenUtils;
-
     private AutoMapper autoMapper = new AutoMapper();
 
     @GetMapping("/{containsString}")

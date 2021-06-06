@@ -8,7 +8,7 @@ declare SuspiciousUserEvent
     reason: String
 end;
 
-rule "More than 5 login attempts in 1 minute from one user"
+rule "Vise od 5 pokusaja za prijavu na sistem u 1 minutu od jednog korisnika"
     when
         $u1: LoginEvent($email: email)
         Number(intValue >= 4) from accumulate(
@@ -18,8 +18,9 @@ rule "More than 5 login attempts in 1 minute from one user"
             ) over window:time( 1m ),
             count($u2)
         )
-        not (SuspiciousUserEvent(email == $email, reason == "Many login attempts"))
+        not (SuspiciousUserEvent(email == $email, reason == "Previse pokusaja prijave na sistem"))
     then
-        insert(new SuspiciousUserEvent($email, "Many login attempts"));
-        System.out.println("Suspicious login attempt for user: " + $email);
+        insert(new SuspiciousUserEvent($email, "Previse pokusaja prijave na sistem"));
+                System.out.println("Neobicno korisnicko ponasanje (login) za korisnika: " + $email);
+
 end
