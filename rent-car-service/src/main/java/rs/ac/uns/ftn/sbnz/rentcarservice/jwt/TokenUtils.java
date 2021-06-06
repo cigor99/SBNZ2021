@@ -18,7 +18,7 @@ import java.util.Date;
 public class TokenUtils {
 
     // Izdavac tokena
-    @Value("serbioneer")
+    @Value("rentcarservice")
     private String APP_NAME;
 
     // Tajna koju samo backend aplikacija treba da zna kako bi mogla da generise i proveri JWT https://jwt.io/
@@ -27,8 +27,6 @@ public class TokenUtils {
 
     // Period vazenja
     @Value("900000") // 15 min -> 1800000 = 30 min
-    //@Value("30000") // 30 sekundi -> demonstracija
-    //@Value("120000") // 2 min -> demonstracija
     private int EXPIRES_IN;
 
     // Naziv headera kroz koji ce se prosledjivati JWT u komunikaciji server-klijent

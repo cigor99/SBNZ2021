@@ -5,9 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class LoginDto {
+@NoArgsConstructor
+public class KorisnikDto {
+
+    private int id;
+    private String ime;
+    private String prezime;
     private String email;
     private String lozinka;
+    private String status;
+
 }
