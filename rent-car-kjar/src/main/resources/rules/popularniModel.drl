@@ -17,7 +17,5 @@ rule "Najpopularniji model"
                 count($o)
         )
     then
-        // modify(popularniModel){setMarka("dasdasdsadas")};
         popularniModel.setMarka($auto.getMarka().getNaziv());
-        // System.out.println($auto);
 end

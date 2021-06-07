@@ -13,8 +13,8 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.service.OcenaService;
 
 public class OcenaController {
 
-    @Autowired
-    private OcenaService ocenaService;
+//    @Autowired
+//    private OcenaService ocenaService;
 
 //    @PostMapping()
 //    public ResponseEntity<Void> oceniAuto(@RequestBody OcenaDto ocenaDto){
