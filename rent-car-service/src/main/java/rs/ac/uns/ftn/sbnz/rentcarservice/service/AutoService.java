@@ -82,4 +82,8 @@ public class AutoService {
     public Auto dodajNoviAuto(Auto auto) {
         return autoRepository.save(auto);
     }
+
+    public Auto findOneById(int autoId) {
+        return autoRepository.findById(autoId).orElse(null);
+    }
 }
