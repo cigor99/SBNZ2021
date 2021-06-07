@@ -72,8 +72,11 @@ export class RegistrationComponent implements OnInit {
 
     // delete formObj.rePassword;
     let formObj: RegisterRequest = {
+      ime: "dodaj ime",
+      prezime: "Dodaj prezime",
       email: this.form.value.email,
-      lozinka: this.form.value.password
+      lozinka: this.form.value.password,
+      status: "BRONZANI"
     }
     this.loading = true;
 
@@ -87,7 +90,7 @@ export class RegistrationComponent implements OnInit {
       (err) => {
         this.loading = false;
         console.log(err);
-        this._snackBar.open(err, "Close");
+        this._snackBar.open(err.error, "Close");
       }
     );
   }

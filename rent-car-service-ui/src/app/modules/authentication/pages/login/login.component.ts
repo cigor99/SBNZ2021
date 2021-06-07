@@ -7,6 +7,8 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication.service';
 
 
@@ -22,6 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: AuthenticationService,
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {
     this.form = this.formBuilder.group({
       email: [
@@ -51,8 +55,18 @@ export class LoginComponent implements OnInit {
     this.service.login(this.form.value.email, this.form.value.password)
                 .subscribe(
                   (data) => {
-                    console.log(data);
+                    this.service.setLoggedInUser(data);
+                    this.form.reset();
+                    this.router.navigate(['/auto']);
+                    console.log(this.service.getLoggedInUser());
+                    this.service.currentUserSubject.next(this.service.getLoggedInUserAuthority());
+                  },
+                (error) => {
+                  if(error.status === 401){
+                    this._snackBar.open('Incorrect email or password', 'Close');
                   }
+                  this.form.reset();
+                }
                 );
   }
 

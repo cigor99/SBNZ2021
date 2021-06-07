@@ -5,9 +5,10 @@ import { AutoRoutingModule } from './auto-routing.module';
 import { MaterialModule } from '../../material-module';
 import { AdvancedSearchAutoComponent } from './components/advanced-search-auto/advanced-search-auto.component';
 import { AddFormAutoComponent } from './components/add-form-auto/add-form-auto.component';
+import { AutoReviewComponent } from './components/auto-review/auto-review.component';
 
 @NgModule({
-  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent],
+  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent, AutoReviewComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
