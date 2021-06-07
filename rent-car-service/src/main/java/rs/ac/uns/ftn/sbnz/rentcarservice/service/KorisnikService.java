@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.sbnz.rentcarservice.exception.PostojeciObjekatException;
@@ -35,5 +36,13 @@ public class KorisnikService {
             throw new Exception("Doslo je do greske");
         }
 
+    }
+
+    public Korisnik findOneByEmail(String email){
+        Korisnik korisnik = korisnikRepository.findOneByEmail(email);
+        if(korisnik == null){
+            throw new UsernameNotFoundException(String.format("Nije pronadjen korisnik sa emailom: %s.", email));
+        }
+        return korisnik;
     }
 }
