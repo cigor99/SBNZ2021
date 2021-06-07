@@ -5,12 +5,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.sbnz.rentcarservice.exception.PostojeciObjekatException;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Administrator;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Korisnik;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Osoba;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.StatusKorisnika;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.repository.KorisnikRepository;
 import rs.ac.uns.ftn.sbnz.rentcarservice.repository.OsobaRepository;
+
+import java.util.List;
 
 @Service
 public class KorisnikService {
@@ -19,7 +18,10 @@ public class KorisnikService {
     private KorisnikRepository korisnikRepository;
 
     @Autowired
-    OsobaRepository osobaRepository;
+    private OsobaRepository osobaRepository;
+
+    @Autowired
+    private RezervacijaService rezervacijaService;
 
     public Korisnik dodajNovogKorisnika(Korisnik korisnik) throws Exception {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -44,5 +46,15 @@ public class KorisnikService {
             throw new UsernameNotFoundException(String.format("Nije pronadjen korisnik sa emailom: %s.", email));
         }
         return korisnik;
+    }
+
+    public List<Rezervacija> findAllIznajmljivanja(Korisnik ulogovani) {
+
+        Korisnik korisnik = korisnikRepository.findOneByEmail(ulogovani.getEmail());
+
+        List<Rezervacija> korisnikoveRezervacije = rezervacijaService.findAllByKorisnikId(korisnik.getId());
+
+        return korisnikoveRezervacije;
+
     }
 }

@@ -20,12 +20,12 @@ import java.time.LocalDate;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
-@RequestMapping(value = "api/auto", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/ocena", produces = MediaType.APPLICATION_JSON_VALUE)
 
 public class OcenaController {
 
-//    @Autowired
-//    private OcenaService ocenaService;
+    @Autowired
+    private OcenaService ocenaService;
 
     @Autowired
     private AutoService autoService;
