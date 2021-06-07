@@ -11,7 +11,7 @@ import { RegisterRequest } from "./register";
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  authenticationUrl = `${environment.apiUrl}/api/auth`;
+  authenticationUrl = `${environment.apiUrl}/api`;
 
   private handleError: HandleError;
   private currentUserSubject: BehaviorSubject<User>;
@@ -67,10 +67,6 @@ export class AuthenticationService {
   register(registerRequest: RegisterRequest): any {
     const url = `${this.authenticationUrl}/register`;
     return this.http.post(url, registerRequest);
-      // .pipe(
-      //   catchError(this.handleError<string>('postRegisterRequest')
-      //   )
-      // );
   }
 
 }
