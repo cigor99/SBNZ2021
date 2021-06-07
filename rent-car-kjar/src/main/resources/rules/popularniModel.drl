@@ -1,0 +1,21 @@
+import rs.ac.uns.ftn.sbnz.rentcarservice.dto.*;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+import java.time.LocalDate;
+
+global AutoDto popularniModel;
+
+rule "Najpopularniji model"
+    agenda-group "popularni-model"
+    salience (100 - $brojTromesecnihOcena)
+    lock-on-active true
+    when 
+        $auto: Auto($marka: marka, $ocene: ocene)
+        $brojTromesecnihOcena: Number(intValue > 10) from accumulate(
+            Ocena($o: this, $datum: datum, 
+                  $datum.isAfter(LocalDate.now().minusMonths(3)),
+                  vrednost >= 4) from $ocene,
+                count($o)
+        )
+    then
+        popularniModel.setMarka($auto.getMarka().getNaziv());
+end

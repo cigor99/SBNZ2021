@@ -104,6 +104,14 @@ public class Auto {
 		this.dodaciZaUdobnost = new HashSet<>();
 	}
 
+	public void setAuto(Auto a){
+		this.marka = a.getMarka();
+		this.bodovi = a.getBodovi();
+		this.brojSedista = a.getBrojSedista();
+		this.cena = a.getCena();
+		this.model = a.getModel();
+	}
+
 	@Override
 	public String toString() {
 		return "Auto{" +

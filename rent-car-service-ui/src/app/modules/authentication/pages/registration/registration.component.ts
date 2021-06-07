@@ -9,6 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthenticationService } from '../../authentication.service';
+import { RegisterRequest } from '../../register';
 
 @Component({
   selector: 'app-registration',
@@ -26,6 +29,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private _snackBar: MatSnackBar
   ) {
     this.form = this.formBuilder.group(
       {
@@ -61,7 +66,25 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(){
-    console.log(this.form.value);
+    console.log(this.form.value.email);
+    this._snackBar.open("dasd", "Close");
+    // const formObj = this.form.getRawValue();
+    // delete formObj.rePassword;
+    // this.loading = true;
+
+    // this.authenticationService.register(formObj).subscribe(
+    //   (data) => {
+    //     this.loading = false;
+    //     this.form.reset();
+    //     this.registerForm.resetForm();
+    //     this._snackBar.open('Confirmation mail has been sent. Please activate your account', '', 'green-snackbar');
+    //   },
+    //   (err) => {
+    //     this.loading = false;
+    //     console.log(err);
+    //     this._snackBar.openSnackBar(err, '', 'red-snackbar');
+    //   }
+    // );
   }
 
 }

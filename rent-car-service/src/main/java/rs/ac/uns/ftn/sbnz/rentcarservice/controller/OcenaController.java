@@ -24,8 +24,8 @@ import java.time.LocalDate;
 
 public class OcenaController {
 
-    @Autowired
-    private OcenaService ocenaService;
+//    @Autowired
+//    private OcenaService ocenaService;
 
     @Autowired
     private AutoService autoService;
