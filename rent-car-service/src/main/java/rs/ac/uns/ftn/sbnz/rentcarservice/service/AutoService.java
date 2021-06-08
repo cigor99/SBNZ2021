@@ -22,17 +22,21 @@ public class AutoService {
     @Autowired
     private AutoRepository autoRepository;
 
-    public List<Auto> naprednaPretraga(KorisnickiUnosDto korisnickiUnosDto, Korisnik korisnik){
+    @Autowired
+    private KorisnikService korisnikService;
+
+    public List<Auto> naprednaPretraga(KorisnickiUnosDto korisnickiUnosDto, Korisnik ulogovani){
 
         ZahteviZaAuto zza = new ZahteviZaAuto();
-        List<Auto> atutomobili = new ArrayList<>();
+        List<Auto> atutomobili = autoRepository.findAll();
+        Korisnik korisnik = korisnikService.findOneByEmail(ulogovani.getEmail());
 
-        knowledgeService.getRulesSession().insert(atutomobili);
+//        knowledgeService.getRulesSession().insert(atutomobili);
         knowledgeService.getRulesSession().insert(korisnickiUnosDto);
         knowledgeService.getRulesSession().insert(zza);
         knowledgeService.getRulesSession().getAgenda().getAgendaGroup("filter").setFocus();
         knowledgeService.getRulesSession().fireAllRules();
-        knowledgeService.getRulesSession().dispose();
+//        knowledgeService.getRulesSession().dispose();
         knowledgeService.releaseRulesSession();
 
         ArrayList<Auto> predlozeniAuti = new ArrayList<>();
@@ -41,13 +45,10 @@ public class AutoService {
             knowledgeService.getRulesSession().insert(a);
         }
 
-        Auto auto = new Auto();
-
         knowledgeService.getRulesSession().insert(zza);
         knowledgeService.getRulesSession().insert(korisnik);
-        knowledgeService.getRulesSession().insert(auto);
         knowledgeService.getRulesSession().setGlobal("predlozeniAuti", predlozeniAuti);
-        knowledgeService.getRulesSession().setGlobal("ulogovaniEmail", "email@email.com");
+        knowledgeService.getRulesSession().setGlobal("ulogovaniEmail", korisnik.getEmail());
         knowledgeService.getRulesSession().getAgenda().getAgendaGroup("rangiranje").setFocus();
         knowledgeService.getRulesSession().fireAllRules();
         predlozeniAuti = (ArrayList<Auto>) knowledgeService.getRulesSession().getGlobal("predlozeniAuti");
@@ -80,5 +81,9 @@ public class AutoService {
 
     public Auto dodajNoviAuto(Auto auto) {
         return autoRepository.save(auto);
+    }
+
+    public Auto findOneById(int autoId) {
+        return autoRepository.findById(autoId).orElse(null);
     }
 }

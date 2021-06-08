@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "cf92c474-a7fa-438e-b484-ab56296c1248",
+		"name": "SBNZ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AutoRequests",
+			"item": [
+				{
+					"name": "PretragaAutaPoImenu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMUBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNTk1MTgsImV4cCI6MTYyMzE2MDQxOCwiYXV0aG9yaXRpZXMiOlt7ImlkIjoyLCJuYW1lIjoiUk9MRV9VU0VSIiwiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.DWvHxd13fpbakEtACEk6TOmVU4nFta3GgHcJG20Xrojb2Q4qwTu_zhaKU2_aB7WOdzMX9zfDXs1AEvXRkpMTog",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/auto/sm",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auto",
+								"sm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NaprednaPretragaAuta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMUBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNTk3OTQsImV4cCI6MTYyMzE2MDY5NCwiYXV0aG9yaXRpZXMiOlt7ImlkIjoyLCJuYW1lIjoiUk9MRV9VU0VSIiwiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.Jhqbfkioz5VPfB4UNPC6v-q6BpegQD-xPWKGkhMfXcamBMOOTnu9SBxM189kYCRWdD5sXlAveekNxH9230CDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"svrha\": \"GRADSKA_VOZNJA\",\r\n    \"brojPutnika\": 2,\r\n    \"ekoloskaVoznja\": true,\r\n    \"budzet\": \"NISKI\",\r\n    \"dodatnaOprema\": [],\r\n    \"dodaciZaUdobnost\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auto/napredna-pretraga",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auto",
+								"napredna-pretraga"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DodavanjeAuta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMUBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNTk3OTQsImV4cCI6MTYyMzE2MDY5NCwiYXV0aG9yaXRpZXMiOlt7ImlkIjoyLCJuYW1lIjoiUk9MRV9VU0VSIiwiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.Jhqbfkioz5VPfB4UNPC6v-q6BpegQD-xPWKGkhMfXcamBMOOTnu9SBxM189kYCRWdD5sXlAveekNxH9230CDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"marka\": \"Nova marka\",\r\n    \"model\": \"Novi model\",\r\n    \"godiste\": 2015,\r\n    \"karoserija\": \"KARAVAN\",\r\n    \"tipGoriva\": \"DIZEL\",\r\n    \"duzina\": 4,\r\n    \"sirina\": 3,\r\n    \"visina\": 2,\r\n    \"brojSedista\": 5,\r\n    \"zapreminaGepeka\": 500,\r\n    \"zapreminaRezervoara\": 600,\r\n    \"distanca\": 0,\r\n    \"ubrzanje\": 4.3,\r\n    \"maksimalnaBrzina\": 220,\r\n    \"cena\": 25,\r\n    \"prosecnaOcena\": 0,\r\n    \"dodatnaOprema\": [],\r\n    \"dodaciZaUdobnost\": [],\r\n    \"bodovi\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auto/dodavanje-auta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auto",
+								"dodavanje-auta"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login/RegisterRequests",
+			"item": [
+				{
+					"name": "LoginKorisnik",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"email1@email.com\",\r\n    \"lozinka\": \"lozinka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"email2@email.com\",\r\n    \"lozinka\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registracija",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ime\": \"Novi\",\r\n    \"prezime\": \"Novi\",\r\n    \"email\": \"emailnovi@email.com\",\r\n    \"lozinka\": \"lozinka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OcenaRequests",
+			"item": [
+				{
+					"name": "OceniAuto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMUBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNjAyODksImV4cCI6MTYyMzE2MTE4OSwiYXV0aG9yaXRpZXMiOlt7ImlkIjoyLCJuYW1lIjoiUk9MRV9VU0VSIiwiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.1ljkRXD42H_y37o6xGzgBpgLxGTYdALZ38G0ozMOvEUgFPSmDck_iwl5AHREAm4qmVT9sII5XqpBOU263NrPDA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vrednost\": 5,\r\n    \"autoId\": 1,\r\n    \"korisnikEmail\": \"email1@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/ocena",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ocena"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdministratorRequests",
+			"item": [
+				{
+					"name": "OdbijRezervaciju",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMkBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNjM0MjEsImV4cCI6MTYyMzE2NDMyMSwiYXV0aG9yaXRpZXMiOlt7ImlkIjoxLCJuYW1lIjoiUk9MRV9BRE1JTiIsImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV19.qb5altGpOYHLQhg6LDqqwUAaNSshhXB0t82eTiOt8KZfi9FPaZlGxhhiFyfTnPaBSqZpRXfnHp8_qiku7EpYeg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/administrator/odbij-rezervaciju/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"administrator",
+								"odbij-rezervaciju",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OdobriRezervaciju",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMkBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNjQ3NzksImV4cCI6MTYyMzE2NTY3OSwiYXV0aG9yaXRpZXMiOlt7ImlkIjoxLCJuYW1lIjoiUk9MRV9BRE1JTiIsImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV19.m0imY6wyntOy55j0CKm8eIOTtClXWTivo35-A2-LV23WA6Ti1LF3NSKY7sXP1Joqu-49zUkFkAweRhKVzCmZEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/administrator/odobri-rezervaciju/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"administrator",
+								"odobri-rezervaciju",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "KorisnikRequests",
+			"item": [
+				{
+					"name": "SvaIznajmljivanja",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMUBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNjMxODQsImV4cCI6MTYyMzE2NDA4NCwiYXV0aG9yaXRpZXMiOlt7ImlkIjoyLCJuYW1lIjoiUk9MRV9VU0VSIiwiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.pOcoepsl-eGuTzo_rfiCwjFe6ctg1Sj-YFHHYVBEbg6GFifOQygbIYnqZJcT45d_8f6X3gEdDbKbF0QZ2lkSzQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/korisnik",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"korisnik"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rezervisiauto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJyZW50Y2Fyc2VydmljZSIsInN1YiI6ImVtYWlsMUBlbWFpbC5jb20iLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2MjMxNjQ3MzEsImV4cCI6MTYyMzE2NTYzMSwiYXV0aG9yaXRpZXMiOlt7ImlkIjoyLCJuYW1lIjoiUk9MRV9VU0VSIiwiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.742Trs035Zs-U3VYn6jfuqsNplWJsmZU-mFGjVYtO5JA6pplX5bHGW2ClEW0JG2NUAxmvkR6LwdUGCd3Bu5zow",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pocetakRezervacije\": \"2021-06-08\",\r\n    \"krajRezervacije\": \"2021-07-09\",\r\n    \"autoId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/korisnik",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"korisnik"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,9 +1,15 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.sbnz.rentcarservice.exception.PostojeciObjekatException;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
+import rs.ac.uns.ftn.sbnz.rentcarservice.repository.KorisnikRepository;
+import rs.ac.uns.ftn.sbnz.rentcarservice.repository.OsobaRepository;
+
+import java.util.List;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Administrator;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Korisnik;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Osoba;
@@ -21,7 +27,10 @@ public class KorisnikService {
     private KorisnikRepository korisnikRepository;
 
     @Autowired
-    OsobaRepository osobaRepository;
+    private OsobaRepository osobaRepository;
+
+    @Autowired
+    private RezervacijaService rezervacijaService;
 
     @Autowired
     AuthorityRepository authorityRepository;
@@ -41,6 +50,24 @@ public class KorisnikService {
                 throw new PostojeciObjekatException("Korisnik", "email");
             throw new Exception("Doslo je do greske");
         }
+
+    }
+
+    public Korisnik findOneByEmail(String email){
+        Korisnik korisnik = korisnikRepository.findOneByEmail(email);
+        if(korisnik == null){
+            throw new UsernameNotFoundException(String.format("Nije pronadjen korisnik sa emailom: %s.", email));
+        }
+        return korisnik;
+    }
+
+    public List<Rezervacija> findAllIznajmljivanja(Korisnik ulogovani) {
+
+        Korisnik korisnik = korisnikRepository.findOneByEmail(ulogovani.getEmail());
+
+        List<Rezervacija> korisnikoveRezervacije = rezervacijaService.findAllByKorisnikId(korisnik.getId());
+
+        return korisnikoveRezervacije;
 
     }
 }
