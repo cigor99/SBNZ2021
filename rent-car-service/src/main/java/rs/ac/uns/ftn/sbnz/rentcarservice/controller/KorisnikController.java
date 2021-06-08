@@ -5,15 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.RezervacijaDto;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Korisnik;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Rezervacija;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.AutoService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.KorisnikService;
+import rs.ac.uns.ftn.sbnz.rentcarservice.service.RezervacijaService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.util.RezervacijaMapper;
 
 import java.util.List;
@@ -29,6 +29,9 @@ public class KorisnikController {
     @Autowired
     private AutoService autoService;
 
+    @Autowired
+    private RezervacijaService rezervacijaService;
+
     private RezervacijaMapper rezervacijaMapper;
 
     public KorisnikController() {
@@ -41,5 +44,18 @@ public class KorisnikController {
         List<Rezervacija> iznajmljivanjaList = korisnikService.findAllIznajmljivanja(korisnik);
 
         return new ResponseEntity<>(rezervacijaMapper.toDtoList(iznajmljivanjaList), HttpStatus.OK);
+    }
+
+    @PostMapping("/rezervisi-auto")
+    public ResponseEntity<RezervacijaDto> rezervisiAuto(@RequestBody RezervacijaDto rezervacijaDto){
+        Korisnik ulogovani = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Korisnik korisnik = korisnikService.findOneByEmail(ulogovani.getEmail());
+        Auto auto = autoService.findOneById(rezervacijaDto.getAutoId());
+        Rezervacija rezervacija = rezervacijaMapper.toEntity(rezervacijaDto, auto, korisnik);
+        Rezervacija kreirana = rezervacijaService.rezervisiAuto(rezervacija);
+        if(kreirana==null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Neuspesno kreiranje rezervacije");
+        }
+        return new ResponseEntity<>(rezervacijaMapper.toDto(kreirana), HttpStatus.ACCEPTED);
     }
 }

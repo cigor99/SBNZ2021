@@ -16,6 +16,7 @@ public class RezervacijaDto {
     private String status;
     private int brojDana;
     private double iznos;
+    private int autoId;
     private String autoMarka;
     private String autoModel;
     private String korisnikEmail;
