@@ -9,7 +9,8 @@ const routes: Routes = [
   {
     path: 'auto',
     loadChildren: () => import('./modules/auto/auto.module').then(m => m.AutoModule),
-  }
+  },
+
 ];
 
 @NgModule({

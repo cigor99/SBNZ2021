@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     CommonModule,
     RouterModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   exports: [HeaderComponent],
   providers: []

@@ -15,7 +15,7 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.service.KorisnikService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.util.KorisnikMapper;
 
 @RestController
-@RequestMapping(value = "api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RegistracijaController {
 
     @Autowired

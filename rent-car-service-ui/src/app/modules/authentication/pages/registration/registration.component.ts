@@ -67,24 +67,32 @@ export class RegistrationComponent implements OnInit {
 
   register(){
     console.log(this.form.value.email);
-    this._snackBar.open("dasd", "Close");
+    // this._snackBar.open("dasd", "Close");
     // const formObj = this.form.getRawValue();
-    // delete formObj.rePassword;
-    // this.loading = true;
 
-    // this.authenticationService.register(formObj).subscribe(
-    //   (data) => {
-    //     this.loading = false;
-    //     this.form.reset();
-    //     this.registerForm.resetForm();
-    //     this._snackBar.open('Confirmation mail has been sent. Please activate your account', '', 'green-snackbar');
-    //   },
-    //   (err) => {
-    //     this.loading = false;
-    //     console.log(err);
-    //     this._snackBar.openSnackBar(err, '', 'red-snackbar');
-    //   }
-    // );
+    // delete formObj.rePassword;
+    let formObj: RegisterRequest = {
+      ime: "dodaj ime",
+      prezime: "Dodaj prezime",
+      email: this.form.value.email,
+      lozinka: this.form.value.password,
+      status: "BRONZANI"
+    }
+    this.loading = true;
+
+    this.authenticationService.register(formObj).subscribe(
+      (data) => {
+        this.loading = false;
+        this.form.reset();
+        this.registerForm.resetForm();
+        this._snackBar.open('Uspesno registrovan', "Close");
+      },
+      (err) => {
+        this.loading = false;
+        console.log(err);
+        this._snackBar.open(err.error, "Close");
+      }
+    );
   }
 
 }

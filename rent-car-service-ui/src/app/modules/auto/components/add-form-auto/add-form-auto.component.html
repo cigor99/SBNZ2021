@@ -1,0 +1,65 @@
+<form [formGroup]="addForm" class="form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Dodaj auto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Karoserija</mat-label>
+            <mat-select formControlName="karoserija">
+              <mat-option *ngFor="let option of karoserijaArray" [value]="option.value" >
+                {{option.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3">
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="Marka" formControlName="marka">
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="col-sm-3">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Dodatna oprema</mat-label>
+            <mat-select multiple formControlName="dodatnaOprema">
+              <mat-option *ngFor="let option of dodatnaOpremaArray" [value]="option.value">
+                {{option.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+      </div>
+      <div class="row">
+        <!-- <div class="col-sm-6">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Dodaci za udobnost</mat-label>
+            <mat-select multiple formControlName="dodaciZaUdobnost">
+              <mat-option *ngFor="let option of dodaciZaUdobnostArray" [value]="option.value">
+                {{option.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+        <div class="col-md-6">
+          <mat-form-field class="full-width" appearance="fill">
+            <input matInput type="number" min="0" placeholder="Broj putnika" formControlName="brojSedista">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="full-width" appearance="fill">
+            <input matInput type="number" min="0" placeholder="Budzett" formControlName="cena">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="addCar()" mat-raised-button color="primary">Dodaj</button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>

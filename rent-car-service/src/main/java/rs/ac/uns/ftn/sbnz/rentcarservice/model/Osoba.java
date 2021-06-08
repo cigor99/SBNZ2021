@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="osobe")
@@ -35,6 +36,12 @@ public abstract class Osoba implements UserDetails {
 
     @Column(nullable = false)
     private String lozinka;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "osoba_authority",
+            joinColumns = @JoinColumn(name = "osoba_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private Set<Authority> authorities;
 
     @Override
     public String getUsername() {
@@ -63,7 +70,7 @@ public abstract class Osoba implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
@@ -82,5 +89,13 @@ public abstract class Osoba implements UserDetails {
     @Override
     public int hashCode() {
         return Objects.hash(email);
+    }
+
+    public Osoba(int id, String ime, String prezime, String email, String lozinka) {
+        this.id = id;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.lozinka = lozinka;
     }
 }
