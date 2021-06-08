@@ -13,9 +13,10 @@ export class HeaderComponent implements OnInit {
 
   role: string;
   authenticated: boolean;
+  route: string;
 
   ngOnInit(): void {
-    this.role = this.authService.getUserRole();
+    // this.role = this.authService.getUserRole();
     this.authService.currentUserSubject$.subscribe(role => {
       this.role = role;
       if(!!role){
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
         this.authenticated = false;
       }
     })
+    this.route = this.router.url;
   }
 
 

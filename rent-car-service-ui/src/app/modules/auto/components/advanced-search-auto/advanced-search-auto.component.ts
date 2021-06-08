@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Auto } from '../../auto';
+import { AutoService } from '../../auto.service';
+import { KorisnickiUnos } from '../../korisnickiUnos';
 
 @Component({
   selector: 'app-advanced-search-auto',
@@ -10,6 +13,8 @@ export class AdvancedSearchAutoComponent implements OnInit {
 
   searchForm: FormGroup;
   ekoCheckbox = new FormControl(false);
+
+  automobili: Auto[];
 
   svrhaArray: any[] = [
     {value:'GRADSKA_VOZNJA', viewValue:'Gradska voznja'},
@@ -29,9 +34,15 @@ export class AdvancedSearchAutoComponent implements OnInit {
     {value:'GREJACI_SEDISTA', viewValue:'Grejaci sedista'},
     {value: 'MULTIMEDIJALNI_SISTEM', viewValue: 'Multimedijalni sistem'},
     {value: 'DRZACI_ZA_CASE', viewValue: 'Drzaci za case'},
-  ]
+  ];
 
-  constructor(private formBuilder:FormBuilder)
+  budzetArray: any[] = [
+    {value:'NISKI', viewValue:'Niski'},
+    {value: 'SREDNJI', viewValue: 'Srednji'},
+    {value:'VISOK', viewValue:'Visok'},
+  ];
+
+  constructor(private formBuilder:FormBuilder, private autoService: AutoService)
   {
     this.searchForm = this.formBuilder.group({
       svrha:['', Validators.required],
@@ -47,7 +58,9 @@ export class AdvancedSearchAutoComponent implements OnInit {
   }
 
   search(){
-    console.log(this.searchForm.value);
+    let unos: KorisnickiUnos = this.searchForm.value;
+    this.autoService.autoNaprednaPretraga(unos).subscribe(data => this.automobili = data);
   }
 
 }
+
