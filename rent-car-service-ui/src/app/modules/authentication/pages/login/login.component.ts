@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
                     this.form.reset();
                     this.router.navigate(['/auto']);
                     console.log(this.service.getLoggedInUser());
-                    this.service.currentUserSubject.next(this.service.getLoggedInUserAuthority());
+                    this.service.currentUserSubject.next(this.service.getUserRole());
                   },
                 (error) => {
                   if(error.status === 401){

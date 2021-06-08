@@ -46,7 +46,7 @@ export class AuthenticationService {
       return false;
     }
     // token je validan, prosledimo rolu kao sledecu vrednost observable
-    const role = this.getLoggedInUserAuthority();
+    const role = this.getUserRole();
     this.currentUserSubject.next(role);
     // pokrenemo refresh
     return true;
@@ -64,7 +64,7 @@ export class AuthenticationService {
 	logout(): void {
 		localStorage.removeItem('jwtToken');
     localStorage.removeItem('expiresIn');
-    this.router.navigate(['login-register/login']);
+    this.router.navigate(['auth/login']);
     this.currentUserSubject.next('');
     // this.stopRefreshTokenTimer();
 	}
@@ -98,7 +98,7 @@ export class AuthenticationService {
     return info;
   }
 
-  getLoggedInUserAuthority(): string {
+  getUserRole(): string {
     const info = this.getLoggedInUser();
     if (info) {
       return info.authorities[0].authority;
