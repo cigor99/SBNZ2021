@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import rs.ac.uns.ftn.sbnz.rentcarservice.exception.NepostojeciObjekatException;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Administrator;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.Korisnik;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Rezervacija;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.RezervacijaService;
 
@@ -23,7 +24,8 @@ public class AdministratorController {
     @PutMapping("/odbij-rezervaciju/{rezervacijaId}")
     public ResponseEntity<Void> odbijRezervaciju(@PathVariable Integer rezervacijaId) {
         try {
-            rezervacijaService.odbijRezervaciju(rezervacijaId);
+            Administrator ulogovani = (Administrator) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            rezervacijaService.odbijRezervaciju(rezervacijaId, ulogovani);
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -33,7 +35,8 @@ public class AdministratorController {
     @PutMapping("/odobri-rezervaciju/{rezervacijaId}")
     public ResponseEntity<Void> odobriRezervaciju(@PathVariable Integer rezervacijaId) {
         try {
-            rezervacijaService.odobriRezervaciju(rezervacijaId);
+            Administrator ulogovani = (Administrator) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            rezervacijaService.odobriRezervaciju(rezervacijaId, ulogovani);
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

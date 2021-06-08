@@ -48,10 +48,10 @@ public class KorisnikController {
 
     @PostMapping()
     public ResponseEntity<RezervacijaDto> rezervisiAuto(@RequestBody RezervacijaDto rezervacijaDto){
-        Korisnik ulogovani = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Rezervacija kreirana;
         try {
-           kreirana = rezervacijaService.rezervisiAuto(rezervacijaDto, ulogovani);
+            Korisnik ulogovani = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            kreirana = rezervacijaService.rezervisiAuto(rezervacijaDto, ulogovani);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

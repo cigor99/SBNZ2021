@@ -34,6 +34,9 @@ public class RezervacijaService {
     @Autowired
     private KnowledgeService knowledgeService;
 
+    @Autowired
+    private AdministratorService administratorService;
+
 
     @Autowired
     Environment env;
@@ -92,11 +95,12 @@ public class RezervacijaService {
         return this.rezervacijaRepository.findById(rezervacijaId).orElse(null);
     }
 
-    public void odbijRezervaciju(Integer rezervacijaId) throws NepostojeciObjekatException, MessagingException {
+    public void odbijRezervaciju(Integer rezervacijaId, Administrator ulogovani) throws NepostojeciObjekatException, MessagingException {
         Rezervacija rezervacija = rezervacijaRepository.findById(rezervacijaId).orElse(null);
         if(rezervacija == null)
             throw new NepostojeciObjekatException("rezervacija", rezervacijaId.toString());
         rezervacija.setStatus(StatusRezervacije.ODBIJENA);
+
         Rezervacija odbijena = rezervacijaRepository.save(rezervacija);
 
         mailSender.setUsername(env.getProperty("spring.mail.username"));
@@ -112,13 +116,15 @@ public class RezervacijaService {
         mailSender.send(mimeMessage);
     }
 
-    public void odobriRezervaciju(Integer rezervacijaId) throws NepostojeciObjekatException, MessagingException {
+    public void odobriRezervaciju(Integer rezervacijaId, Administrator ulogovani) throws NepostojeciObjekatException, MessagingException {
+        Administrator administrator = administratorService.findOneByEmail(ulogovani.getEmail());
         Rezervacija rezervacija = rezervacijaRepository.findById(rezervacijaId).orElse(null);
         if(rezervacija == null)
             throw new NepostojeciObjekatException("rezervacija", rezervacijaId.toString());
         rezervacija.setStatus(StatusRezervacije.PRIHVACENA);
         Rezervacija odobrena = rezervacijaRepository.save(rezervacija);
-
+        administrator.getOdobreneRezervacije().add(odobrena);
+        administratorService.updateAdministrator(administrator);
         mailSender.setUsername(env.getProperty("spring.mail.username"));
         mailSender.setPassword(env.getProperty("spring.mail.password"));
 
