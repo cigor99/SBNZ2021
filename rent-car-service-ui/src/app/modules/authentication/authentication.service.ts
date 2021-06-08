@@ -64,7 +64,7 @@ export class AuthenticationService {
 	logout(): void {
 		localStorage.removeItem('jwtToken');
     localStorage.removeItem('expiresIn');
-    this.router.navigate(['login-register/login']);
+    this.router.navigate(['auth/login']);
     this.currentUserSubject.next('');
     // this.stopRefreshTokenTimer();
 	}
