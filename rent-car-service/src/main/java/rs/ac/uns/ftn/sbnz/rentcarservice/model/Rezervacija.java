@@ -5,10 +5,12 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Data
+@AllArgsConstructor
 public class Rezervacija {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

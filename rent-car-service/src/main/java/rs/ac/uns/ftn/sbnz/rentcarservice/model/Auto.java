@@ -17,7 +17,7 @@ public class Auto {
 	private int id;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "auto_id")
+	@JoinColumn(name = "marka_id")
 	private Marka marka;
 
 	@Column(nullable = false)
