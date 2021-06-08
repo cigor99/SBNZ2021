@@ -36,7 +36,7 @@ public class AutoService {
         knowledgeService.getRulesSession().insert(zza);
         knowledgeService.getRulesSession().getAgenda().getAgendaGroup("filter").setFocus();
         knowledgeService.getRulesSession().fireAllRules();
-        knowledgeService.getRulesSession().dispose();
+//        knowledgeService.getRulesSession().dispose();
         knowledgeService.releaseRulesSession();
 
         ArrayList<Auto> predlozeniAuti = new ArrayList<>();

@@ -10,16 +10,12 @@ import org.springframework.web.server.ResponseStatusException;
 import rs.ac.uns.ftn.sbnz.rentcarservice.exception.NepostojeciObjekatException;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Administrator;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Rezervacija;
-import rs.ac.uns.ftn.sbnz.rentcarservice.service.AdministratorService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.RezervacijaService;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
 @RequestMapping(value = "api/administrator", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdministratorController {
-
-    @Autowired
-    private AdministratorService administratorService;
 
     @Autowired
     private RezervacijaService rezervacijaService;

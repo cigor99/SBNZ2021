@@ -5,16 +5,15 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import rs.ac.uns.ftn.sbnz.rentcarservice.dto.RezervacijaDto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.exception.NepostojeciObjekatException;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Korisnik;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.Rezervacija;
-import rs.ac.uns.ftn.sbnz.rentcarservice.model.StatusRezervacije;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 import rs.ac.uns.ftn.sbnz.rentcarservice.repository.RezervacijaRepository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -33,14 +32,60 @@ public class RezervacijaService {
     private JavaMailSenderImpl mailSender;
 
     @Autowired
+    private KnowledgeService knowledgeService;
+
+
+    @Autowired
     Environment env;
 
     List<Rezervacija> findAllByKorisnikId(Integer id){
         return  rezervacijaRepository.findAllByKorisnikId(id);
     }
 
-    public Rezervacija rezervisiAuto(Rezervacija rezervacija) {
-        return rezervacijaRepository.save(rezervacija);
+    public Rezervacija rezervisiAuto(RezervacijaDto rezervacijaDto, Korisnik ulogovani) throws NepostojeciObjekatException, MessagingException {
+        Korisnik korisnik = korisnikService.findOneByEmail(ulogovani.getEmail());
+        Auto auto = autoService.findOneById(rezervacijaDto.getAutoId());
+        if(auto == null)
+            throw new NepostojeciObjekatException("auto", String.valueOf(rezervacijaDto.getAutoId()));
+
+        long daniIzmedju = ChronoUnit.DAYS.between(rezervacijaDto.getPocetakRezervacije(), rezervacijaDto.getKrajRezervacije());
+        int brojDana = Math.toIntExact(daniIzmedju);
+        Rezervacija rezervacija = new Rezervacija(
+                0,
+                rezervacijaDto.getPocetakRezervacije(),
+                rezervacijaDto.getKrajRezervacije(),
+                StatusRezervacije.KREIRANA,
+                brojDana,
+                brojDana * auto.getCena(),
+                auto,
+                korisnik);
+
+        knowledgeService.getRulesSession().insert(korisnik);
+        knowledgeService.getRulesSession().getAgenda().getAgendaGroup("status").setFocus();
+        knowledgeService.getRulesSession().fireAllRules();
+        knowledgeService.releaseRulesSession();
+
+        knowledgeService.getRulesSession().insert(korisnik);
+        knowledgeService.getRulesSession().insert(rezervacija);
+        knowledgeService.getRulesSession().getAgenda().getAgendaGroup("popusti").setFocus();
+        knowledgeService.getRulesSession().fireAllRules();
+        knowledgeService.releaseRulesSession();
+
+        Rezervacija kreirana = rezervacijaRepository.save(rezervacija);
+
+        mailSender.setUsername(env.getProperty("spring.mail.username"));
+        mailSender.setPassword(env.getProperty("spring.mail.password"));
+
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper email = new MimeMessageHelper(mimeMessage, "utf-8");
+        email.setTo(rezervacija.getKorisnik().getEmail());
+        email.setSubject("Kreirana rezervacija");
+
+        String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je kreirana", kreirana.getAuto().getMarka().getNaziv(), kreirana.getAuto().getModel());
+        email.setText(message);
+        mailSender.send(mimeMessage);
+
+        return kreirana;
     }
 
     public Rezervacija findById(Integer rezervacijaId) {

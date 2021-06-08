@@ -38,7 +38,7 @@ public class KorisnikController {
         this.rezervacijaMapper = new RezervacijaMapper();
     }
 
-    @GetMapping("/sva-iznajmljivanja")
+    @GetMapping()
     public ResponseEntity<List<RezervacijaDto>> svaIznajmljivanja(){
         Korisnik korisnik = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Rezervacija> iznajmljivanjaList = korisnikService.findAllIznajmljivanja(korisnik);
@@ -46,15 +46,14 @@ public class KorisnikController {
         return new ResponseEntity<>(rezervacijaMapper.toDtoList(iznajmljivanjaList), HttpStatus.OK);
     }
 
-    @PostMapping("/rezervisi-auto")
+    @PostMapping()
     public ResponseEntity<RezervacijaDto> rezervisiAuto(@RequestBody RezervacijaDto rezervacijaDto){
         Korisnik ulogovani = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Korisnik korisnik = korisnikService.findOneByEmail(ulogovani.getEmail());
-        Auto auto = autoService.findOneById(rezervacijaDto.getAutoId());
-        Rezervacija rezervacija = rezervacijaMapper.toEntity(rezervacijaDto, auto, korisnik);
-        Rezervacija kreirana = rezervacijaService.rezervisiAuto(rezervacija);
-        if(kreirana==null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Neuspesno kreiranje rezervacije");
+        Rezervacija kreirana;
+        try {
+           kreirana = rezervacijaService.rezervisiAuto(rezervacijaDto, ulogovani);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
         return new ResponseEntity<>(rezervacijaMapper.toDto(kreirana), HttpStatus.ACCEPTED);
     }
