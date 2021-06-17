@@ -18,6 +18,20 @@ export class AdminService {
 	constructor(private http: HttpClient) {}
 
 	getRezervacije(): Observable<Rezervacija[]> {
-		return this.http.get<any>(`${this.url}/api/rezervacija`);
+		return this.http.get<any>(`${this.url}/api/rezervacija`, httpOptions);
+	}
+
+	odbijRezervaciju(id: number): Observable<Object> {
+		return this.http.get(
+			`${this.url}/api/administrator/odbij-rezervaciju/${id}`,
+			httpOptions
+		);
+	}
+
+	odobriRezervaciju(id: number): Observable<Object> {
+		return this.http.get(
+			`${this.url}/api/administrator/odobri-rezervaciju/${id}`,
+			httpOptions
+		);
 	}
 }

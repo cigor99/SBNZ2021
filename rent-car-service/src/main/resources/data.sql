@@ -2,14 +2,18 @@ insert into authority (name) values ('ROLE_ADMIN');
 insert into authority (name) values ('ROLE_USER');
 
 INSERT INTO osobe (tip, email, ime, prezime, lozinka, status) VALUES
-('Korisnik', 'email1@email.com', 'Ime1', 'Prezime1', '$2a$10$A2Scp4L/2Zj9bRvs/O9Li.dODxCDqno4VXT5XWNRS5amuBK5/KIYu', 'OBICNI');
+('Korisnik', 'igi.l.1999@gmail.com', 'Ime1', 'Prezime1', '$2a$10$A2Scp4L/2Zj9bRvs/O9Li.dODxCDqno4VXT5XWNRS5amuBK5/KIYu', 'OBICNI');
 
 INSERT INTO osobe (tip, email, ime, prezime, lozinka) VALUES
 ('Administrator', 'email2@email.com', 'Ime1', 'Prezime1', '$2a$10$A2Scp4L/2Zj9bRvs/O9Li.dODxCDqno4VXT5XWNRS5amuBK5/KIYu');
 
+INSERT INTO osobe (tip, email, ime, prezime, lozinka, status) VALUES
+('Korisnik', 'email3@email.com', 'Ime1', 'Prezime1', '$2a$10$A2Scp4L/2Zj9bRvs/O9Li.dODxCDqno4VXT5XWNRS5amuBK5/KIYu', 'OBICNI');
+
 
 INSERT INTO osoba_authority(osoba_id, authority_id) values (1,2);
 INSERT INTO osoba_authority(osoba_id, authority_id) values (2,1);
+INSERT INTO osoba_authority(osoba_id, authority_id) values (3,2);
 
 INSERT INTO marka (naziv) values ('Smart');
 INSERT INTO marka (naziv) values ('Tesla');
@@ -119,7 +123,7 @@ prosecna_ocena
 25, --cena
 0, --distanca
 4.5, --duzina
-2017, --godiste
+2015, --godiste
 'KARAVAN', --karoserija
 220, --max_brzina
 'OKTAVIJA', --model
@@ -213,12 +217,58 @@ prosecna_ocena
 
 
 INSERT INTO rezervacija(
-	broj_dana,
-	iznos,
-	kraj_rezervacije,
-	pocetak_rezervacije,
-	status,
-	auto_id,
-	korisnik_id,
-	administrator_id)
-	VALUES (10, 1000, '2020-1-10', '2020-1-1', 'KREIRANA', 1, 1, 1);
+broj_dana,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id)
+VALUES (10, 1000, '2020-1-10', '2020-1-1', 'KREIRANA', 1, 1);
+
+
+INSERT INTO rezervacija(
+broj_dana,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (15, 1000, '2020-2-15', '2020-2-1', 'KREIRANA', 2, 3);
+
+
+INSERT INTO rezervacija(
+broj_dana,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id)
+VALUES (10, 1000, '2020-1-10', '2020-1-1', 'ODBIJENA', 1, 1);
+
+
+INSERT INTO rezervacija(
+broj_dana,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id)
+VALUES (10, 1000, '2020-1-10', '2020-1-1', 'ODBIJENA', 1, 1);
+
+
+INSERT INTO rezervacija(
+broj_dana,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (13, 5100, '2020-3-13', '2020-1-1', 'KREIRANA', 3, 1);
+

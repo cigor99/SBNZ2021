@@ -28,8 +28,8 @@ public class RezervacijaService {
     @Autowired
     private AutoService autoService;
 
-    @Autowired
-    private JavaMailSenderImpl mailSender;
+//    @Autowired
+//    private JavaMailSenderImpl mailSender;
 
     @Autowired
     private KnowledgeService knowledgeService;
@@ -76,22 +76,21 @@ public class RezervacijaService {
 
         Rezervacija kreirana = rezervacijaRepository.save(rezervacija);
 
-        mailSender.setUsername(env.getProperty("spring.mail.username"));
-        mailSender.setPassword(env.getProperty("spring.mail.password"));
-
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper email = new MimeMessageHelper(mimeMessage, "utf-8");
-        email.setTo(rezervacija.getKorisnik().getEmail());
-        email.setSubject("Kreirana rezervacija");
-
-        String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je kreirana", kreirana.getAuto().getMarka().getNaziv(), kreirana.getAuto().getModel());
-        email.setText(message);
+//        mailSender.setUsername(env.getProperty("spring.mail.username"));
+//        mailSender.setPassword(env.getProperty("spring.mail.password"));
+//
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper email = new MimeMessageHelper(mimeMessage, "utf-8");
+//        email.setTo(rezervacija.getKorisnik().getEmail());
+//        email.setSubject("Kreirana rezervacija");
+//
+//        String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je kreirana", kreirana.getAuto().getMarka().getNaziv(), kreirana.getAuto().getModel());
+//        email.setText(message);
 //        mailSender.send(mimeMessage);
 
-        for(int i=0; i<10; i++) {
-            RezervacijaEvent rezervacijaEvent = new RezervacijaEvent(rezervacija.getKorisnik().getEmail());
-            knowledgeService.getEventsSession().insert(rezervacijaEvent);
-        }
+        RezervacijaEvent rezervacijaEvent = new RezervacijaEvent(rezervacija.getKorisnik().getEmail());
+        knowledgeService.getEventsSession().insert(rezervacijaEvent);
+
         return kreirana;
     }
 
@@ -107,17 +106,17 @@ public class RezervacijaService {
 
         Rezervacija odbijena = rezervacijaRepository.save(rezervacija);
 
-        mailSender.setUsername(env.getProperty("spring.mail.username"));
-        mailSender.setPassword(env.getProperty("spring.mail.password"));
-
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper email = new MimeMessageHelper(mimeMessage, "utf-8");
-        email.setTo(rezervacija.getKorisnik().getEmail());
-        email.setSubject("Odobrena rezervacija");
-
-        String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je odobrena", odbijena.getAuto().getMarka().getNaziv(), odbijena.getAuto().getModel());
-        email.setText(message);
-        mailSender.send(mimeMessage);
+//        mailSender.setUsername(env.getProperty("spring.mail.username"));
+//        mailSender.setPassword(env.getProperty("spring.mail.password"));
+//
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper email = new MimeMessageHelper(mimeMessage, "utf-8");
+//        email.setTo(rezervacija.getKorisnik().getEmail());
+//        email.setSubject("Odobrena rezervacija");
+//
+//        String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je odobrena", odbijena.getAuto().getMarka().getNaziv(), odbijena.getAuto().getModel());
+//        email.setText(message);
+//        mailSender.send(mimeMessage);
     }
 
     public void odobriRezervaciju(Integer rezervacijaId, Administrator ulogovani) throws NepostojeciObjekatException, MessagingException {
@@ -129,17 +128,17 @@ public class RezervacijaService {
         Rezervacija odobrena = rezervacijaRepository.save(rezervacija);
         administrator.getOdobreneRezervacije().add(odobrena);
         administratorService.updateAdministrator(administrator);
-        mailSender.setUsername(env.getProperty("spring.mail.username"));
-        mailSender.setPassword(env.getProperty("spring.mail.password"));
+//        mailSender.setUsername(env.getProperty("spring.mail.username"));
+//        mailSender.setPassword(env.getProperty("spring.mail.password"));
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper email = new MimeMessageHelper(mimeMessage, "utf-8");
-        email.setTo(rezervacija.getKorisnik().getEmail());
-        email.setSubject("Odobrena rezervacija");
-
-        String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je odobrena", odobrena.getAuto().getMarka().getNaziv(), odobrena.getAuto().getModel());
-        email.setText(message);
-        mailSender.send(mimeMessage);
+//        MimeMessage mimeMessage = mailSender.createMimeMessage();
+//        MimeMessageHelper email = new MimeMessageHelper(mimeMessage, "utf-8");
+//        email.setTo(rezervacija.getKorisnik().getEmail());
+//        email.setSubject("Odobrena rezervacija");
+//
+//        String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je odobrena", odobrena.getAuto().getMarka().getNaziv(), odobrena.getAuto().getModel());
+//        email.setText(message);
+//        mailSender.send(mimeMessage);
     }
 
     public List<Rezervacija> findAll() {
