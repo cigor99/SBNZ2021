@@ -39,8 +39,9 @@ public class AutoController {
         return new ResponseEntity<>(autoDtoList, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/napredna-pretraga", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/napredna-pretraga")
     public ResponseEntity<List<AutoDto>> naprednaPretraga(@RequestBody KorisnickiUnosDto korisnickiUnosDto){
+        System.out.println(korisnickiUnosDto.getBudzet());
         List<AutoDto> autoDtoList;
         try{
             Korisnik korisnik = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

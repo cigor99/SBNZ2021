@@ -55,11 +55,12 @@ export class LoginComponent implements OnInit {
     this.service.login(this.form.value.email, this.form.value.password)
                 .subscribe(
                   (data) => {
+                    console.log(data);
                     this.service.setLoggedInUser(data);
                     this.form.reset();
                     this.router.navigate(['/auto']);
                     console.log(this.service.getLoggedInUser());
-                    this.service.currentUserSubject.next(this.service.getUserRole());
+                    this.service.currentUserSubject.next(this.service.getLoggedInUser());
                   },
                 (error) => {
                   if(error.status === 401){
