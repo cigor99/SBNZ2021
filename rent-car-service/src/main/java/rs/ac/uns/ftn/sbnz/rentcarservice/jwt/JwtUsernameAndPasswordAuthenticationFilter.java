@@ -1,12 +1,15 @@
 package rs.ac.uns.ftn.sbnz.rentcarservice.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.kie.api.runtime.KieContainer;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import rs.ac.uns.ftn.sbnz.rentcarservice.dto.LoginDto;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.LoginEvent;
+import rs.ac.uns.ftn.sbnz.rentcarservice.service.KnowledgeService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -20,9 +23,14 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     private final TokenUtils tokenUtils;
 
-    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager, TokenUtils tokenUtils) {
+    private final KnowledgeService knowledgeService;
+
+    private LoginDto loginDto;
+
+    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager, TokenUtils tokenUtils, KnowledgeService knowledgeService) {
         this.authenticationManager = authenticationManager;
         this.tokenUtils = tokenUtils;
+        this.knowledgeService = knowledgeService;
     }
 
 
@@ -32,7 +40,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
         try {
             LoginDto userLoginDTO = new ObjectMapper().readValue(request.getInputStream(), LoginDto.class);
-
+            this.loginDto = userLoginDTO;
             Authentication authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(
                         userLoginDTO.getEmail(),
@@ -60,7 +68,9 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        System.out.println("NEUSPESNO");
+        for(int i=0; i<10; i++)
+            knowledgeService.getEventsSession().insert(new LoginEvent(this.loginDto.getEmail()));
+
         super.unsuccessfulAuthentication(request, response, failed);
     }
 }

@@ -21,7 +21,7 @@ public class AdministratorController {
     @Autowired
     private RezervacijaService rezervacijaService;
 
-    @PutMapping("/odbij-rezervaciju/{rezervacijaId}")
+    @GetMapping("/odbij-rezervaciju/{rezervacijaId}")
     public ResponseEntity<Void> odbijRezervaciju(@PathVariable Integer rezervacijaId) {
         try {
             Administrator ulogovani = (Administrator) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -32,12 +32,13 @@ public class AdministratorController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/odobri-rezervaciju/{rezervacijaId}")
+    @GetMapping("/odobri-rezervaciju/{rezervacijaId}")
     public ResponseEntity<Void> odobriRezervaciju(@PathVariable Integer rezervacijaId) {
         try {
             Administrator ulogovani = (Administrator) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             rezervacijaService.odobriRezervaciju(rezervacijaId, ulogovani);
         } catch (Exception e){
+            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
         return new ResponseEntity<>(HttpStatus.OK);

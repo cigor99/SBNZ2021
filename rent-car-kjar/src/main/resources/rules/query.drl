@@ -2,9 +2,29 @@ package rules;
 import java.util.List;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
-// global List<Auto> pronadjeni;
+declare PopularModelEvent
+    @role(event)
+    @expires(24h)
+    marka: String
+    reason: String
+end;
+
+declare SuspiciousUserEvent
+    @role(event)
+    @expires(10m)
+    email: String
+    reason: String
+end;
+
 
 query "pretrazi auto po imenu" (String containsString)
     auto: Auto(marka.getNaziv().toLowerCase().contains(containsString.toLowerCase()))
-    // auto: Auto()
+end;
+
+query "pretrazi event popular model"()
+    popularModelEvent : PopularModelEvent()
+end;
+
+query "pretrazi event suspicious user"()
+    suspiciousUserEvent : SuspiciousUserEvent()
 end;

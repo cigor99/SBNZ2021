@@ -1,15 +1,40 @@
-<mat-toolbar color="primary" style="margin-bottom: 15px;">
-  <mat-icon>time_to_leave</mat-icon>
-  <span style="margin-left: 8px;">  Rent car service</span>
-  <span class="example-spacer"></span>
+<mat-toolbar color="primary" style="margin-bottom: 15px">
+	<mat-icon>time_to_leave</mat-icon>
+	<span style="margin-left: 8px"> Rent car service</span>
+	<span class="example-spacer"></span>
 
-  <button mat-button *ngIf="isAdmin" routerLink="/auto/add-form">Dodaj auto</button>
+	<button mat-button *ngIf="isAdmin" routerLink="/auto/add-form">
+		Dodaj auto
+	</button>
+	<button mat-button *ngIf="isAdmin" routerLink="/admin/view-reservations">
+		Pregledaj rezervacije
+	</button>
 
-  <button mat-button *ngIf="isUser" routerLink="/auto/advanced-search">Napredna pretraga</button>
+	<button mat-button *ngIf="isUser" routerLink="/auto/advanced-search">
+		Napredna pretraga
+	</button>
 
-
-  <button mat-button *ngIf="!authenticated && user==null" routerLink="/auth/login">Login</button>
-  <button mat-button *ngIf="!authenticated && user==null" routerLink="/auth/register">Register</button>
-  <button mat-button *ngIf="isAuthorized" color="primary" style="background-color: white;"
-    (click)="logout()">Logout</button>
+	<button
+		mat-button
+		*ngIf="!authenticated && user == null"
+		routerLink="/auth/login"
+	>
+		Login
+	</button>
+	<button
+		mat-button
+		*ngIf="!authenticated && user == null"
+		routerLink="/auth/register"
+	>
+		Register
+	</button>
+	<button
+		mat-button
+		*ngIf="isAuthorized"
+		color="primary"
+		style="background-color: white"
+		(click)="logout()"
+	>
+		Logout
+	</button>
 </mat-toolbar>
