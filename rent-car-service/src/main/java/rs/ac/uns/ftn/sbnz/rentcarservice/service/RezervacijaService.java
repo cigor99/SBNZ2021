@@ -141,4 +141,8 @@ public class RezervacijaService {
         email.setText(message);
         mailSender.send(mimeMessage);
     }
+
+    public List<Rezervacija> findAll() {
+        return this.rezervacijaRepository.findAll();
+    }
 }

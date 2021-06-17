@@ -210,3 +210,15 @@ prosecna_ocena
 0,
 0
 );
+
+
+INSERT INTO rezervacija(
+	broj_dana,
+	iznos,
+	kraj_rezervacije,
+	pocetak_rezervacije,
+	status,
+	auto_id,
+	korisnik_id,
+	administrator_id)
+	VALUES (10, 1000, '2020-1-10', '2020-1-1', 'KREIRANA', 1, 1, 1);

@@ -70,6 +70,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/api/auto/napredna-pretraga").permitAll()
+                .antMatchers("/api/rezervacija/**").permitAll()
 //                .antMatchers("/successful-logout.html").permitAll()
                 .antMatchers("/api/register").permitAll()
                 .anyRequest().authenticated()
