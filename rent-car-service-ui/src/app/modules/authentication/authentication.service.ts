@@ -9,7 +9,7 @@ import { User } from "./user";
 import { HandleError } from "src/app/core/services/http-error-handler.service";
 import { RegisterRequest } from "./register";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { ConstantPool } from "@angular/compiler";
+import { of } from 'rxjs'
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
@@ -17,19 +17,25 @@ export class AuthenticationService {
 
 	private handleError: HandleError;
 	private headers = new HttpHeaders({ "Content-Type": "application/json" });
-	public currentUserSubject = new BehaviorSubject<string>('');
-	currentUserSubject$ = this.currentUserSubject.asObservable();
+	public currentUserSubject : BehaviorSubject<string>;
+	currentUserSubject$: Observable<string>;
 
   private jwtService: JwtHelperService;
 
 
 	constructor(private http: HttpClient, private router: Router) {
     this.jwtService = new JwtHelperService();
+    this.currentUserSubject = new BehaviorSubject<string>(this.getLoggedInUser());
+    this.currentUserSubject$ = this.currentUserSubject.asObservable();
 	}
 
 	isAuthenticated(): boolean {
 		return this.currentUserSubject.value != null;
 	}
+
+  public get currentUserValue(): string {
+    return this.currentUserSubject.value;
+  }
 
   autoLogin(): boolean {
     const user = this.getLoggedInUser();

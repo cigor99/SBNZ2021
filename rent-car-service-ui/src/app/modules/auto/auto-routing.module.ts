@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { AddFormAutoComponent } from './components/add-form-auto/add-form-auto.component';
 import { AdvancedSearchAutoComponent } from './components/advanced-search-auto/advanced-search-auto.component';
 import { AutoReviewComponent } from './components/auto-review/auto-review.component';
@@ -15,7 +16,9 @@ const routes: Routes = [
   },
   {
     path: 'add-form',
-    component: AddFormAutoComponent
+    component: AddFormAutoComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ["ROLE_ADMIN"]}
   }
 ];
 

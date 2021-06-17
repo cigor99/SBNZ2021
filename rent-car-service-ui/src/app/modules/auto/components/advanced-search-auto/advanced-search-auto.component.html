@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-6">
           <mat-form-field class="full-width" appearance="fill">
-            <input matInput type="number" min="0" placeholder="Broj putnika" formControlName="brojPutnika">
+            <input matInput type="number" min="0" max="5" placeholder="Broj putnika" formControlName="brojPutnika">
           </mat-form-field>
         </div>
       </div>
@@ -69,23 +69,27 @@
 
 </form>
 </mat-grid-tile>
-<mat-grid-tile colspan="2" style="background-color: aqua;">
-  <mat-card class="example-card" *ngFor="let svr of svrhaArray">
+<mat-grid-tile colspan="2">
+  <h2 *ngIf="!automobili">Pretrazeni automobili</h2>
+  <mat-card class="example-card" *ngFor="let auto of automobili">
     <mat-card-header>
-      <mat-card-title>{{svr.viewValue}}</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      <mat-card-title>{{auto.marka}}</mat-card-title>
+      <mat-card-subtitle>{{auto.model}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <mat-list>
-        <mat-list-item>Godiste: </mat-list-item>
-        <mat-list-item>Karoserija: </mat-list-item>
-        <mat-list-item>Tip goriva: </mat-list-item>
-        <mat-list-item>Broj sedista: </mat-list-item>
-        <mat-list-item>Zapremina gepeka: </mat-list-item>
-        <mat-list-item>Zapremina rezervoara: </mat-list-item>
-        <mat-list-item>Distanca: </mat-list-item>
-        <mat-list-item>Maksimalna brzina: </mat-list-item>
-        <mat-list-item>Cena: </mat-list-item>
+        <mat-list-item>Godiste: {{auto.godiste}}</mat-list-item>
+        <mat-list-item>Karoserija: {{auto.karoserija}}</mat-list-item>
+        <mat-list-item>Tip goriva: {{auto.tipGoriva}}</mat-list-item>
+        <mat-list-item>Broj sedista: {{auto.brojSedista}}</mat-list-item>
+        <mat-list-item>Zapremina gepeka: {{auto.zapreminaGepeka}}</mat-list-item>
+        <mat-list-item *ngIf="auto.zapreminaRezervoara">Zapremina rezervoara: {{auto.zapreminaRezervoara}}</mat-list-item>
+        <mat-list-item *ngIf="auto.distanca">Distanca: {{auto.distanca}}</mat-list-item>
+        <mat-list-item>Maksimalna brzina: {{auto.maksimalnaBrzina}}</mat-list-item>
+        <mat-list-item>Cena: {{auto.cena}}</mat-list-item>
+        <mat-list-item>
+          <button mat-button color="primary" (click)="rent()">Iznajmi</button>
+        </mat-list-item>
       </mat-list>
 
     </mat-card-content>

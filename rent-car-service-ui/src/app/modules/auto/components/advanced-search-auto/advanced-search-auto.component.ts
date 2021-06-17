@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SnackBarComponent } from 'src/app/core/components/snack-bar/snack-bar.component';
 import { Auto } from '../../auto';
 import { AutoService } from '../../auto.service';
 import { KorisnickiUnos } from '../../korisnickiUnos';
@@ -42,7 +43,7 @@ export class AdvancedSearchAutoComponent implements OnInit {
     {value:'VISOK', viewValue:'Visok'},
   ];
 
-  constructor(private formBuilder:FormBuilder, private autoService: AutoService)
+  constructor(private formBuilder:FormBuilder, private autoService: AutoService, public snackBar: SnackBarComponent )
   {
     this.searchForm = this.formBuilder.group({
       svrha:['', Validators.required],
@@ -58,8 +59,18 @@ export class AdvancedSearchAutoComponent implements OnInit {
   }
 
   search(){
+    if(this.searchForm.value.dodatnaOprema == null){
+      this.searchForm.value.dodatnaOprema = [];
+    }
+    if(this.searchForm.value.dodaciZaUdobnost == null){
+      this.searchForm.value.dodaciZaUdobnost = [];
+    }
     let unos: KorisnickiUnos = this.searchForm.value;
     this.autoService.autoNaprednaPretraga(unos).subscribe(data => this.automobili = data);
+  }
+
+  rent(){
+    this.snackBar.openSnackBar('Zahtev prosledjen adminu', '', 'green-snackbar');
   }
 
 }

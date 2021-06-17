@@ -11,15 +11,15 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
-  role: string;
+  user: string;
   authenticated: boolean;
   route: string;
 
   ngOnInit(): void {
     // this.role = this.authService.getUserRole();
-    this.authService.currentUserSubject$.subscribe(role => {
-      this.role = role;
-      if(!!role){
+    this.authService.currentUserSubject$.subscribe(us => {
+      this.user = us;
+      if(!!us){
         this.authenticated = true;
       }else{
         this.authenticated = false;
@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    this.role == null!;
+    this.user == null!;
     this.authService.logout();
   }
 
