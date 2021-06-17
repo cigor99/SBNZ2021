@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import rs.ac.uns.ftn.sbnz.rentcarservice.jwt.JwtAuthenticationFilter;
 import rs.ac.uns.ftn.sbnz.rentcarservice.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import rs.ac.uns.ftn.sbnz.rentcarservice.jwt.TokenUtils;
+import rs.ac.uns.ftn.sbnz.rentcarservice.service.KnowledgeService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.SecureUserDetailsService;
 
 
@@ -34,6 +35,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+
+    @Autowired
+    private KnowledgeService knowledgeService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -75,7 +79,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .logoutUrl("/logout-user")
 //                .logoutSuccessUrl("/successful-logout.html")
 //                .and()
-                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), tokenUtils))
+                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), tokenUtils, knowledgeService))
                 .addFilterAfter(new JwtAuthenticationFilter(tokenUtils, secureUserDetailsService),
                         JwtUsernameAndPasswordAuthenticationFilter.class);
     }

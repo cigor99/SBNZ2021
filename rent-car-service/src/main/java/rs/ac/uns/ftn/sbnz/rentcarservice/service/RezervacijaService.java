@@ -86,8 +86,12 @@ public class RezervacijaService {
 
         String message = String.format("Vaša rezervacija za auto marke: {}, model: {} je kreirana", kreirana.getAuto().getMarka().getNaziv(), kreirana.getAuto().getModel());
         email.setText(message);
-        mailSender.send(mimeMessage);
+//        mailSender.send(mimeMessage);
 
+        for(int i=0; i<10; i++) {
+            RezervacijaEvent rezervacijaEvent = new RezervacijaEvent(rezervacija.getKorisnik().getEmail());
+            knowledgeService.getEventsSession().insert(rezervacijaEvent);
+        }
         return kreirana;
     }
 
