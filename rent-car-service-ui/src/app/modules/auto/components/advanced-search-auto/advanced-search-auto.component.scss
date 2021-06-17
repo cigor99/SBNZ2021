@@ -1,5 +1,9 @@
-.form-container{
-  width: 400 px;
-  margin: 0 px auto;
-  margin-top: 200 px
+.mat-grid-tile .mat-figure{
+  align-items: baseline;
+  justify-content: left;
+  margin-left: 5%;
+}
+
+.example-card{
+  max-width: 300px;
 }

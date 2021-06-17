@@ -65,10 +65,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rent-car-service-ui:build",
-            "ssl": true,
-            "sslKey": "ssl/server.key",
-            "sslCert": "ssl/server.crt"
+            "browserTarget": "rent-car-service-ui:build"
           },
           "configurations": {
             "production": {

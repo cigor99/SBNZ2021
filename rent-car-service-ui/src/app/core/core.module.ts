@@ -6,10 +6,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, SnackBarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -18,6 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ],
   exports: [HeaderComponent],
-  providers: []
+  providers: [SnackBarComponent]
 })
 export class CoreModule { }
