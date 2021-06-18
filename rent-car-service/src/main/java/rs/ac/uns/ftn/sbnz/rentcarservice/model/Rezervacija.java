@@ -31,11 +31,11 @@ public class Rezervacija {
 	@Column(nullable = false)
 	private double iznos;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "auto_id")
 	private Auto auto;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   	@JoinColumn(name = "korisnik_id")
 	private Korisnik korisnik;
 
@@ -56,5 +56,17 @@ public class Rezervacija {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	@Override
+	public String toString() {
+		return "Rezervacija{" +
+				"id=" + id +
+				", pocetakRezervacije=" + pocetakRezervacije +
+				", krajRezervacije=" + krajRezervacije +
+				", status=" + status +
+				", brojDana=" + brojDana +
+				", iznos=" + iznos +
+				'}';
 	}
 }

@@ -11,12 +11,14 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.dto.RezervacijaDto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Auto;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Korisnik;
 import rs.ac.uns.ftn.sbnz.rentcarservice.model.Rezervacija;
+import rs.ac.uns.ftn.sbnz.rentcarservice.model.StatusRezervacije;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.AutoService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.KorisnikService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.service.RezervacijaService;
 import rs.ac.uns.ftn.sbnz.rentcarservice.util.RezervacijaMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
@@ -42,6 +44,8 @@ public class KorisnikController {
     public ResponseEntity<List<RezervacijaDto>> svaIznajmljivanja(){
         Korisnik korisnik = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Rezervacija> iznajmljivanjaList = korisnikService.findAllIznajmljivanja(korisnik);
+
+        iznajmljivanjaList = iznajmljivanjaList.stream().filter(iznajmljivanje -> iznajmljivanje.getStatus() == StatusRezervacije.PRIHVACENA).collect(Collectors.toList());
 
         return new ResponseEntity<>(rezervacijaMapper.toDtoList(iznajmljivanjaList), HttpStatus.OK);
     }

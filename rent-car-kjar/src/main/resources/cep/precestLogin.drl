@@ -3,7 +3,7 @@ import rs.ac.uns.ftn.sbnz.rentcarservice.model.*;
 
 declare SuspiciousUserEvent
     @role(event)
-    @expires(1m)
+    @expires(10m)
     email: String
     reason: String
 end;
