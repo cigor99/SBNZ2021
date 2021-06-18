@@ -20,6 +20,7 @@ public class RezervacijaDto {
     private String autoMarka;
     private String autoModel;
     private String korisnikEmail;
+    private int ocena;
 
     public RezervacijaDto(LocalDate pocetakRezervacije, LocalDate krajRezervacije, int autoId) {
         this.pocetakRezervacije = pocetakRezervacije;

@@ -22,16 +22,18 @@
 		Pregled automobila
 	</button>
 
+  <button mat-button *ngIf="isUser" routerLink="user/view-my-reservations">Istorija rezervacija</button>
+
 	<button
 		mat-button
-		*ngIf="!authenticated && user == null"
+		*ngIf="!authenticated && user == ''"
 		routerLink="/auth/login"
 	>
 		Login
 	</button>
 	<button
 		mat-button
-		*ngIf="!authenticated && user == null"
+		*ngIf="!authenticated && user == ''"
 		routerLink="/auth/register"
 	>
 		Register

@@ -9,6 +9,7 @@ export interface Rezervacija {
 	autoMarka: string;
 	autoModel: string;
 	korisnikEmail: string;
+  ocena: number;
 }
 
 export class RezervacijaCollection implements Iterator<Rezervacija> {

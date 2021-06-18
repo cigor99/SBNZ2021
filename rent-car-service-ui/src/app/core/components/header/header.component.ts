@@ -50,7 +50,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    this.user == null!;
+    this.user = "";
+    this.authenticated = false;
     this.authService.logout();
   }
 
