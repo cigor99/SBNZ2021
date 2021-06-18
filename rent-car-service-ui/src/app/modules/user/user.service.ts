@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Rezervacija } from "../admin/rezervacija";
+import { OcenaRequest } from "./ocena";
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -20,4 +21,9 @@ export class UserService {
 	getIznajmljivanja(): Observable<Rezervacija[]> {
 		return this.http.get<any>(`${this.url}/api/korisnik`, httpOptions);
 	}
+
+  oceni(ocena : OcenaRequest, rezervacijaId : string): Observable<void>{
+    return this.http.post<any>(`${this.url}/api/ocena/${rezervacijaId}`, ocena, httpOptions);
+  }
+
 }

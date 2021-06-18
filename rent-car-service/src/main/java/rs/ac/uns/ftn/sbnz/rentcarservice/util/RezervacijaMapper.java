@@ -23,7 +23,8 @@ public class RezervacijaMapper {
                 rezervacija.getAuto().getId(),
                 rezervacija.getAuto().getMarka().getNaziv(),
                 rezervacija.getAuto().getModel(),
-                rezervacija.getKorisnik().getEmail());
+                rezervacija.getKorisnik().getEmail(),
+                rezervacija.getOcena());
     }
 
     public List<RezervacijaDto> toDtoList(List<Rezervacija> rezervacije){
@@ -33,15 +34,15 @@ public class RezervacijaMapper {
         return dtoList;
     }
 
-    public Rezervacija toEntity(RezervacijaDto rezervacijaDto, Auto auto, Korisnik korisnik) {
-        return new Rezervacija(
-                0,
-                rezervacijaDto.getPocetakRezervacije(),
-                rezervacijaDto.getKrajRezervacije(),
-                StatusRezervacije.KREIRANA,
-                rezervacijaDto.getBrojDana(),
-                0,
-                auto,
-                korisnik);
-    }
+//    public Rezervacija toEntity(RezervacijaDto rezervacijaDto, Auto auto, Korisnik korisnik) {
+//        return new Rezervacija(
+//                0,
+//                rezervacijaDto.getPocetakRezervacije(),
+//                rezervacijaDto.getKrajRezervacije(),
+//                StatusRezervacije.KREIRANA,
+//                rezervacijaDto.getBrojDana(),
+//                0,
+//                auto,
+//                korisnik);
+//    }
 }

@@ -28,6 +28,9 @@ public class Rezervacija {
 	@Column(nullable = false)
 	private int brojDana;
 
+	@Column()
+	private int ocena;
+
 	@Column(nullable = false)
 	private double iznos;
 

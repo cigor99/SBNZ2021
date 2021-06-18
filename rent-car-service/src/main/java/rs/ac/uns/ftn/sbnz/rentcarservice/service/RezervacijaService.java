@@ -59,6 +59,7 @@ public class RezervacijaService {
                 rezervacijaDto.getKrajRezervacije(),
                 StatusRezervacije.KREIRANA,
                 brojDana,
+                0,
                 brojDana * auto.getCena(),
                 auto,
                 korisnik);

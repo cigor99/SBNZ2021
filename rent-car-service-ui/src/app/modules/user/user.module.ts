@@ -2,18 +2,19 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { UserRoutingModule } from "./user-routing.module";
 import { ViewMyReservationsComponent } from "./components/view-my-reservations/view-my-reservations.component";
-import { MatPaginatorModule } from "@angular/material/paginator";
-import { MatSortModule } from "@angular/material/sort";
-import { MatTableModule } from "@angular/material/table";
+
+import { OcenaDialogComponent } from './components/ocena-dialog/ocena-dialog.component';
+import { MaterialModule } from "src/app/material-module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-	declarations: [ViewMyReservationsComponent],
+	declarations: [ViewMyReservationsComponent, OcenaDialogComponent],
 	imports: [
 		CommonModule,
 		UserRoutingModule,
-		MatPaginatorModule,
-		MatSortModule,
-		MatTableModule,
+    ReactiveFormsModule,
+    FormsModule,
+		MaterialModule
 	],
 })
 export class UserModule {}

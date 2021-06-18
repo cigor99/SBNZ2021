@@ -218,17 +218,19 @@ prosecna_ocena
 
 INSERT INTO rezervacija(
 broj_dana,
+ocena,
 iznos,
 kraj_rezervacije,
 pocetak_rezervacije,
 status,
 auto_id,
 korisnik_id)
-VALUES (10, 1000, '2020-1-10', '2020-1-1', 'KREIRANA', 1, 1);
+VALUES (10, 0,1000, '2020-1-10', '2020-1-1', 'KREIRANA', 1, 1);
 
 
 INSERT INTO rezervacija(
 broj_dana,
+ocena,
 iznos,
 kraj_rezervacije,
 pocetak_rezervacije,
@@ -236,33 +238,36 @@ status,
 auto_id,
 korisnik_id
 )
-VALUES (15, 1000, '2020-2-15', '2020-2-1', 'PRIHVACENA', 2, 3);
+VALUES (15,0, 1000, '2020-2-15', '2020-2-1', 'PRIHVACENA', 2, 3);
 
 
 INSERT INTO rezervacija(
 broj_dana,
+ocena,
 iznos,
 kraj_rezervacije,
 pocetak_rezervacije,
 status,
 auto_id,
 korisnik_id)
-VALUES (10, 1000, '2020-1-10', '2020-1-1', 'ODBIJENA', 1, 1);
+VALUES (10, 0,1000, '2020-1-10', '2020-1-1', 'ODBIJENA', 1, 1);
 
 
 INSERT INTO rezervacija(
 broj_dana,
+ocena,
 iznos,
 kraj_rezervacije,
 pocetak_rezervacije,
 status,
 auto_id,
 korisnik_id)
-VALUES (10, 1000, '2020-1-10', '2020-1-1', 'PRIHVACENA', 1, 3);
+VALUES (10, 0, 1000, '2020-1-10', '2020-1-1', 'PRIHVACENA', 1, 3);
 
 
 INSERT INTO rezervacija(
 broj_dana,
+ocena,
 iznos,
 kraj_rezervacije,
 pocetak_rezervacije,
@@ -270,5 +275,5 @@ status,
 auto_id,
 korisnik_id
 )
-VALUES (13, 5100, '2020-3-13', '2020-1-1', 'KREIRANA', 3, 1);
+VALUES (13,0, 5100, '2020-3-13', '2020-1-1', 'KREIRANA', 3, 1);
 

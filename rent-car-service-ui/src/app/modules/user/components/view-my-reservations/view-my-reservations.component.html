@@ -30,9 +30,11 @@
 		</ng-container>
 
 		<ng-container matColumnDef="oceni">
-			<th mat-header-cell *matHeaderCellDef>Oceni</th>
+			<th mat-header-cell *matHeaderCellDef>Ocena</th>
 			<td mat-cell *matCellDef="let row">
-				<button mat-flat-button color="primary">Oceni</button>
+        <p *ngIf="row.ocena != 0">{{row.ocena}}</p>
+				<button *ngIf="row.ocena == 0" mat-button color="primary" (click)="oceni(row)">Oceni</button>
+
 			</td>
 		</ng-container>
 
