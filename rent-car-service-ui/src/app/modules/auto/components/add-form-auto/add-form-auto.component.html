@@ -1,129 +1,215 @@
 <form [formGroup]="addForm" class="my-form" #form="ngForm">
-  <mat-card style="width: 800px;">
-    <mat-card-header>
-      <mat-card-title>Dodaj auto</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-grid-list cols="3" rowHeight="80px">
-          <mat-grid-tile>
-            <mat-form-field appearance="fill">
-              <mat-label>Karoserija</mat-label>
-              <mat-select formControlName="karoserija">
-                <mat-option *ngFor="let option of karoserijaArray" [value]="option.value" >
-                  {{option.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field appearance="fill">
-              <input matInput placeholder="Marka" formControlName="marka">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Broj sedista</mat-label>
-              <mat-select formControlName="brojSedista">
-                <mat-option value="2">2</mat-option>
-                <mat-option value="4">4</mat-option>
-                <mat-option value="5">5</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-grid-tile>
+	<mat-card style="width: 800px">
+		<mat-card-header>
+			<mat-card-title>Dodaj auto</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<mat-grid-list cols="3" rowHeight="80px">
+				<mat-grid-tile>
+					<mat-form-field appearance="fill">
+						<mat-label>Karoserija</mat-label>
+						<mat-select formControlName="karoserija">
+							<mat-option
+								*ngFor="let option of karoserijaArray"
+								[value]="option.value"
+							>
+								{{ option.viewValue }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field appearance="fill">
+						<input
+							matInput
+							placeholder="Marka"
+							formControlName="marka"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field appearance="fill">
+						<input
+							matInput
+							placeholder="Model"
+							formControlName="model"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<mat-label>Broj sedista</mat-label>
+						<mat-select formControlName="brojSedista">
+							<mat-option value="2">2</mat-option>
+							<mat-option value="4">4</mat-option>
+							<mat-option value="5">5</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</mat-grid-tile>
 
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Cena" formControlName="cena">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Godiste" formControlName="godiste">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Tip goriva</mat-label>
-              <mat-select formControlName="tipGoriva">
-                <mat-option *ngFor="let option of tipGorivaArray" [value]="option.value">
-                  {{option.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Cena"
+							formControlName="cena"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Godiste"
+							formControlName="godiste"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<mat-label>Tip goriva</mat-label>
+						<mat-select formControlName="tipGoriva">
+							<mat-option
+								*ngFor="let option of tipGorivaArray"
+								[value]="option.value"
+							>
+								{{ option.viewValue }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</mat-grid-tile>
 
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Duzina" formControlName="duzina">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Sirina" formControlName="sirina">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Visina" formControlName="visina">
-            </mat-form-field>
-          </mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Duzina"
+							formControlName="duzina"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Sirina"
+							formControlName="sirina"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Visina"
+							formControlName="visina"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
 
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Zapremina gepeka" formControlName="zapreminaGepeka">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0"
-                      placeholder="Zapremina rezervoara" formControlName="zapreminaRezervoara">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Distanca" formControlName="distanca">
-            </mat-form-field>
-          </mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Zapremina gepeka"
+							formControlName="zapreminaGepeka"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Zapremina rezervoara"
+							formControlName="zapreminaRezervoara"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Distanca"
+							formControlName="distanca"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
 
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0" placeholder="Ubrzanje" formControlName="ubrzanje">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <input matInput type="number" min="0"
-                    placeholder="Maksimalna brzina" formControlName="maksimalnaBrzina">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Dodatna oprema</mat-label>
-              <mat-select multiple formControlName="dodatnaOprema">
-                <mat-option *ngFor="let option of dodatnaOpremaArray" [value]="option.value">
-                  {{option.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Ubrzanje"
+							formControlName="ubrzanje"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<input
+							matInput
+							type="number"
+							min="0"
+							placeholder="Maksimalna brzina"
+							formControlName="maksimalnaBrzina"
+						/>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<mat-label>Dodatna oprema</mat-label>
+						<mat-select multiple formControlName="dodatnaOprema">
+							<mat-option
+								*ngFor="let option of dodatnaOpremaArray"
+								[value]="option.value"
+							>
+								{{ option.viewValue }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</mat-grid-tile>
 
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Dodaci za udobnost</mat-label>
-              <mat-select multiple formControlName="dodaciZaUdobnost">
-                <mat-option *ngFor="let option of dodaciZaUdobnostArray" [value]="option.value">
-                  {{option.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <button (click)="addCar()" mat-raised-button
-             color="primary">Dodaj</button>
-          </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card-content>
-
-  </mat-card>
-
+				<mat-grid-tile>
+					<mat-form-field class="full-width" appearance="fill">
+						<mat-label>Dodaci za udobnost</mat-label>
+						<mat-select multiple formControlName="dodaciZaUdobnost">
+							<mat-option
+								*ngFor="let option of dodaciZaUdobnostArray"
+								[value]="option.value"
+							>
+								{{ option.viewValue }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<button
+						(click)="addCar()"
+						mat-raised-button
+						color="primary"
+					>
+						Dodaj
+					</button>
+				</mat-grid-tile>
+			</mat-grid-list>
+		</mat-card-content>
+	</mat-card>
 </form>
