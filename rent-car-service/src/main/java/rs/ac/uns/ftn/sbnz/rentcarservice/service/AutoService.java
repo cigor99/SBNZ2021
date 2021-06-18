@@ -86,4 +86,9 @@ public class AutoService {
     public Auto findOneById(int autoId) {
         return autoRepository.findById(autoId).orElse(null);
     }
+
+    public List<Auto> findAll() {
+        return this.autoRepository.findAll();
+
+    }
 }

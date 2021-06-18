@@ -1,0 +1,97 @@
+<mat-form-field style="margin-left: 20px">
+	<mat-label>Pretraga Marke</mat-label>
+	<input
+		matInput
+		(keyup)="applySearch($event)"
+		placeholder="Ex. Smart"
+		#input
+	/>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+	<table mat-table [dataSource]="auti" matSort>
+		<ng-container matColumnDef="marka">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Marka</th>
+			<td mat-cell *matCellDef="let row">{{ row.marka }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="model">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
+			<td mat-cell *matCellDef="let row">{{ row.model }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="godiste">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Godiste</th>
+			<td mat-cell *matCellDef="let row">{{ row.godiste }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="karoserija">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Karoserija
+			</th>
+			<td mat-cell *matCellDef="let row">{{ row.karoserija }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="tipGoriva">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Tip Goriva
+			</th>
+			<td mat-cell *matCellDef="let row">{{ row.tipGoriva }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="brojSedista">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Broj Sedista
+			</th>
+			<td mat-cell *matCellDef="let row">{{ row.brojSedista }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="zapreminaGepeka">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Zapremina Gepeka
+			</th>
+			<td mat-cell *matCellDef="let row">{{ row.zapreminaGepeka }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="zapreminaRezervoara">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Zapremina Rezervoara
+			</th>
+			<td mat-cell *matCellDef="let row">
+				{{ row.zapreminaRezervoara }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="distanca">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Distanca</th>
+			<td mat-cell *matCellDef="let row">{{ row.distanca }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="ubrzanje">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Ubrzanje</th>
+			<td mat-cell *matCellDef="let row">{{ row.ubrzanje }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="maksimalnaBrzina">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Maksimalna Brzina
+			</th>
+			<td mat-cell *matCellDef="let row">{{ row.maksimalnaBrzina }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="cena">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Cena</th>
+			<td mat-cell *matCellDef="let row">{{ row.cena }}</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+		<!-- Row shown when there is no matching data. -->
+		<tr class="mat-row" *matNoDataRow>
+			<td class="mat-cell" colspan="4">Nije pronadjen ni jedan auto</td>
+		</tr>
+	</table>
+
+	<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
