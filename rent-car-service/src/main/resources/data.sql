@@ -236,7 +236,7 @@ status,
 auto_id,
 korisnik_id
 )
-VALUES (15, 1000, '2020-2-15', '2020-2-1', 'KREIRANA', 2, 3);
+VALUES (15, 1000, '2020-2-15', '2020-2-1', 'PRIHVACENA', 2, 3);
 
 
 INSERT INTO rezervacija(
@@ -258,7 +258,7 @@ pocetak_rezervacije,
 status,
 auto_id,
 korisnik_id)
-VALUES (10, 1000, '2020-1-10', '2020-1-1', 'ODBIJENA', 1, 1);
+VALUES (10, 1000, '2020-1-10', '2020-1-1', 'PRIHVACENA', 1, 3);
 
 
 INSERT INTO rezervacija(

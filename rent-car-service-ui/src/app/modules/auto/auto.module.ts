@@ -6,9 +6,10 @@ import { MaterialModule } from '../../material-module';
 import { AdvancedSearchAutoComponent } from './components/advanced-search-auto/advanced-search-auto.component';
 import { AddFormAutoComponent } from './components/add-form-auto/add-form-auto.component';
 import { AutoReviewComponent } from './components/auto-review/auto-review.component';
+import { ViewAllAutoComponent } from './components/view-all-auto/view-all-auto.component';
 
 @NgModule({
-  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent, AutoReviewComponent],
+  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent, AutoReviewComponent, ViewAllAutoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

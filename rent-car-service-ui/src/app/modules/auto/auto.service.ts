@@ -5,20 +5,31 @@ import { Observable } from "rxjs";
 import { Auto } from "./auto";
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
-  })
+	headers: new HttpHeaders({
+		"Content-Type": "application/json",
+		Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+	}),
 };
 
 @Injectable({ providedIn: "root" })
-export class AutoService{
-  url: string = environment.apiUrl;
+export class AutoService {
+	url: string = environment.apiUrl;
 
+	constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient){}
+	autoNaprednaPretraga(korisnickiUnos: any): Observable<Auto[]> {
+		return this.http.post<any>(
+			`${this.url}/api/auto/napredna-pretraga`,
+			korisnickiUnos,
+			httpOptions
+		);
+	}
 
-  autoNaprednaPretraga(korisnickiUnos:any): Observable<Auto[]>{
-    return this.http.post<any>(`${this.url}/api/auto/napredna-pretraga`,korisnickiUnos, httpOptions);
-  }
+	getAutomobili(): Observable<Auto[]> {
+		return this.http.get<any>(`${this.url}/api/auto`, httpOptions);
+	}
+
+	getAutomobiliMarka(marka: string): Observable<Auto[]> {
+		return this.http.get<any>(`${this.url}/api/auto/${marka}`, httpOptions);
+	}
 }

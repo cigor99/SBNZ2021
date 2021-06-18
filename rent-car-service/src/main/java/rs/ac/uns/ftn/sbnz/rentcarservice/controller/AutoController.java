@@ -66,4 +66,15 @@ public class AutoController {
         }
         return new ResponseEntity<>(autoMapper.toDto(auto), HttpStatus.ACCEPTED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<AutoDto>> sviAutomobili(){
+        try{
+            List<Auto> auti = autoService.findAll();
+            return new ResponseEntity<>(autoMapper.toDtoList(auti), HttpStatus.OK);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+
+        }
+    }
 }
