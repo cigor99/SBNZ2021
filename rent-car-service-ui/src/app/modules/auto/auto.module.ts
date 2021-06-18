@@ -7,15 +7,18 @@ import { AdvancedSearchAutoComponent } from './components/advanced-search-auto/a
 import { AddFormAutoComponent } from './components/add-form-auto/add-form-auto.component';
 import { AutoReviewComponent } from './components/auto-review/auto-review.component';
 import { ViewAllAutoComponent } from './components/view-all-auto/view-all-auto.component';
+import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
+
 
 @NgModule({
-  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent, AutoReviewComponent, ViewAllAutoComponent],
+  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent, AutoReviewComponent, ViewAllAutoComponent, ReservationDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     AutoRoutingModule,
-    MaterialModule
-  ]
+    MaterialModule,
+
+  ],
 })
 export class AutoModule { }

@@ -11,7 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AutoDto implements Comparable<AutoDto>{
-
+    private int id;
     private String marka;
     private String model;
     private int godiste;

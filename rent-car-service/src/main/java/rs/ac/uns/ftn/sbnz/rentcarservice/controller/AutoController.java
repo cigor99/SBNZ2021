@@ -56,7 +56,7 @@ public class AutoController {
         return new ResponseEntity<>(autoDtoList, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/dodavanje-auta", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/dodavanje-auta")
     public ResponseEntity<AutoDto> dodajAuto(@RequestBody AutoDto autoDto){
         Auto auto = autoMapper.toEntity(autoDto);
         try{

@@ -18,6 +18,7 @@ public class AutoMapper {
         for (DodatnaOprema dod : auto.getDodatnaOprema())
             dodatnaOpremaString.add(dod.getNaziv());
         return new AutoDto(
+                auto.getId(),
                 auto.getMarka().getNaziv(),
                 auto.getModel(),
                 auto.getGodiste(),
