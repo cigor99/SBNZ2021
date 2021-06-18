@@ -6,8 +6,8 @@
       <mat-card-title>Napredna pretraga</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="row">
-        <div class="col-sm-3">
+      <div >
+        <div >
           <mat-form-field appearance="fill">
             <mat-label>Svrha</mat-label>
             <mat-select formControlName="svrha">
@@ -17,7 +17,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-sm-3">
+        <div>
           <mat-form-field class="full-width" appearance="fill">
             <mat-label>Dodatna oprema</mat-label>
             <mat-select multiple formControlName="dodatnaOprema">
@@ -28,8 +28,8 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-6">
+      <div >
+        <div >
           <mat-form-field class="full-width" appearance="fill">
             <mat-label>Dodaci za udobnost</mat-label>
             <mat-select multiple formControlName="dodaciZaUdobnost">
@@ -39,14 +39,14 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-md-6">
+        <div>
           <mat-form-field class="full-width" appearance="fill">
             <input matInput type="number" min="0" max="5" placeholder="Broj putnika" formControlName="brojPutnika">
           </mat-form-field>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-6">
+      <div>
+        <div>
           <mat-form-field class="full-width" appearance="fill">
             <mat-label>Budzet</mat-label>
             <mat-select formControlName="budzet">
@@ -56,14 +56,16 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-sm-6">
+        <div>
             <mat-checkbox type="checkBox" [formControl]="ekoCheckbox">
               Ekoloska voznja</mat-checkbox>
         </div>
       </div>
+
     </mat-card-content>
     <mat-card-actions>
       <button (click)="search()" [disabled]="!form.form.valid" mat-raised-button color="primary">Pretrazi</button>
+
     </mat-card-actions>
   </mat-card>
 
@@ -90,8 +92,6 @@
         <mat-list-item>Maksimalna brzina: {{auto.maksimalnaBrzina}}</mat-list-item>
         <mat-list-item>Cena: {{auto.cena}}</mat-list-item>
         <mat-list-item>Dodatna oprema {{auto.dodatnaOprema}}</mat-list-item>
-        <mat-list-item>Oceni</mat-list-item>
-        <mat-list-item>PRobaaa</mat-list-item>
       </mat-list>
 
     </mat-card-content>

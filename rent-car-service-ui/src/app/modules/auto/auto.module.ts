@@ -6,15 +6,17 @@ import { MaterialModule } from '../../material-module';
 import { AdvancedSearchAutoComponent } from './components/advanced-search-auto/advanced-search-auto.component';
 import { AddFormAutoComponent } from './components/add-form-auto/add-form-auto.component';
 import { AutoReviewComponent } from './components/auto-review/auto-review.component';
+import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
 
 @NgModule({
-  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent, AutoReviewComponent],
+  declarations: [AdvancedSearchAutoComponent, AddFormAutoComponent, AutoReviewComponent, ReservationDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     AutoRoutingModule,
-    MaterialModule
-  ]
+    MaterialModule,
+
+  ],
 })
 export class AutoModule { }

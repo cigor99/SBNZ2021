@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Rezervacija</h2>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <mat-date-range-input
+    [min]="todayDate"
+      [formGroup]="form"
+      [rangePicker]="campaignOnePicker"
+      [comparisonStart]="form.value.start"
+      [comparisonEnd]="form.value.end">
+    <input matStartDate  placeholder="Start date" formControlName="start">
+    <input matEndDate placeholder="End date" formControlName="end">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button style="margin-left: 75px;" id="close_type_button" mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button color="primary" id="save_type_button" type="button" [disabled]="form.invalid"
+         (click)="onSaveClick()">Save</button>
+</div>

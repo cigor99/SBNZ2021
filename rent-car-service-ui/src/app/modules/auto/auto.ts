@@ -1,4 +1,5 @@
 export interface Auto{
+  id: number;
   marka: string;
   model: string;
   godiste: number;
@@ -16,6 +17,12 @@ export interface Auto{
   cena: number,
   dodatnaOprema: string[],
   dodaciZaUdobnost: string[]
+}
+
+export interface RezervacijaRequest{
+  autoId: number,
+  pocetakRezervacije: Date,
+  krajRezervacije: Date
 }
 
 export interface AddAuto{
@@ -37,3 +44,5 @@ export interface AddAuto{
   dodatnaOprema: string[],
   dodaciZaUdobnost: string[]
 }
+
+

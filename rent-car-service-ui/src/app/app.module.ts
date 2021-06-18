@@ -7,6 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     NoopAnimationsModule,
     CoreModule,
     HttpClientModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

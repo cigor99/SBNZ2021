@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SnackBarComponent } from 'src/app/core/components/snack-bar/snack-bar.component';
 import { Auto } from '../../auto';
 import { AutoService } from '../../auto.service';
 import { KorisnickiUnos } from '../../korisnickiUnos';
+import { ReservationDialogComponent } from '../../reservation-dialog/reservation-dialog.component';
 
 @Component({
   selector: 'app-advanced-search-auto',
@@ -14,6 +16,8 @@ export class AdvancedSearchAutoComponent implements OnInit {
 
   searchForm: FormGroup;
   ekoCheckbox = new FormControl(false);
+  ocene: number[] = [1, 2, 3, 4, 5];
+  selectedOcena: number;
 
   automobili: Auto[];
 
@@ -43,7 +47,10 @@ export class AdvancedSearchAutoComponent implements OnInit {
     {value:'VISOK', viewValue:'Visok'},
   ];
 
-  constructor(private formBuilder:FormBuilder, private autoService: AutoService, public snackBar: SnackBarComponent )
+  constructor(private formBuilder:FormBuilder,
+              private autoService: AutoService,
+              public snackBar: SnackBarComponent,
+              public dialog: MatDialog )
   {
     this.searchForm = this.formBuilder.group({
       svrha:['', Validators.required],
@@ -70,7 +77,25 @@ export class AdvancedSearchAutoComponent implements OnInit {
   }
 
   rent(auto: Auto){
-    this.snackBar.openSnackBar('Zahtev prosledjen adminu', '', 'green-snackbar');
+    const dialogRef = this.dialog.open(ReservationDialogComponent, {
+      width: '300px',
+      panelClass : 'mat-elevation-z8',
+      data: auto
+    });
+
+    dialogRef.afterClosed()
+              .subscribe(data =>{
+                if(data){
+                  console.log(data);
+                  this.autoService
+                      .rezervisi(data)
+                      .subscribe(res => {
+                        this.snackBar.openSnackBar('Zahtev prosledjen adminu', '', 'green-snackbar');
+                      });
+                }
+              })
+
+    // console.log(auto);
   }
 
 }
