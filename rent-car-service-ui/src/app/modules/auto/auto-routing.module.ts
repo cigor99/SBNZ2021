@@ -9,7 +9,7 @@ import { ViewAllAutoComponent } from "./components/view-all-auto/view-all-auto.c
 const routes: Routes = [
 	{
 		path: "",
-		component: AutoReviewComponent,
+		component: ViewAllAutoComponent,
 	},
 	{
 		path: "advanced-search",

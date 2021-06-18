@@ -14,7 +14,13 @@
 		Napredna pretraga
 	</button>
 
-	<button mat-button routerLink="/auto/view-auto">Pregled automobila</button>
+	<button mat-button *ngIf="isUser" routerLink="/auto/view-auto">
+		Pregled automobila
+	</button>
+
+	<button mat-button *ngIf="isAdmin" routerLink="/auto/view-auto">
+		Pregled automobila
+	</button>
 
   <button mat-button *ngIf="isUser" routerLink="user/view-my-reservations">Istorija rezervacija</button>
 

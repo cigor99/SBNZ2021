@@ -67,7 +67,7 @@ public class AutoController {
         return new ResponseEntity<>(autoMapper.toDto(auto), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<AutoDto>> sviAutomobili(){
         try{
             List<Auto> auti = autoService.findAll();
