@@ -136,4 +136,17 @@ public class Auto {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
+	public double getProsecnaOcena() {
+		double suma = 0;
+		for(Ocena o: ocene){
+			suma += o.getVrednost();
+		}
+
+		double prosek = suma / ocene.size();
+
+
+		prosek = (double) Math.round(prosek * 10) / 10;
+		return prosek;
+	}
 }

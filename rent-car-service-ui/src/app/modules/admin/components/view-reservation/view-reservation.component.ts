@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
+import { SnackBarComponent } from "src/app/core/components/snack-bar/snack-bar.component";
 import { AdminService } from "../../admin.service";
 import { Rezervacija } from "../../rezervacija";
 
@@ -29,7 +30,8 @@ export class ViewReservationComponent implements OnInit {
 
 	constructor(
 		private adminService: AdminService,
-		private changeDetectorRefs: ChangeDetectorRef
+		private changeDetectorRefs: ChangeDetectorRef,
+		private snackBar: SnackBarComponent
 	) {}
 
 	ngOnInit(): void {
@@ -48,14 +50,22 @@ export class ViewReservationComponent implements OnInit {
 	odobriRezervaciju(id: number) {
 		this.adminService.odobriRezervaciju(id).subscribe(() => {
 			this.refresh();
-			alert("Odobrena rezervacija");
+			this.snackBar.openSnackBar(
+				"Uspesno odobreno",
+				"",
+				"green-snackbar"
+			);
 		});
 	}
 
 	odbijRezervaciju(id: number) {
 		this.adminService.odbijRezervaciju(id).subscribe(() => {
 			this.refresh();
-			alert("Odbijena rezervacija");
+			this.snackBar.openSnackBar(
+				"Uspesno odbijeno",
+				"",
+				"green-snackbar"
+			);
 		});
 	}
 }

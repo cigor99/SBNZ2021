@@ -84,6 +84,11 @@
 			<td mat-cell *matCellDef="let row">{{ row.cena }}</td>
 		</ng-container>
 
+		<ng-container matColumnDef="ocena">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Ocena</th>
+			<td mat-cell *matCellDef="let row">{{ row.prosecnaOcena }}</td>
+		</ng-container>
+
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 

@@ -25,6 +25,7 @@ export class ViewAllAutoComponent implements OnInit {
 		"ubrzanje",
 		"maksimalnaBrzina",
 		"cena",
+		"ocena",
 	];
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;

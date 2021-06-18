@@ -1,102 +1,179 @@
 <mat-grid-list cols="4" rowHeight="700px">
-<mat-grid-tile colspan="1">
-<form [formGroup]="searchForm" #form="ngForm">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Napredna pretraga</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div >
-        <div >
-          <mat-form-field appearance="fill">
-            <mat-label>Svrha</mat-label>
-            <mat-select formControlName="svrha">
-              <mat-option *ngFor="let option of svrhaArray" [value]="option.value" >
-                {{option.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Dodatna oprema</mat-label>
-            <mat-select multiple formControlName="dodatnaOprema">
-              <mat-option *ngFor="let option of dodatnaOpremaArray" [value]="option.value">
-                {{option.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-      <div >
-        <div >
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Dodaci za udobnost</mat-label>
-            <mat-select multiple formControlName="dodaciZaUdobnost">
-              <mat-option *ngFor="let option of dodaciZaUdobnostArray" [value]="option.value">
-                {{option.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput type="number" min="0" max="5" placeholder="Broj putnika" formControlName="brojPutnika">
-          </mat-form-field>
-        </div>
-      </div>
-      <div>
-        <div>
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Budzet</mat-label>
-            <mat-select formControlName="budzet">
-              <mat-option *ngFor="let option of budzetArray" [value]="option.value">
-                {{option.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-            <mat-checkbox type="checkBox" [formControl]="ekoCheckbox">
-              Ekoloska voznja</mat-checkbox>
-        </div>
-      </div>
-
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="search()" [disabled]="!form.form.valid" mat-raised-button color="primary">Pretrazi</button>
-
-    </mat-card-actions>
-  </mat-card>
-
-</form>
-</mat-grid-tile>
-<mat-grid-tile colspan="3" rowspan="1">
-  <h2 *ngIf="!automobili">Pretrazeni automobili</h2>
-  <mat-card class="example-card" *ngFor="let auto of automobili">
-    <mat-card-header>
-      <mat-card-title>{{auto.marka}}
-        <button style="margin-left: 50px;" mat-raised-button color="primary" (click)="rent(auto)">Iznajmi</button>
-      </mat-card-title>
-      <mat-card-subtitle>{{auto.model}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>Godiste: {{auto.godiste}}</mat-list-item>
-        <mat-list-item>Karoserija: {{auto.karoserija}}</mat-list-item>
-        <mat-list-item>Tip goriva: {{auto.tipGoriva}}</mat-list-item>
-        <mat-list-item>Broj sedista: {{auto.brojSedista}}</mat-list-item>
-        <mat-list-item>Zapremina gepeka: {{auto.zapreminaGepeka}}</mat-list-item>
-        <mat-list-item *ngIf="auto.zapreminaRezervoara">Zapremina rezervoara: {{auto.zapreminaRezervoara}}</mat-list-item>
-        <mat-list-item *ngIf="auto.distanca">Distanca: {{auto.distanca}}</mat-list-item>
-        <mat-list-item>Maksimalna brzina: {{auto.maksimalnaBrzina}}</mat-list-item>
-        <mat-list-item>Cena: {{auto.cena}}</mat-list-item>
-        <mat-list-item>Dodatna oprema {{auto.dodatnaOprema}}</mat-list-item>
-      </mat-list>
-
-    </mat-card-content>
-
-  </mat-card>
-</mat-grid-tile>
-<mat-grid-tile></mat-grid-tile>
+	<mat-grid-tile colspan="1">
+		<form [formGroup]="searchForm" #form="ngForm">
+			<mat-card>
+				<mat-card-header>
+					<mat-card-title>Napredna pretraga</mat-card-title>
+				</mat-card-header>
+				<mat-card-content>
+					<div>
+						<div>
+							<mat-form-field appearance="fill">
+								<mat-label>Svrha</mat-label>
+								<mat-select formControlName="svrha">
+									<mat-option
+										*ngFor="let option of svrhaArray"
+										[value]="option.value"
+									>
+										{{ option.viewValue }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div>
+							<mat-form-field
+								class="full-width"
+								appearance="fill"
+							>
+								<mat-label>Dodatna oprema</mat-label>
+								<mat-select
+									multiple
+									formControlName="dodatnaOprema"
+								>
+									<mat-option
+										*ngFor="
+											let option of dodatnaOpremaArray
+										"
+										[value]="option.value"
+									>
+										{{ option.viewValue }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+					</div>
+					<div>
+						<div>
+							<mat-form-field
+								class="full-width"
+								appearance="fill"
+							>
+								<mat-label>Dodaci za udobnost</mat-label>
+								<mat-select
+									multiple
+									formControlName="dodaciZaUdobnost"
+								>
+									<mat-option
+										*ngFor="
+											let option of dodaciZaUdobnostArray
+										"
+										[value]="option.value"
+									>
+										{{ option.viewValue }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div>
+							<mat-form-field
+								class="full-width"
+								appearance="fill"
+							>
+								<input
+									matInput
+									type="number"
+									min="0"
+									max="5"
+									placeholder="Broj putnika"
+									formControlName="brojPutnika"
+								/>
+							</mat-form-field>
+						</div>
+					</div>
+					<div>
+						<div>
+							<mat-form-field
+								class="full-width"
+								appearance="fill"
+							>
+								<mat-label>Budzet</mat-label>
+								<mat-select formControlName="budzet">
+									<mat-option
+										*ngFor="let option of budzetArray"
+										[value]="option.value"
+									>
+										{{ option.viewValue }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div>
+							<mat-checkbox
+								type="checkBox"
+								[formControl]="ekoCheckbox"
+							>
+								Ekoloska voznja</mat-checkbox
+							>
+						</div>
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<button
+						(click)="search()"
+						[disabled]="!form.form.valid"
+						mat-raised-button
+						color="primary"
+					>
+						Pretrazi
+					</button>
+				</mat-card-actions>
+			</mat-card>
+		</form>
+	</mat-grid-tile>
+	<mat-grid-tile colspan="3" rowspan="1">
+		<h2 *ngIf="!automobili">Pretrazeni automobili</h2>
+		<mat-card class="example-card" *ngFor="let auto of automobili">
+			<mat-card-header>
+				<mat-card-title
+					>{{ auto.marka }}
+					<button
+						style="margin-left: 50px"
+						mat-raised-button
+						color="primary"
+						(click)="rent(auto)"
+					>
+						Iznajmi
+					</button>
+				</mat-card-title>
+				<mat-card-subtitle>{{ auto.model }}</mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-content>
+				<mat-list>
+					<mat-list-item>Godiste: {{ auto.godiste }}</mat-list-item>
+					<mat-list-item
+						>Karoserija: {{ auto.karoserija }}</mat-list-item
+					>
+					<mat-list-item
+						>Tip goriva: {{ auto.tipGoriva }}</mat-list-item
+					>
+					<mat-list-item
+						>Broj sedista: {{ auto.brojSedista }}</mat-list-item
+					>
+					<mat-list-item
+						>Zapremina gepeka:
+						{{ auto.zapreminaGepeka }}</mat-list-item
+					>
+					<mat-list-item *ngIf="auto.zapreminaRezervoara"
+						>Zapremina rezervoara:
+						{{ auto.zapreminaRezervoara }}</mat-list-item
+					>
+					<mat-list-item *ngIf="auto.distanca"
+						>Distanca: {{ auto.distanca }}</mat-list-item
+					>
+					<mat-list-item
+						>Maksimalna brzina:
+						{{ auto.maksimalnaBrzina }}</mat-list-item
+					>
+					<mat-list-item>Cena: {{ auto.cena }}</mat-list-item>
+					<mat-list-item
+						>Dodatna oprema {{ auto.dodatnaOprema }}</mat-list-item
+					>
+					<mat-list-item
+						>Ocena: {{ auto.prosecnaOcena }}</mat-list-item
+					>
+				</mat-list>
+			</mat-card-content>
+		</mat-card>
+	</mat-grid-tile>
+	<mat-grid-tile></mat-grid-tile>
 </mat-grid-list>

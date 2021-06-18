@@ -43,6 +43,17 @@ public class Ocena {
 	}
 
 	@Override
+	public String toString() {
+		return "Ocena{" +
+				"id=" + id +
+				", vrednost=" + vrednost +
+				", datum=" + datum +
+				", auto=" + auto.getId() +
+				", korisnik=" + korisnik.getId() +
+				'}';
+	}
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}

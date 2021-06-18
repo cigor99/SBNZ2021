@@ -2,7 +2,7 @@ insert into authority (name) values ('ROLE_ADMIN');
 insert into authority (name) values ('ROLE_USER');
 
 INSERT INTO osobe (tip, email, ime, prezime, lozinka, status) VALUES
-('Korisnik', 'igi.l.1999@gmail.com', 'Ime1', 'Prezime1', '$2a$10$A2Scp4L/2Zj9bRvs/O9Li.dODxCDqno4VXT5XWNRS5amuBK5/KIYu', 'OBICNI');
+('Korisnik', 'email1@email.com', 'Ime1', 'Prezime1', '$2a$10$A2Scp4L/2Zj9bRvs/O9Li.dODxCDqno4VXT5XWNRS5amuBK5/KIYu', 'OBICNI');
 
 INSERT INTO osobe (tip, email, ime, prezime, lozinka) VALUES
 ('Administrator', 'email2@email.com', 'Ime1', 'Prezime1', '$2a$10$A2Scp4L/2Zj9bRvs/O9Li.dODxCDqno4VXT5XWNRS5amuBK5/KIYu');
@@ -276,4 +276,47 @@ auto_id,
 korisnik_id
 )
 VALUES (13,0, 5100, '2020-3-13', '2020-1-1', 'KREIRANA', 3, 1);
+
+INSERT INTO ocena (datum, vrednost, auto_id, korisnik_id) VALUES
+('2020-3-13', 5, 1, 1),
+('2019-3-17', 4, 1, 3),
+('2020-2-14', 4, 1, 3),
+('2020-3-21', 4, 1, 1),
+('2020-1-30', 5, 1, 1),
+('2020-4-26', 5, 1, 1),
+('2020-5-18', 5, 1, 1),
+('2020-3-19', 5, 1, 3),
+('2020-1-12', 5, 1, 3),
+('2020-5-17', 5, 1, 1),
+('2020-6-13', 5, 1, 1),
+('2020-7-21', 5, 1, 3),
+('2020-1-30', 5, 2, 3),
+('2020-4-26', 5, 2, 3),
+('2020-5-18', 5, 2, 1),
+('2020-3-19', 5, 2, 1),
+('2020-1-12', 3, 2, 3),
+('2020-5-17', 5, 2, 3),
+('2020-6-13', 3, 2, 3),
+('2020-1-30', 5, 3, 3),
+('2020-4-26', 4, 3, 3),
+('2020-5-18', 5, 3, 3),
+('2020-3-19', 5, 3, 3),
+('2020-1-12', 5, 3, 1),
+('2020-5-17', 5, 4, 1),
+('2020-6-13', 5, 4, 1),
+('2020-1-30', 5, 4, 1),
+('2020-4-26', 4, 4, 1),
+('2020-5-18', 5, 4, 1),
+('2020-3-19', 5, 4, 1),
+('2020-1-12', 3, 4, 3),
+('2020-5-17', 3, 4, 3),
+('2020-6-13', 3, 5, 1),
+('2020-1-30', 5, 5, 1),
+('2020-4-26', 5, 5, 1),
+('2020-5-18', 5, 5, 3),
+('2020-3-19', 5, 5, 3),
+('2020-1-12', 3, 5, 3),
+('2020-5-17', 3, 3, 1),
+('2020-6-13', 5, 3, 1);
+
 
