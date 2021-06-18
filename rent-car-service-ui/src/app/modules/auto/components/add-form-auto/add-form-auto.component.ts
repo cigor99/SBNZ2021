@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SnackBarComponent } from 'src/app/core/components/snack-bar/snack-bar.component';
+import { Auto } from '../../auto';
+import { AutoService } from '../../auto.service';
 
 @Component({
   selector: 'app-add-form-auto',
@@ -26,33 +29,50 @@ export class AddFormAutoComponent implements OnInit {
     {value:'HIBRID', viewValue:'Hibrid', key:2},
     {value:'ELEKTRICNI', viewValue:'Elektricni', key:3},
   ];
+  dodatnaOpremaArray: any[] = [
+    {value:'AUTOMATSKI_MENJAC', viewValue:'Automatski menjac'},
+    {value: 'PARKING_SENZORI', viewValue: 'Parking senzori'},
+    {value: 'AUTONOMNA_VOZNJA', viewValue: 'Autonomna voznja'},
+  ];
+  dodaciZaUdobnostArray: any[] = [
+    {value:'GREJACI_SEDISTA', viewValue:'Grejaci sedista'},
+    {value: 'MULTIMEDIJALNI_SISTEM', viewValue: 'Multimedijalni sistem'},
+    {value: 'DRZACI_ZA_CASE', viewValue: 'Drzaci za case'},
+  ];
 
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private formBuilder:FormBuilder, private autoService: AutoService, private snackBar: SnackBarComponent) {
     this.addForm = this.formBuilder.group({
       marka: ['', Validators.required],
       model: ['', Validators.required],
       godiste: ['', Validators.required],
-      karoserija: new FormControl(),
-      tipGoriva: new FormControl(),
+      karoserija: new FormControl(Validators.required),
+      tipGoriva: new FormControl([Validators.required]),
       duzina: ['', Validators.required],
       sirina: ['', Validators.required],
       visina: ['', Validators.required],
       brojSedista: ['', Validators.required],
       zapreminaGepeka: ['', Validators.required],
       zapreminaRezervoara: ['', Validators.required],
-      distanca: ['', Validators.required],
+      distanca: [''],
       ubrzanje: ['', Validators.required],
       maksimalnaBrzina: ['', Validators.required],
       cena: ['', Validators.required],
+      dodatnaOprema: new FormControl([Validators.required]),
+      dodaciZaUdobnost: new FormControl([Validators.required])
       //dodatna oprema i dodaci za udobnost
     });
    }
 
   ngOnInit(): void {
+
   }
 
   addCar(){
-
+    const auto: Auto = this.addForm.value;
+    console.log(auto);
+    this.autoService.dodajAuto(auto).subscribe(res => {
+      this.snackBar.openSnackBar("Uspesno dodato", "", "green-snackbar");
+    });
   }
 
 }

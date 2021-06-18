@@ -21,4 +21,8 @@ export class AutoService{
   autoNaprednaPretraga(korisnickiUnos:any): Observable<Auto[]>{
     return this.http.post<any>(`${this.url}/api/auto/napredna-pretraga`,korisnickiUnos, httpOptions);
   }
+
+  dodajAuto(autoReq: Auto): Observable<void>{
+    return this.http.post<any>(`${this.url}/api/auto/dodavanje-auta`, autoReq, httpOptions);
+  }
 }

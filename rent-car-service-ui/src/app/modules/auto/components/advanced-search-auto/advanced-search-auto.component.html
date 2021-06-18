@@ -1,5 +1,5 @@
-<mat-grid-list cols="3">
-<mat-grid-tile>
+<mat-grid-list cols="4" rowHeight="700px">
+<mat-grid-tile colspan="1">
 <form [formGroup]="searchForm" #form="ngForm">
   <mat-card>
     <mat-card-header>
@@ -69,11 +69,13 @@
 
 </form>
 </mat-grid-tile>
-<mat-grid-tile colspan="2">
+<mat-grid-tile colspan="3" rowspan="1">
   <h2 *ngIf="!automobili">Pretrazeni automobili</h2>
   <mat-card class="example-card" *ngFor="let auto of automobili">
     <mat-card-header>
-      <mat-card-title>{{auto.marka}}</mat-card-title>
+      <mat-card-title>{{auto.marka}}
+        <button style="margin-left: 50px;" mat-raised-button color="primary" (click)="rent(auto)">Iznajmi</button>
+      </mat-card-title>
       <mat-card-subtitle>{{auto.model}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -87,12 +89,13 @@
         <mat-list-item *ngIf="auto.distanca">Distanca: {{auto.distanca}}</mat-list-item>
         <mat-list-item>Maksimalna brzina: {{auto.maksimalnaBrzina}}</mat-list-item>
         <mat-list-item>Cena: {{auto.cena}}</mat-list-item>
-        <mat-list-item>
-          <button mat-button color="primary" (click)="rent()">Iznajmi</button>
-        </mat-list-item>
+        <mat-list-item>Dodatna oprema {{auto.dodatnaOprema}}</mat-list-item>
+        <mat-list-item>Oceni</mat-list-item>
+        <mat-list-item>PRobaaa</mat-list-item>
       </mat-list>
 
     </mat-card-content>
+
   </mat-card>
 </mat-grid-tile>
 <mat-grid-tile></mat-grid-tile>

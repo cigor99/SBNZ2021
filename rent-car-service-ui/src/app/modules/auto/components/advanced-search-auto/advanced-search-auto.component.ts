@@ -66,10 +66,10 @@ export class AdvancedSearchAutoComponent implements OnInit {
       this.searchForm.value.dodaciZaUdobnost = [];
     }
     let unos: KorisnickiUnos = this.searchForm.value;
-    this.autoService.autoNaprednaPretraga(unos).subscribe(data => this.automobili = data);
+    this.autoService.autoNaprednaPretraga(unos).subscribe(data => this.automobili = data.slice(0,4));
   }
 
-  rent(){
+  rent(auto: Auto){
     this.snackBar.openSnackBar('Zahtev prosledjen adminu', '', 'green-snackbar');
   }
 
