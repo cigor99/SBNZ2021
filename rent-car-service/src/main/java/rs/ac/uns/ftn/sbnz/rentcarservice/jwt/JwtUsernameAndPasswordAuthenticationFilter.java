@@ -68,9 +68,9 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        for(int i=0; i<10; i++)
-            knowledgeService.getEventsSession().insert(new LoginEvent(this.loginDto.getEmail()));
 
+        knowledgeService.getEventsSession().insert(new LoginEvent(this.loginDto.getEmail()));
+        knowledgeService.getEventsSession().fireAllRules();
         super.unsuccessfulAuthentication(request, response, failed);
     }
 }

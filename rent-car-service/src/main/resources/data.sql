@@ -277,6 +277,78 @@ korisnik_id
 )
 VALUES (13,0, 5100, '2020-3-13', '2020-1-1', 'KREIRANA', 3, 1);
 
+INSERT INTO rezervacija(
+broj_dana,
+ocena,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (1,0, 5100, '2021-6-19', '2021-6-19', 'PRIHVACENA', 3, 1);
+
+INSERT INTO rezervacija(
+broj_dana,
+ocena,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (1,0, 5100, '2021-6-19', '2021-6-19', 'PRIHVACENA', 3, 1);
+
+INSERT INTO rezervacija(
+broj_dana,
+ocena,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (1,0, 5100, '2021-6-19', '2021-6-19', 'PRIHVACENA', 3, 1);
+
+INSERT INTO rezervacija(
+broj_dana,
+ocena,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (1,0, 5100, '2021-6-19', '2021-6-19', 'PRIHVACENA', 3, 1);
+
+INSERT INTO rezervacija(
+broj_dana,
+ocena,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (1,0, 5100, '2021-6-19', '2021-6-19', 'PRIHVACENA', 3, 1);
+
+INSERT INTO rezervacija(
+broj_dana,
+ocena,
+iznos,
+kraj_rezervacije,
+pocetak_rezervacije,
+status,
+auto_id,
+korisnik_id
+)
+VALUES (1,0, 5100, '2021-6-19', '2021-6-19', 'PRIHVACENA', 3, 1);
+
 INSERT INTO ocena (datum, vrednost, auto_id, korisnik_id) VALUES
 ('2020-3-13', 5, 1, 1),
 ('2019-3-17', 4, 1, 3),

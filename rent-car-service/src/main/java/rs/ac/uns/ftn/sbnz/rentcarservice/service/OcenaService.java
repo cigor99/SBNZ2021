@@ -20,6 +20,7 @@ public class OcenaService {
 
         Ocena sacuvana = ocenaRepository.save(ocena);
         knowledgeService.getEventsSession().insert(new ReviewEvent(sacuvana.getAuto().getMarka().getNaziv()));
+        knowledgeService.getEventsSession().fireAllRules();
         return sacuvana;
     }
 
